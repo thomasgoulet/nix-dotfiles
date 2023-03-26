@@ -1,0 +1,16 @@
+k9s:
+  ui:
+    enableMouse: false
+    headless: true
+    logoless: true
+    crumbsless: false
+    noIcons: true
+    reactive: false
+    skin: onedark
+  logger:
+    tail: -1
+    buffer: 10000
+    sinceSeconds: -1
+    fullScreen: false
+    textWrap: false
+    showTime: false

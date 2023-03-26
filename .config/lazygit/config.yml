@@ -1,0 +1,26 @@
+customCommands:
+  - command: 'git pull --prune'
+    context: remoteBranches
+    key: 'p'
+gui:
+  nerdFontsVersion: '2'
+  showBottomLine: false
+  showPanelJumps: false
+  showRandomTip: false
+  statusPanelView: allBranchesLog
+  theme:
+    activeBorderColor:
+      - blue
+      - bold
+    inactiveBorderColor:
+      - white
+      - bold
+    selectedLineBgColor:
+      - "#3e4452" # set to `default` to have no background colour
+  timeFormat: '2006-01-02 / 15h04m'
+notARepository: 'skip'
+os:
+  edit: 'hx {{filename}}'
+  editAtLine: 'hx +{{line}} {{filename}}'
+  editInTerminal: true
+  openDirInEditor: 'hx {{dir}}'

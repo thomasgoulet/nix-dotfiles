@@ -1,0 +1,88 @@
+set hidden
+set icons
+set previewer ~/.config/lf/preview.sh
+set ratios 2:2:9
+
+cmd open $hx $fx
+
+cmd open_shell ${{
+    nu -e '
+        $env.PROMPT_EXTRA = "lf";
+        $env.config.keybindings = ($env.config.keybindings | append {name: exit modifier: none keycode: esc mode: [emacs] event: {send: ctrld} });
+        let f = ($env.fx | lines);
+        let fx = ($env.fx);
+    '
+}}
+
+${{ mkdir -p ~/.trash }}
+cmd trash ${{ IFS="$(printf '\n\t')"; mv $fx ~/.trash }}
+
+cmd create_file %touch $@
+cmd create_dir %mkdir $@
+
+cmd go_root ${{
+    while [ ! -d ".git" ]; do
+        cd ..
+        if [[ "$PWD" == '/' ]]; then
+            break
+        fi
+    done
+    lf -remote "send $id select \"$PWD\""
+}}
+
+cmd fzf_content_search ${{
+    res="$( \
+        fzf --inline-info --disabled \
+        --reverse \
+        --bind 'start:reload:rg -n -H --no-ignore-parent .' \
+        --bind 'change:reload:try {rg {q} -n -H --no-ignore-parent}' \
+        --bind 'tab:down' \
+        --bind 'shift-tab:up' \
+        --delimiter=: \
+        --with-nth=1..2 \
+        --preview '~/.config/lf/fzf-content-preview.sh {1} {2}' \
+        --preview-window 'right:70%,border-none' \
+        | cut -d':' -f1
+    )"
+    [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
+}}
+
+cmd fzf_file_search ${{
+    res="$( \
+        fd -p --no-ignore-parent \
+        | fzf --inline-info \
+        --reverse \
+        --bind 'tab:down' \
+        --bind 'shift-tab:up' \
+        --preview '~/.config/lf/fzf-file-preview.sh {1}' \
+        --preview-window 'right:70%,border-none' \
+        | cut -d':' -f1
+    )"
+    [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
+}}
+
+cmd for_each_selected ${{
+    echo "$fx" | xargs -L1 -- $@
+}}
+
+cmd on-select &{{
+    lf -remote "send $id set statfmt \"$(eza -ldg --git --color=always "$f")\""
+}}
+
+map <space> :toggle
+map <enter> open_shell
+
+map D trash
+
+map m push :create_file<space>
+map M push :create_dir<space>
+
+map gt cd ~/.trash
+map gb push ''
+map gr go_root
+
+map f
+map ff fzf_file_search
+map fl fzf_content_search
+map f/ fzf_content_search
+map fe push :for_each_selected<space>

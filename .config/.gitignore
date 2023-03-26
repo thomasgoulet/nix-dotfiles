@@ -1,0 +1,11 @@
+argocd/*
+btop/*
+environment.d/*
+gh/*
+glow/*
+go/telemetry/*
+helm/*
+k9s/config.yml
+lazygit/state.yml
+nushell/history.*
+wslu/*

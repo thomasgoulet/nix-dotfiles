@@ -1,0 +1,41 @@
+add_newline = true
+
+format = '''
+[ $directory](bright-white)$kubernetes$git_status$git_branch
+$env_var$character'''
+
+[env_var.PROMPT_EXTRA]
+style = 'purple'
+variable = 'PROMPT_EXTRA'
+format = '[ $env_value]($style)'
+
+[kubernetes]
+style = 'green'
+symbol = ''
+format = ' [\[[$symbol$context([/](bright-white)[$namespace](purple))]($style)\]](bright-white)'
+disabled = false
+
+[[kubernetes.contexts]]
+context_pattern = '.*prod.*'
+style = 'red'
+
+[directory]
+style = 'blue'
+format = '[$path]($style)'
+truncate_to_repo = true
+fish_style_pwd_dir_length = 1
+
+[git_status]
+style = 'red'
+deleted = 'x'
+diverged = '[⇡⇣](purple)'
+format = ' [\[[$all_status$ahead_behind]($style)](bright-white)'
+
+[git_branch]
+style = 'yellow'
+symbol = ''
+format = '[[$branch]($style)\]](bright-white)'
+
+[character]
+success_symbol = ' [->](bright-white)'
+error_symbol = ' [|>](red)'

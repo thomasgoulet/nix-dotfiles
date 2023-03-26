@@ -1,0 +1,290 @@
+{
+  "$help": "https://aka.ms/terminal-documentation",
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "actions": [
+    {
+      "command": "find",
+      "keys": "ctrl+shift+f"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "auto",
+        "splitMode": "duplicate"
+      },
+      "keys": "alt+shift+d"
+    },
+    {
+      "command": "paste",
+      "keys": "ctrl+v"
+    },
+    {
+      "command": {
+        "action": "copy",
+        "singleLine": false
+      },
+      "keys": "ctrl+c"
+    },
+    {
+      "command": "unbound",
+      "keys": "enter"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+insert"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+w"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+left"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+n"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+1"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+2"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+3"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+4"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+5"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+6"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+7"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+8"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+9"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+space"
+    },
+    {
+      "command": "unbound",
+      "keys": "shift+insert"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+down"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+pgdn"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+end"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+home"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+up"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+pgup"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+a"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+shift+minus"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+shift+plus"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+1"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+2"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+3"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+4"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+5"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+6"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+7"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+8"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+9"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+p"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+enter"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+m"
+    },
+    {
+      "command": {
+        "action": "commandPalette"
+      },
+      "keys": "alt+shift+p"
+    },
+    {
+      "command": "closePane",
+      "keys": "alt+shift+w"
+    }
+  ],
+  "alwaysShowTabs": true,
+  "copyFormatting": "none",
+  "copyOnSelect": false,
+  "defaultProfile": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+  "newTabMenu": [
+    {
+      "type": "remainingProfiles"
+    }
+  ],
+  "profiles": {
+    "defaults": {
+      "colorScheme": "One Half Dark",
+      "font": {
+        "face": "CaskaydiaCove Nerd Font Mono"
+      }
+    },
+    "list": [
+      {
+        "commandline": "C:\\Windows\\system32\\wsl.exe -d Arch -u thomas",
+        "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+        "hidden": false,
+        "name": "Arch",
+        "startingDirectory": "\\\\wsl$\\Arch\\home\\thomas"
+      },
+      {
+        "commandline": "C:\\Windows\\System32\\wsl.exe -d Arch",
+        "guid": "{a0c56d43-5483-4263-bc9b-bfffcf828394}",
+        "hidden": false,
+        "name": "Arch Root",
+        "startingDirectory": "\\\\wsl$\\Arch\\root"
+      },
+      {
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "hidden": false,
+        "name": "Windows PowerShell"
+      },
+      {
+        "commandline": "%SystemRoot%\\System32\\cmd.exe",
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "hidden": false,
+        "name": "Command Prompt"
+      },
+      {
+        "guid": "{e636fd95-8db6-56fc-969f-5647553fa92b}",
+        "hidden": false,
+        "name": "wsl-vpnkit",
+        "source": "Windows.Terminal.Wsl"
+      }
+    ]
+  },
+  "schemes": [
+    {
+      "background": "#282C34",
+      "black": "#282C34",
+      "blue": "#61AFEF",
+      "brightBlack": "#3E4452",
+      // "brightBlack": "#2C323C",
+      "brightBlue": "#61AFEF",
+      "brightCyan": "#56B6C2",
+      "brightGreen": "#98C379",
+      "brightPurple": "#C678DD",
+      "brightRed": "#E06C75",
+      "brightWhite": "#ABB2BF",
+      "brightYellow": "#E5C07B",
+      "cursorColor": "#DCDFE4",
+      "cyan": "#56B6C2",
+      "foreground": "#DCDFE4",
+      "green": "#98C379",
+      "purple": "#C678DD",
+      "red": "#E06C75",
+      "selectionBackground": "#4B5263",
+      "white": "#DCDFE4",
+      "yellow": "#E5C07B",
+      "name": "One Half Dark"
+    },
+    {
+      "background": "#FAFAFA",
+      "black": "#383A42",
+      "blue": "#0184BC",
+      "brightBlack": "#4F525D",
+      "brightBlue": "#61AFEF",
+      "brightCyan": "#56B5C1",
+      "brightGreen": "#98C379",
+      "brightPurple": "#C577DD",
+      "brightRed": "#DF6C75",
+      "brightWhite": "#FFFFFF",
+      "brightYellow": "#E4C07A",
+      "cursorColor": "#4F525D",
+      "cyan": "#0997B3",
+      "foreground": "#383A42",
+      "green": "#50A14F",
+      "name": "One Half Light",
+      "purple": "#A626A4",
+      "red": "#E45649",
+      "selectionBackground": "#FFFFFF",
+      "white": "#FAFAFA",
+      "yellow": "#C18301"
+    }
+  ],
+  "showTabsInTitlebar": true,
+  "showTerminalTitleInTitlebar": false,
+  "themes": []
+}

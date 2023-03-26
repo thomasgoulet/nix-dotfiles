@@ -1,0 +1,94 @@
+theme = "onedark-custom"
+
+[editor]
+bufferline = "always"
+color-modes = true
+idle-timeout = 0
+jump-label-alphabet = "hjklvbnmyuiopasdfg"
+line-number = "relative"
+mouse = false
+shell = ["nu", "-c"]
+true-color = true
+undercurl = true
+
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name", "file-modification-indicator", "spacer", "version-control"]
+right = ["register", "diagnostics", "selections", "position", "position-percentage", "file-encoding", "file-line-ending", "file-type"]
+separator = "-"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-messages = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.auto-pairs]
+"(" = ")"
+"{" = "}"
+"[" = "]"
+"'" = "'"
+'"' = '"'
+"`" = "`"
+# "<" = ">"
+
+[editor.whitespace.render]
+tab = "all"
+
+[editor.whitespace.characters]
+tab = "→"
+tabpad = "·"
+
+[editor.gutters]
+layout = ["diagnostics", "spacer", "diff", "line-numbers", "spacer"]
+
+[editor.indent-guides]
+character = "|"
+render = true
+
+[keys.normal]
+"\\" = "command_palette"
+"esc" = "keep_primary_selection"
+A-y = "select_prev_sibling"
+A-u = "shrink_selection"
+A-i = "expand_selection"
+A-o = "select_next_sibling"
+C-s = "split_selection_on_newline"
+C-w = "rotate_view"
+B = "extend_prev_word_start"
+D = "delete_char_backward"
+E = "extend_next_word_end"
+G = "goto_word"
+H = ":bp"
+L = ":bn"
+S = ["select_all", "select_regex"]
+W = "extend_next_word_start"
+y = ["yank", ":clipboard-yank"]
+X = "extend_line_above"
+tab = "jump_backward"
+S-tab = "jump_forward"
+
+[keys.normal.space]
+space = ":wa"
+C = ":bc!"
+c = ":bc"
+F = "file_picker_in_current_buffer_directory"
+G = ":reset-diff-change"
+q = ":q"
+Q = ":qa!"
+t = [":sh zellij run -f -c -n '' -- nu -e '$env.PROMPT_EXTRA = hx; $env.config.keybindings = ($env.config.keybindings | append {name: exit modifier: none keycode: esc mode: [emacs] event: {send: ctrld} })'"]
+"[" = "jump_view_left"
+"]" = "jump_view_right"
+tab = "save_selection"
+
+[keys.normal.m]
+w = ["move_char_left", "move_next_word_end", "move_prev_word_start", "move_next_word_end", "search_selection"]
+W = ["move_char_left", "move_next_long_word_end", "move_prev_long_word_start", "move_next_long_word_end", "search_selection"]
