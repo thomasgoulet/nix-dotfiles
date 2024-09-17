@@ -2,12 +2,26 @@ add_newline = true
 
 format = '''
 [ $directory](bright-white)$kubernetes$git_status$git_branch
-$env_var$character'''
+$env_var$nix_shell$character'''
 
 [env_var.PROMPT_EXTRA]
-style = 'purple'
+style = 'italic purple'
 variable = 'PROMPT_EXTRA'
 format = '[ $env_value]($style)'
+
+[nix_shell]
+style = 'italic cyan'
+format = '[ nix]($style)'
+
+[character]
+success_symbol = ' [->](bright-white)'
+error_symbol = ' [|>](red)'
+
+[directory]
+style = 'blue'
+format = '[$path]($style)'
+truncate_to_repo = true
+fish_style_pwd_dir_length = 1
 
 [kubernetes]
 style = 'green'
@@ -19,12 +33,6 @@ disabled = false
 context_pattern = '.*prod.*'
 style = 'red'
 
-[directory]
-style = 'blue'
-format = '[$path]($style)'
-truncate_to_repo = true
-fish_style_pwd_dir_length = 1
-
 [git_status]
 style = 'red'
 deleted = 'x'
@@ -35,7 +43,3 @@ format = ' [\[[$all_status$ahead_behind]($style)](bright-white)'
 style = 'yellow'
 symbol = ''
 format = '[[$branch]($style)\]](bright-white)'
-
-[character]
-success_symbol = ' [->](bright-white)'
-error_symbol = ' [|>](red)'
