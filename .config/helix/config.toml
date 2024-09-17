@@ -84,7 +84,7 @@ F = "file_picker_in_current_buffer_directory"
 G = ":reset-diff-change"
 q = ":q"
 Q = ":qa!"
-t = [":sh zellij run -f -c -n '' -- nu -e '$env.PROMPT_EXTRA = hx; $env.config.keybindings = ($env.config.keybindings | append {name: exit modifier: none keycode: esc mode: [emacs] event: {send: ctrld} })'"]
+t = [":sh zellij action new-pane -c -n TERM -- nu -e '$env.PROMPT_EXTRA = \"hx\"; $env.config.keybindings = ($env.config.keybindings | append {name: exit modifier: none keycode: esc mode: [emacs] event: {send: ctrld} })'"]
 "[" = "jump_view_left"
 "]" = "jump_view_right"
 tab = "save_selection"
