@@ -50,6 +50,6 @@ module nix {
     export def "nx try" [
         ...packages  # Packages to temporarily install
     ] {
-        nix-shell --command "nu -e '$env.PROMPT_EXTRA = "nix"; $env.config.keybindings = ($env.config.keybindings | append {name: exit modifier: none keycode: esc mode: [emacs] event: {send: ctrld} });'" -p ...$packages;
+        nix-shell --command "nu -e '$env.config.keybindings = ($env.config.keybindings | append {name: exit modifier: none keycode: esc mode: [emacs] event: {send: ctrld} });'" -p ...$packages;
     }
 }

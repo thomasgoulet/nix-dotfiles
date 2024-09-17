@@ -167,12 +167,12 @@ $env.config = {
             marker: ""
             type: {
                 layout: columnar
-                columns: 4
+                columns: 1
                 col_padding: 2
             }
             style: {
                 text: yellow
-                selected_text: blue_reverse
+                selected_text: yellow_reverse
                 description_text: blue
             }
         }
@@ -186,45 +186,25 @@ $env.config = {
             }
             style: {
                 text: yellow
-                selected_text: blue_reverse
+                selected_text: yellow_reverse
                 description_text: blue
             }
         }
         {
             name: help_menu
-            only_buffer_difference: true
+            only_buffer_difference: false
             marker: "? "
             type: {
                 layout: description
-                columns: 4
+                columns: 1
                 col_padding: 2
-                selection_rows: 4
+                selection_rows: 10
                 description_rows: 10
             }
             style: {
                 text: yellow
-                selected_text: blue_reverse
+                selected_text: yellow_reverse
                 description_text: blue
-            }
-        }
-        {
-            name: vars_menu
-            only_buffer_difference: true
-            marker: "# "
-            type: {
-                layout: list
-                page_size: 10
-            }
-            style: {
-                text: green
-                selected_text: green_reverse
-                description_text: yellow
-            }
-            source: { |buffer, position|
-                $nu.scope.vars
-                | where name =~ $buffer
-                | sort-by name
-                | each { |it| {value: $it.name description: $it.type} }
             }
         }
     ]
@@ -251,9 +231,21 @@ $env.config = {
             event: { send: menuprevious }
         }
         {
-            name: fuzzy_history
+            name: help_menu
             modifier: control
             keycode: char_h
+            mode: [emacs vi_normal vi_insert]
+            event: {
+                until: [
+                    { send: menu name: help_menu}
+                    { send: menunext }
+                ]
+            }
+        }
+        {
+            name: fuzzy_history
+            modifier: control
+            keycode: char_r
             mode: [emacs, vi_normal, vi_insert]
             event: [
                 {
@@ -273,40 +265,11 @@ $env.config = {
             ]
         }
         {
-            name: fuzzy_local_history
-            modifier: control
-            keycode: char_r
-            mode: [emacs, vi_normal, vi_insert]
-            event: [
-                {
-                    send: ExecuteHostCommand
-                    cmd: "commandline edit (
-                              history
-                              | where exit_status == 0 and cwd == $env.PWD
-                              | get command
-                              | reverse
-                              | uniq
-                              | str join (char -i 0)
-                              | fzf --read0 --height 40% --reverse --inline-info +s --bind 'tab:down' --bind 'shift-tab:up' -q (commandline)
-                              | decode utf-8
-                              | str trim
-                          )"
-                }
-            ]
-        }
-        {
             name: yank
             modifier: control
             keycode: char_y
             mode: emacs
             event: { until: [ {edit: pastecutbufferafter} ] }
-        }
-        {
-            name: unix-line-discard
-            modifier: control
-            keycode: char_u
-            mode: [emacs, vi_normal, vi_insert]
-            event: { until: [ {edit: cutfromlinestart} ] }
         }
         {
             name: kill-line
@@ -315,14 +278,6 @@ $env.config = {
             mode: [emacs, vi_normal, vi_insert]
             event: { until: [ {edit: cuttolineend} ]
             }
-        }
-        # Keybindings used to trigger the user defined menus
-        {
-            name: vars_menu
-            modifier: alt
-            keycode: char_o
-            mode: [emacs, vi_normal, vi_insert]
-            event: { send: menu name: vars_menu }
         }
     ]
 }

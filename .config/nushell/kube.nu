@@ -60,7 +60,7 @@ module kube {
             kubectl config get-contexts
             | from ssv -a
             | iter filter-map {|c|
-                {value: ($c.NAME), description: $"cluster: ($c.CLUSTER), namespace:  ($c.NAMESPACE)"}
+                {value: ($c.NAME), description: $"($c.CLUSTER | fill -w 15) namespace ($c.NAMESPACE | fill -w 15)"}
             }
         };
     }
@@ -207,6 +207,7 @@ module kube {
         return;
     }
 
+    # Edit resources
     export def ke [
         kind: string@"nu-complete kubectl kinds"  # Kind
         resource?: string@"nu-complete kubectl kind instances"  # Resource to edit
