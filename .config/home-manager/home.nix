@@ -44,6 +44,10 @@ extra@{ config, pkgs, ... }:
     terraform-ls            # HCL
     yaml-language-server    # YAML
 
+      # Go
+      go
+      gopls
+
       # Java
       jdk
       jdt-language-server
