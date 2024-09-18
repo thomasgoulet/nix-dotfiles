@@ -1,7 +1,7 @@
 module az {
 
     def "nu-complete azurecli subscriptions" [] {
-        cache hit az.subscriptions 60 {||
+        cache hit az.subscriptions 60 {
             az account list
             | from json
             | get name

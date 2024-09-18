@@ -6,7 +6,7 @@ module kube {
 
     ### Utility
 
-    export def argparse [
+    def argparse [
         context: string  # Context string passed to completer function
     ] {
         mut args = (
@@ -56,7 +56,7 @@ module kube {
     ### Completions
 
     def "nu-complete kubectl contexts" [] {
-        cache hit kube.contexts 60 {||
+        cache hit kube.contexts 60 {
             kubectl config get-contexts
             | from ssv -a
             | iter filter-map {|c|
@@ -66,7 +66,7 @@ module kube {
     }
 
     def "nu-complete kubectl namespaces" [] {
-        cache hit kube.namespaces 60 {||
+        cache hit kube.namespaces 60 {
             kubectl get namespaces
             | from ssv
             | where NAME != "default"
@@ -79,7 +79,7 @@ module kube {
         context: string
     ] {
         let ctx = argparse $context;
-        cache hit $"kube.pods.($ctx.flag_id)" 15 {||
+        cache hit $"kube.pods.($ctx.flag_id)" 15 {
             kubectl get pods ...$ctx.flags
             | from ssv
             | get NAME
@@ -87,7 +87,7 @@ module kube {
     }
 
     def "nu-complete kubectl shell" [] {
-        cache hit kube.restartable 15 {||
+        cache hit kube.restartable 15 {
             kubectl get pods -o wide
             | from ssv -a
             | select NAME NODE
@@ -102,7 +102,7 @@ module kube {
     }
 
     def "nu-complete kubectl kinds" [] {
-        cache hit kube.kinds 60 {||
+        cache hit kube.kinds 60 {
             kubectl api-resources
             | from ssv
             | select SHORTNAMES NAME
@@ -118,7 +118,7 @@ module kube {
         context: string
     ] {
         let ctx = argparse $context
-        cache hit $"kube.kind.($ctx.args.0).($ctx.flag_id)" 15 {||
+        cache hit $"kube.kind.($ctx.args.0).($ctx.flag_id)" 15 {
             kubectl get $ctx.args.0 ...$ctx.flags
             | from ssv
             | get NAME
@@ -129,7 +129,7 @@ module kube {
         context: string
     ] {
         let ctx = argparse $context
-        cache hit $"kube.ports.($ctx.args.0)" 15 {||
+        cache hit $"kube.ports.($ctx.args.0)" 15 {
             kubectl get pods $ctx.args.0 -o yaml
             | from yaml
             | select spec.containers.ports
@@ -142,7 +142,7 @@ module kube {
     }
 
     def "nu-complete kubectl restartable" [] {
-        cache hit kube.restartable 15 {||
+        cache hit kube.restartable 15 {
             ["deployment" "statefulset" "daemonset"]
             | par-each {kubectl get $in e> (null-device) | from ssv -a}
             | flatten
@@ -305,7 +305,7 @@ module kube {
     }
 
     # Completes the possible paths for kgp
-    export def "nu-complete kg path" [
+    def "nu-complete kg path" [
         context: string
     ] {
         let ctx = argparse $context
@@ -323,7 +323,7 @@ module kube {
             | into cell-path
         );
 
-        let resource = cache hit $"kube.($kind).($instance)" 30 {||
+        let resource = cache hit $"kube.($kind).($instance)" 30 {
             kubectl get $kind $instance ...$ctx.flags -o yaml | from yaml
         };
         let yaml = (
