@@ -1,7 +1,7 @@
 add_newline = true
 
 format = '''
-[ $directory](bright-white)$kubernetes$git_status$git_branch
+[ $directory](bright-white)$kubernetes$azure$git_status$git_branch
 $env_var$nix_shell$character'''
 
 [env_var.PROMPT_EXTRA]
@@ -32,6 +32,12 @@ disabled = false
 [[kubernetes.contexts]]
 context_pattern = '.*prod.*'
 style = 'red'
+
+[azure]
+style = 'cyan'
+symbol = ''
+format = ' [\[[$symbol$subscription]($style)\]](bright-white)'
+disabled = false
 
 [git_status]
 style = 'red'

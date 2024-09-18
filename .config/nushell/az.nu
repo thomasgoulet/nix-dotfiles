@@ -40,7 +40,7 @@ module az {
         );
 
         if (($matches | length) == 0) {
-            return "No matching subscription"
+            return "No matching subscription";
         } else if (($matches | length) == 1) {
             let match = (
                 $matches
