@@ -144,9 +144,10 @@ module kube {
     def "nu-complete kubectl restartable" [] {
         cache hit kube.restartable 15 {
             ["deployment" "statefulset" "daemonset"]
-            | par-each {kubectl get $in e> (null-device) | from ssv -a}
+            | par-each {|kind| kubectl get $kind e> (null-device) | from ssv -a | insert kind $kind }
             | flatten
-            | get NAME
+            | select NAME kind
+            | rename value description
         };
     }
 
@@ -388,16 +389,15 @@ module kube {
 
     # Force a deployment to restart it's pods
     export def krestart [
-        set: string@"nu-complete kubectl restartable"  # Restartable set to restart
+        name: string@"nu-complete kubectl restartable"  # Restartable set to restart
     ] {
-        ["deployment" "statefulset" "daemonset"]
-        | par-each { |in|
-            let i = $in;
-            let instances = kubectl get $i e> (null-device) | from ssv -a | get NAME;
-            if ($set in $instances) {
-                kubectl rollout restart $i $set o> (null-device);
-            }
-        };
+        let set = (
+            nu-complete kubectl restartable
+            | where value == $name
+        )
+        if (($set | length) == 1) {
+            kubectl rollout restart ($set | first | get description) ($set | first | get value) o> (null-device);
+        }
         return;
     }
 
