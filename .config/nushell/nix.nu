@@ -1,19 +1,42 @@
 module nix {
 
+    ### GIT
+
     export alias dotfiles-git = git --git-dir=/home/thomas/.dotfiles/ --work-tree=/home/thomas;
     export alias dotfiles = zellij action new-tab -c /home/thomas/ -n dotfiles -l ~/.config/zellij/layouts/dotfiles.kdl;
+
+    ### Completions
 
     def "nu-complete nix generations" [] {
         home-manager generations
         | lines
         | each {|l| $l |
-            parse "{description} -> {value}"
+            parse "{description} : id {value} -> {path}"
         }
         | flatten;
     };
 
-    export alias "nx switch" = home-manager switch --flake ~/.config/home-manager/;  # Build and switch to a new derivation
-  
+    ### Utils
+
+    def package-diff [
+        closure: closure  # Package altering closure. Should not expect any arguments
+    ] {
+        let before_path = (mktemp -t --suffix .packages)
+        let after_path = (mktemp -t --suffix .packages)
+
+        home-manager packages
+        | save -f ($before_path);
+
+        do $closure
+
+        home-manager packages
+        | save -f ($after_path);
+
+        delta ($before_path) ($after_path);
+    }
+
+    ### Commands
+
     # Garbage collect the local nix store
     export def "nx gc" [
         timestamp = "-7 days"  # Timestamp or duration before which generations will be removed ("-7 days" or "2024-01-01"). Default is "-7 days"
@@ -24,26 +47,51 @@ module nix {
   
     # List all available generations
     export def "nx generations" [] {
-        home-manager generations
-        | lines
-        | each {|l| $l |
-            parse "{date} : id {id} -> {path}"
-        }
-        | flatten;
+        nu-complete nix generations
+        | rename date id path;
+    }
+
+    # Info about installed packages and flake
+    export def "nx info" [] {
+        let packages = (
+            home-manager packages
+            | column -x -c (term size | get columns)
+        );
+
+        print $"(ansi light_gray)Packages:(ansi reset)";
+        print -n ($packages)
+        print (nix flake metadata ~/.config/home-manager/);
     }
   
     # Rollback to an earlier generation
     export def "nx rollback" [
-        generation: path@"nu-complete nix generations"
+        generation: string@"nu-complete nix generations"
     ] {
-        cd $generation;
-        ./activate;
+        package-diff {
+            cd (
+                nu-complete nix generations
+                | where value == $generation
+                | first
+                | get path
+            );
+            ./activate;
+        };
     }
+
+    # Build and switch to a new genration
+    export def "nx switch" [] {
+        package-diff {
+            home-manager switch --flake ~/.config/home-manager/;
+        }
+    }
+
 
     # Update channels and switch configuration
     export def "nx upgrade" [] {
-        nix-channel --update;
-        home-manager switch --flake ~/.config/home-manager/;
+        package-diff {
+            nix flake update --flake ~/.config/home-manager/;
+            home-manager switch --flake ~/.config/home-manager/;
+        };
     }
 
     # Launch a  nix shell with the specified packages installed
