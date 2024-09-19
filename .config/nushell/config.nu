@@ -315,8 +315,8 @@ source ~/.config/nushell/helix.nu
 use helix *
 
 # kubectl aliases and functions
-source ~/.config/nushell/kube.nu
-use kube *
+source ~/.config/nushell/kubernetes.nu
+use kubernetes *
 
 # nix aliases and functions
 source ~/.config/nushell/nix.nu
