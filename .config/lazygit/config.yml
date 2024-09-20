@@ -3,6 +3,7 @@ customCommands:
     context: remoteBranches
     key: 'p'
 gui:
+  portraitMode: always
   nerdFontsVersion: '2'
   showBottomLine: false
   showPanelJumps: false
