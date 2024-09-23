@@ -12,13 +12,13 @@ module helix {
 
     # Open folder from zoxide picker in a different zellij tab
     export def prj [
-        hint?: string@"nu-complete zoxide repos"
+        ...hint: string@"nu-complete zoxide repos"
     ] {
         mut dir = "";
-        if ($hint == ".") {
+        if ($hint == ["."]) {
             $dir = $env.PWD;
-        } else if ($hint != null) {
-            $dir = (zoxide query $hint);
+        } else if ($hint != []) {
+            $dir = (zoxide query ...$hint);
         } else {
             $dir = (zoxide query -i);
         }
