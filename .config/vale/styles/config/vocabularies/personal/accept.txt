@@ -1,0 +1,6 @@
+[Dd]atasource
+[Ff]ailover
+[Gg]rafana
+[Ii]ngester
+[Nn]amespace
+[Pp]romtail

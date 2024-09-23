@@ -39,6 +39,7 @@ extra@{ config, pkgs, ... }:
     lazygit
 
     # LSPs
+    vale vale-ls            # Spell checking
     marksman markdown-oxide # Markdown
     nil                     # Nix
     terraform-ls            # HCL

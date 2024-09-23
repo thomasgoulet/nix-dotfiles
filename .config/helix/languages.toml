@@ -1,6 +1,7 @@
 [language-server]
 jdtls = { command = "jdtls", args = ["--jvm-arg=-javaagent:/home/thomas/.config/helix/java/lombok-1.18.32.jar"] }
 omnisharp = { command = "omnisharp", args = ["--languageserver"] }
+vale = { command = "vale-ls" }
 yaml = { command = "yaml-language-server", args = ["--stdio"], config = { yaml = { format = { enable = true }, keyOrdering = false } } } # https://github.com/redhat-developer/yaml-language-server#language-server-settings
 none = { command = "" }
 
@@ -15,6 +16,11 @@ language-servers = ["omnisharp"]
 [[language]]
 name = "html"
 formatter = { command = "prettier", args = ["--parser", "html"] }
+
+[[language]]
+name = "markdown"
+language-servers = [ "marksman", "markdown-oxide", "vale" ]
+diagnostic-severity = "Warning"
 
 [[language]]
 name = "nu"
