@@ -10,7 +10,7 @@ module cache {
                 key: str,
                 expirystamp: int,
                 value: str
-            };
+            } o> (null-device);
         }
 
         let cache = (stor open).cache;
@@ -34,7 +34,7 @@ module cache {
         # If key is not present or expired
         let value = do $closure;
         try {
-            stor delete -t cache -w $"key == '($key)'";
+            stor delete -t cache -w $"key == '($key)'" o> (null-device);
         };
         stor insert -t cache -d {
             key: $key,
