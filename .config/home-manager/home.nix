@@ -60,12 +60,17 @@ extra@{ config, pkgs, ... }:
       nodePackages.prettier 
 
     # Infrastructure
-    azure-cli
     k9s
     kubectl
     kubelogin
     podman
     terraform
+
+    # Azure
+    (azure-cli.withExtensions [
+      azure-cli.extensions.azure-devops
+      azure-cli.extensions.ssh
+    ])
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
