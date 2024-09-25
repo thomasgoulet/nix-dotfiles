@@ -1,6 +1,12 @@
+[Aa]lertmanager
 [Dd]atasource
 [Ff]ailover
 [Gg]rafana
 [Ii]ngester
+[Kk]yverno
+[Ll]oki
 [Nn]amespace
 [Pp]romtail
+[Qq]uerier
+[Ss]yslog(s)?
+TSDB(s)?
