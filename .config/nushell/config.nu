@@ -99,6 +99,10 @@ $env.config = {
         header_on_separator: false
     }
 
+    display_errors: {
+        exit_code: false
+        termination_signal: true
+    }
     error_style: "fancy"
 
     history: {
