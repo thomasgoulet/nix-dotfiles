@@ -32,7 +32,7 @@ module nix {
         home-manager packages
         | save -f ($after_path);
 
-        delta ($before_path) ($after_path);
+        delta ($before_path) ($after_path) --pager never;
     }
 
     ### Commands

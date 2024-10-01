@@ -2,6 +2,8 @@ customCommands:
   - command: 'git pull --prune'
     context: remoteBranches
     key: 'p'
+git:
+  branchLogCmd: git log --pretty=format:"%C(brightwhite)%s%Creset%n%C(yellow)%ar%Creset - %C(cyan)%ae%Creset%n" --color=always --stat --
 gui:
   portraitMode: always
   nerdFontsVersion: '2'
