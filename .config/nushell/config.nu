@@ -1,9 +1,9 @@
 # Nushell Config File
 
 let theme = {
-    separator: white
+    separator: white_bold
     leading_trailing_space_bg: { attr: n }
-    header: green_bold
+    header: light_gray_italic
     empty: blue
     bool: { || if $in { 'light_cyan' } else { 'light_gray' } }
     int: yellow
@@ -15,26 +15,26 @@ let theme = {
         } else { 'blue' }
     }
     duration: cyan
-    date: { || (date now) - $in |
+    date: { || (date now) - $in | math abs |
         if $in < 1hr {
-            'light_red'
+            'red'
         } else if ($in < 6hr) {
-            'light_orange'
-        } else if ($in < 1day) {
             'yellow'
-        } else if ($in < 3day) {
-            'light_green'
-        } else if ($in < 1wk) {
+        } else if ($in < 1day) {
             'green'
-        } else if ($in < 6wk) {
+        } else if ($in < 3day) {
+            'cyan'
+        } else if ($in < 1wk) {
             'blue'
+        } else if ($in < 6wk) {
+            'purple'
         } else { 
             'light_gray'
         }
     }    
     range: white
     float: yellow
-    string: green
+    string: blue
     nothing: white
     binary: white
     cellpath: cyan
@@ -309,7 +309,7 @@ use argo *
 source ~/.config/nushell/az.nu
 use az *
 
-# git aliases and completion
+# git aliases and functions
 source ~/.config/nushell/git.nu
 use git *
 
@@ -325,9 +325,9 @@ use kubernetes *
 source ~/.config/nushell/nix.nu
 use nix *
 
-# Custom completions
-module completions {}
-use completions *
+# taskwarrior aliases and functions
+source ~/.config/nushell/task.nu
+use task *
 
 # Open ZelliJ session if not inside one
 if ($env | columns | where $it == ZELLIJ | is-empty) {
