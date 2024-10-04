@@ -89,6 +89,10 @@ t = [":sh zellij action new-pane -c -n TERM -- nu -e '$env.PROMPT_EXTRA = \"hx\"
 "]" = "jump_view_right"
 tab = "save_selection"
 
+[keys.normal.space.i]
+b = ':insert-output $"- [ ] "'
+d = ':insert-output $"# (date now | format date %Y-%m-%d)"'
+
 [keys.normal.m]
 w = ["move_char_left", "move_next_word_end", "move_prev_word_start", "move_next_word_end", "search_selection"]
 W = ["move_char_left", "move_next_long_word_end", "move_prev_long_word_start", "move_next_long_word_end", "search_selection"]
