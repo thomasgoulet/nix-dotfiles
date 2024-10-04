@@ -12,8 +12,12 @@ module nix {
         | lines
         | each {|l| $l |
             parse "{description} : id {value} -> {path}"
-        }
-        | flatten;
+            | {
+                description: ($in.description | get 0 | into datetime),
+                value: ($in.value | get 0 | into int),
+                path: ($in.path | get 0),
+            }
+        };
     };
 
     ### Utils
@@ -48,7 +52,7 @@ module nix {
     # List all available generations
     export def "nx generations" [] {
         nu-complete nix generations
-        | rename date id path;
+        | rename DATE ID PATH;
     }
 
     # Info about installed packages and flake
@@ -65,7 +69,7 @@ module nix {
   
     # Rollback to an earlier generation
     export def "nx rollback" [
-        generation: string@"nu-complete nix generations"
+        generation: int@"nu-complete nix generations"
     ] {
         package-diff {
             cd (
