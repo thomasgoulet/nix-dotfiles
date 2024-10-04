@@ -31,6 +31,7 @@ extra@{ config, pkgs, ... }:
     fzf
     lf
     ripgrep
+    taskwarrior3
     zoxide
 
     # Editor / Programming

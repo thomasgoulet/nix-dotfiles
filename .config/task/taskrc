@@ -1,0 +1,17 @@
+data.location=~/notes/task
+hooks.location=~/.config/task/hooks
+news.version=3.1.0
+
+fontunderline=0
+verbose=affected,blank,context,footnote,label,new-id,news,project,special,sync,recur
+
+uda.file.type=string
+uda.file.label=Note
+
+uda.url.type=string
+uda.url.label=Link
+
+report.nu-completion.columns=id,uuid,description,file
+
+# Color theme (uncomment one to use)
+include dark-16.theme
