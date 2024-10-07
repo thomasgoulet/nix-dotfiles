@@ -268,18 +268,23 @@ $env.config = {
             ]
         }
         {
-            name: yank
+            name: tasks
             modifier: control
-            keycode: char_y
+            keycode: char_t
             mode: emacs
-            event: { until: [ {edit: pastecutbufferafter} ] }
+            event: [
+                {
+                    send: ExecuteHostCommand
+                    cmd: "clear; tl"
+                }
+            ]
         }
         {
-            name: kill-line
+            name: cut-line
             modifier: control
-            keycode: char_k
+            keycode: char_x
             mode: [emacs, vi_normal, vi_insert]
-            event: { until: [ {edit: cuttolineend} ]
+            event: { until: [ {edit: cutfromstart} ]
             }
         }
     ]

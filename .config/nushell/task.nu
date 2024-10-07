@@ -30,7 +30,6 @@ module task {
         | from json
         | select id? project? description? due? status? entry? file? tags? urgency?
         | where project =~ $search or description =~ $search or status =~ $search
-        | sort-by -r urgency
         | each { |task|
             let task = $task;
             {

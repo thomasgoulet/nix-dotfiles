@@ -13,5 +13,11 @@ uda.url.label=Link
 
 report.nu-completion.columns=id,uuid,description,file
 
+report.meetings.columns=id,uuid,description,file
+report.meetings.filter=project:meetings status.not:recurring
+
+report.recurring.columns=id,uuid,description,file
+report.recurring.filter=status:recurring
+
 # Color theme (uncomment one to use)
 include dark-16.theme
