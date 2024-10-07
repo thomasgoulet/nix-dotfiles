@@ -295,13 +295,13 @@ module kubernetes {
             );
         }
 
-        return (
-            kubectl config use-context ($match | get NAME | to text) o> (null-device);
+        kubectl config use-context ($match | get NAME | to text) o> (null-device);
 
-            if ($namespace != null) {
-                kubectl config set-context ($match | get NAME | to text) --namespace $namespace o> (null-device);
-            }
-        );
+        if ($namespace != null) {
+            kubectl config set-context ($match | get NAME | to text) --namespace $namespace o> (null-device);
+        }
+
+        return null;
     }
 
     # Exec into a pod or a node
