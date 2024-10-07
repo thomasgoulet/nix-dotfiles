@@ -11,4 +11,5 @@
 [Pp]romtail
 [Qq]uerier
 [Ss]yslog(s)?
+[Tt]rivy
 TSDB(s)?
