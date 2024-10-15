@@ -1,8 +1,11 @@
 add_newline = true
 
-format = '''
-[ $directory](bright-white)$kubernetes$azure$git_status$git_branch
-$env_var$nix_shell$character'''
+format = """
+ [$directory](bright-white)\
+$kubernetes\
+$azure\
+$git_status
+$env_var$nix_shell$character"""
 
 [env_var.PROMPT_EXTRA]
 style = 'italic purple'
@@ -34,7 +37,7 @@ context_pattern = '.*prod.*'
 style = 'red'
 
 [azure]
-style = 'cyan'
+style = 'yellow'
 symbol = ''
 format = ' [\[[$symbol$subscription]($style)\]](bright-white)'
 disabled = false
@@ -43,9 +46,4 @@ disabled = false
 style = 'red'
 deleted = 'x'
 diverged = '[⇡⇣](purple)'
-format = ' [\[[$all_status$ahead_behind]($style)](bright-white)'
-
-[git_branch]
-style = 'yellow'
-symbol = ''
-format = '[[$branch]($style)\]](bright-white)'
+format = ' [\[[$all_status$ahead_behind]($style)\]](bright-white)'
