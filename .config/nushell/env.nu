@@ -31,14 +31,19 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.config-path | path dirname | path join 'plugins')
 ]
 
-$env.PATH = ($env.PATH | split row (char esep) | prepend 'local/bin')
-$env.PATH = ($env.PATH | split row (char esep) | prepend 'cargo/bin')
-$env.PATH = ($env.PATH | split row (char esep) | prepend '/home/thomas/')
-$env.PATH = ($env.PATH | split row (char esep) | prepend '/home/thomas/bin')
-$env.PATH = ($env.PATH | split row (char esep) | prepend '/home/thomas/go/bin')
-$env.PATH = ($env.PATH | split row (char esep) | prepend '/home/thomas/.config/carapace/bin')
-$env.PATH = ($env.PATH | split row (char esep) | prepend '/home/thomas/.local/bin')
-$env.PATH = ($env.PATH | split row (char esep) | prepend '/home/thomas/.nix-profile/bin')
+$env.PATH = ($env.PATH | split row (char esep))
+use std "path add"
+
+path add 'local/bin'
+path add 'cargo/bin'
+path add '/home/thomas/'
+path add '/home/thomas/bin'
+path add '/home/thomas/go/bin'
+path add '/home/thomas/.config/carapace/bin'
+path add '/home/thomas/.local/bin'
+path add '/home/thomas/.nix-profile/bin'
+
+$env.PATH = ($env.PATH | uniq)
 
 # Use zoxide
 mkdir ~/.cache/zoxide
@@ -47,4 +52,4 @@ zoxide init nushell --cmd j | save -f ~/.cache/zoxide/init.nu
 # Use starship
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
-$env.TRANSIENT_PROMPT_COMMAND = "\n" + (starship module character)
+$env.TRANSIENT_PROMPT_COMMAND = "\n " + (starship module directory) + (starship module character)

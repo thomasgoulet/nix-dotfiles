@@ -1,19 +1,13 @@
 # Nushell Config File
 
 let theme = {
-    separator: white_bold
+    separator: white
     leading_trailing_space_bg: { attr: n }
     header: light_gray_italic
     empty: blue
     bool: { || if $in { 'light_cyan' } else { 'light_gray' } }
     int: yellow
-    filesize: {|e|
-        if ($e == 0b) {
-            'white'
-        } else if ($e < 1mb) {
-            'cyan'
-        } else { 'blue' }
-    }
+    filesize: cyan
     duration: cyan
     date: { || (date now) - $in | math abs |
         if $in < 1hr {
@@ -38,42 +32,44 @@ let theme = {
     nothing: white
     binary: white
     cellpath: cyan
-    row_index: green_bold
+    row_index: green
     record: white
     list: white
     block: white
     hints: light_gray
-
-    shape_and: purple_bold
-    shape_binary: purple_bold
-    shape_block: blue_bold
-    shape_bool: light_blue
+    search_result: { bg: red fg: white }
+    shape_and: purple
+    shape_binary: purple
+    shape_block: blue
+    shape_bool: blue
+    shape_closure: green
     shape_custom: green
-    shape_datetime: blue_bold
-    shape_directory: blue
-    shape_external: blue
-    shape_externalarg: green_bold
-    shape_filepath: blue
-    shape_flag: blue_bold
-    shape_float: purple_bold
+    shape_datetime: cyan
+    shape_directory: cyan
+    shape_external: cyan
+    shape_externalarg: green
+    shape_filepath: cyan
+    shape_flag: blue
+    shape_float: purple
     shape_garbage: red_underline
-    shape_globpattern: blue_bold
-    shape_int: purple_bold
-    shape_internalcall: blue_bold
-    shape_list: blue_bold
+    # shape_garbage: red_underline
+    shape_globpattern: cyan
+    shape_int: purple
+    shape_internalcall: cyan
+    shape_list: blue
     shape_literal: blue
     shape_matching_brackets: { attr: u }
     shape_nothing: light_blue
     shape_operator: yellow
-    shape_or: purple_bold
-    shape_pipe: purple_bold
-    shape_range: yellow_bold
-    shape_record: blue_bold
-    shape_redirection: purple_bold
-    shape_signature: green_bold
+    shape_or: purple
+    shape_pipe: purple
+    shape_range: yellow
+    shape_record: blue
+    shape_redirection: purple
+    shape_signature: green
     shape_string: green
-    shape_string_interpolation: blue_bold
-    shape_table: blue_bold
+    shape_string_interpolation: blue
+    shape_table: blue
     shape_variable: purple
 }
 
@@ -97,6 +93,11 @@ $env.config = {
             truncating_suffix: "..."
         }
         header_on_separator: false
+    }
+
+    datetime_format: {
+        normal: '%a, %d %b %Y %H:%M:%S %z'    # shows up in displays of variables or other datetime's outside of tables
+        # table: '%m/%d/%y %I:%M:%S%p'          # generally shows up in tabular outputs such as ls. commenting this out will change it to the default human readable datetime format
     }
 
     display_errors: {

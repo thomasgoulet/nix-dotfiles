@@ -43,7 +43,7 @@ module nix {
 
     # Garbage collect the local nix store
     export def "nx gc" [
-        timestamp = "-7 days"  # Timestamp or duration before which generations will be removed ("-7 days" or "2024-01-01"). Default is "-7 days"
+        timestamp = "-14 days"  # Timestamp or duration before which generations will be removed ("-14 days" or "2024-01-01"). Default is "-7 days"
     ] {
         home-manager expire-generations $timestamp;
         nix store gc;
