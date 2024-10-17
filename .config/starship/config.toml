@@ -23,7 +23,6 @@ error_symbol = ' [|>](red)'
 [directory]
 style = 'blue'
 format = '[$path]($style)'
-truncate_to_repo = true
 fish_style_pwd_dir_length = 1
 
 [kubernetes]
@@ -46,4 +45,5 @@ disabled = false
 style = 'red'
 deleted = 'x'
 diverged = '[⇡⇣](purple)'
+up_to_date = '[](green)'
 format = ' [\[[$all_status$ahead_behind]($style)\]](bright-white)'

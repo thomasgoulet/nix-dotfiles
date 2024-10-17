@@ -52,4 +52,4 @@ zoxide init nushell --cmd j | save -f ~/.cache/zoxide/init.nu
 # Use starship
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
-$env.TRANSIENT_PROMPT_COMMAND = "\n " + (starship module directory) + (starship module character)
+$env.TRANSIENT_PROMPT_COMMAND = {"\n " + (starship module directory) + (starship module character)}
