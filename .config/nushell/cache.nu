@@ -46,8 +46,9 @@ module cache {
 
     export def invalidate [] {
         try {
-            stor delete -t cache;
+            stor delete -t cache o+e> (null-device);
         }
+        return null;
     }
   
 }

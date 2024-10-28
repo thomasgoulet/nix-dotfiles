@@ -250,7 +250,7 @@ module kubernetes {
 
         # List the resources
         mut $output = (
-            kubectl get $kind ...$flags e> (null-device)
+            kubectl get $kind ...$flags
             | from ssv
         );
 
@@ -295,10 +295,10 @@ module kubernetes {
             );
         }
 
-        kubectl config use-context ($match | get NAME | to text) o> (null-device);
+        kubectl config use-context ($match | get NAME | to text) o+e> (null-device);
 
         if ($namespace != null) {
-            kubectl config set-context ($match | get NAME | to text) --namespace $namespace o> (null-device);
+            kubectl config set-context ($match | get NAME | to text) --namespace $namespace o+e> (null-device);
         }
 
         return null;
