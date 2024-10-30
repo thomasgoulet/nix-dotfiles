@@ -1,4 +1,4 @@
-extra@{ config, pkgs, ... }:
+extra@{ config, pkgs, pkgs-stable, ... }:
 
 {
   # This value determines the Home Manager release that your configuration is
@@ -16,63 +16,70 @@ extra@{ config, pkgs, ... }:
 
   nixpkgs.config.allowUnfree = true;
 
-  home.packages = with pkgs; [
-    # Shell
-    nushell
-    starship
-    zellij
+  home.packages = (
+    with pkgs; [
+      # Shell
+      nushell
+      starship
+      zellij
 
-    # Utilities
-    bat
-    btop
-    delta
-    eza
-    fd
-    fzf
-    lf
-    ripgrep
-    taskwarrior3
-    zoxide
+      # Utilities
+      bat
+      btop
+      delta
+      eza
+      fd
+      fzf
+      lf
+      ripgrep
+      taskwarrior3
+      zoxide
 
-    # Editor / Programming
-    git
-    helix
-    lazygit
+      # Editor / Programming
+      git
+      helix
+      lazygit
 
-    # LSPs
-    vale vale-ls            # Spell checking
-    marksman markdown-oxide # Markdown
-    nil                     # Nix
-    terraform-ls            # HCL
-    yaml-language-server    # YAML
+      # LSPs
+      vale vale-ls            # Spell checking
+      marksman markdown-oxide # Markdown
+      nil                     # Nix
+      terraform-ls            # HCL
+      yaml-language-server    # YAML
 
-      # Go
-      go
-      gopls
+        # Go
+        go
+        gopls
 
-      # Java
-      jdk
-      jdt-language-server
+        # Java
+        jdk
+        jdt-language-server
 
-      # CSS, HTML, JS, JSON, Typescript
-      vscode-langservers-extracted
-      typescript-language-server
-      nodejs_22
-      nodePackages.prettier 
+        # CSS, HTML, JS, JSON, Typescript
+        vscode-langservers-extracted
+        typescript-language-server
+        nodejs_22
+        nodePackages.prettier 
 
-    # Infrastructure
-    k9s
-    kubectl
-    kubelogin
-    podman
-    terraform
+      # Infrastructure
+      k9s
+      kubectl
+      kubelogin
+      podman
+      terraform
 
-    # Azure
-    (azure-cli.withExtensions [
-      azure-cli.extensions.azure-devops
-      azure-cli.extensions.ssh
-    ])
-  ];
+    ]
+  ) ++ (
+    # Packages which do not build on unstable
+    with pkgs-stable; [
+
+      # Azure
+      (azure-cli.withExtensions [
+        azure-cli.extensions.azure-devops
+      ])
+
+    ]
+  );
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
