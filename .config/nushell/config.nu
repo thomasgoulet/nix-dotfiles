@@ -137,7 +137,7 @@ $env.config = {
     }
 
     color_config: $theme
-    footer_mode: "25" # always, never, number_of_rows, auto
+    footer_mode: 25 # always, never, number_of_rows, auto
     float_precision: 2
     use_ansi_coloring: true
     edit_mode: emacs
