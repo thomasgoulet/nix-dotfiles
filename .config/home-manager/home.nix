@@ -33,6 +33,7 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       lf
       ripgrep
       taskwarrior3
+      wslu
       zoxide
 
       # Editor / Programming
@@ -62,9 +63,11 @@ extra@{ config, pkgs, pkgs-stable, ... }:
         nodePackages.prettier 
 
       # Infrastructure
+      argocd
       k9s
       kubectl
       kubelogin
+      kustomize
       podman
       terraform
 

@@ -26,7 +26,7 @@ module argo {
         let kube_ns = (
             $kube_config
             | get contexts
-            | where context.cluster == $kube_context
+            | where name == $kube_context
             | get context.namespace.0
         );
         return (
