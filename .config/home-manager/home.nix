@@ -30,6 +30,7 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       eza
       fd
       fzf
+      just
       lf
       ripgrep
       taskwarrior3
