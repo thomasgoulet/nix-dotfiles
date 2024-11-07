@@ -269,18 +269,6 @@ $env.config = {
             ]
         }
         {
-            name: tasks
-            modifier: control
-            keycode: char_t
-            mode: emacs
-            event: [
-                {
-                    send: ExecuteHostCommand
-                    cmd: "clear; tl"
-                }
-            ]
-        }
-        {
             name: cut-line
             modifier: control
             keycode: char_x
