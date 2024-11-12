@@ -29,7 +29,7 @@ keybinds clear-defaults=true {
         bind "m" { SwitchToMode "Move"; }
 
         bind "f"   { ToggleFloatingPanes; SwitchToMode "Locked"; }
-        bind "F"   {  ToggleFocusFullscreen; SwitchToMode "Locked"; }
+        bind "F"   { ToggleFocusFullscreen; SwitchToMode "Locked"; }
         bind "1"   { GoToTab 1; SwitchToMode "Locked"; }
         bind "2"   { GoToTab 2; SwitchToMode "Locked"; }
         bind "3"   { GoToTab 3; SwitchToMode "Locked"; }
@@ -164,9 +164,9 @@ keybinds clear-defaults=true {
             };
             SwitchToMode "Locked"
         }
-        bind "Alt S"         { ToggleActiveSyncTab; }
-        bind "Alt t"         { NewTab; SwitchToMode "RenameTab"; TabNameInput 0; }
-        bind "Alt T"         { BreakPane; SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "Alt r"         { SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "Alt t"         { NewTab; }
+        bind "Alt T"         { BreakPane; }
         bind "Alt H"         { GoToPreviousTab; }
         bind "Alt L"         { GoToNextTab; }
         bind "Alt J"         { MoveTab "Left"; }
@@ -191,10 +191,10 @@ ui {
     }
 }
 
-theme "onedark"
+theme "thom"
 
 themes {
-    onedark {
+    thom {
         fg      "#ABB2BF"
         bg      "#2C323C"
         black   "#282C34"
