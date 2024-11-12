@@ -1,3 +1,5 @@
+set dupfilefmt '%b-%n%e'
+set promptfmt "\033[97m%w"
 set hidden
 set icons
 set previewer ~/.config/lf/preview.sh
