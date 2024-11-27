@@ -29,6 +29,7 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       delta
       eza
       fd
+      fx
       fzf
       just
       lf
