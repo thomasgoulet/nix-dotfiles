@@ -4,6 +4,7 @@ omnisharp = { command = "omnisharp", args = ["--languageserver"] }
 vale = { command = "vale-ls" }
 yaml = { command = "yaml-language-server", args = ["--stdio"], config = { yaml = { format = { enable = true }, keyOrdering = false } } } # https://github.com/redhat-developer/yaml-language-server#language-server-settings
 none = { command = "" }
+vscode-esling-language-server = { command = "vscode-eslint-language-server", args = ["stdio"], config = { experimental = { useFlatConfig = true }, workingDirectory = { mode = "auto" }}}
 
 [[language]]
 name = "bash"
@@ -15,7 +16,6 @@ language-servers = ["omnisharp"]
 
 [[language]]
 name = "html"
-formatter = { command = "prettier", args = ["--parser", "html"] }
 
 [[language]]
 name = "markdown"
@@ -35,6 +35,7 @@ formatter = { command = "black", args = ["-", "-l160"]}
 [[language]]
 name = "typescript"
 formatter = { command = "npx", args = ["prettier", "--parser", "typescript"] }
+language-servers = ["typescript-language-server", "vscode-eslint-language-server"]
 
 [[language]]
 name = "yaml"
