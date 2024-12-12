@@ -58,6 +58,10 @@ extra@{ config, pkgs, pkgs-stable, ... }:
         jdk
         jdt-language-server
 
+        # Python
+        python312
+        python312Packages.python-lsp-server
+
         # CSS, HTML, JS, JSON, Typescript
         vscode-langservers-extracted
         typescript-language-server
