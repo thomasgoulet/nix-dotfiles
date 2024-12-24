@@ -98,7 +98,7 @@ module nix {
         };
     }
 
-    # Launch a  nix shell with the specified packages installed
+    # Launch a nix shell with the specified packages installed
     export def "nx try" [
         ...packages  # Packages to temporarily install
     ] {

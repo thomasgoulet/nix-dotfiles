@@ -172,6 +172,7 @@ module kubernetes {
         --edit (-e)  # Edit a resource
         --get (-g)  # Get a resource's full definition
         --logs (-l)  # Get the logs of a pod
+        --logs-previous (-L)  # Get the logs of the previous pod
         --port_forward (-p): int  # Port-forward the resource's port to localhost
         --restart (-r)  # Restart the resources's pods
     ] {
@@ -199,9 +200,14 @@ module kubernetes {
             }
 
             # Outputs the logs for a resource
-            if ($logs) {
+            if ($logs or $logs_previous) {
+                if ($logs_previous) {
+                    $flags = ['-p'] | append $flags;
+                }
+
+
                 if ($kind in [po pod pods]) {
-                    kubectl logs $name | bat;
+                    kubectl logs $name ...$flags | bat;
                 } else {
                     kubectl logs $"($kind)/($name)" ...$flags | bat;
                 }
