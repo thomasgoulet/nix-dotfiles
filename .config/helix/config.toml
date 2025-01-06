@@ -3,6 +3,7 @@ theme = "onedark-custom"
 [editor]
 bufferline = "always"
 color-modes = true
+end-of-line-diagnostics = "hint"
 idle-timeout = 0
 jump-label-alphabet = "hjklvbnmyuiopasdfg"
 line-number = "relative"
@@ -53,6 +54,9 @@ layout = ["diagnostics", "spacer", "diff", "line-numbers", "spacer"]
 [editor.indent-guides]
 character = "|"
 render = true
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
 
 [keys.normal]
 "\\" = "command_palette"

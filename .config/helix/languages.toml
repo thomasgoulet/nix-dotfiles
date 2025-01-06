@@ -20,7 +20,7 @@ name = "html"
 [[language]]
 name = "markdown"
 language-servers = [ "marksman", "markdown-oxide", "vale" ]
-diagnostic-severity = "Warning"
+diagnostic-severity = "warning"
 
 [[language]]
 name = "nu"
