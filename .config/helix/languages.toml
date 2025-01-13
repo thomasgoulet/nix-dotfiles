@@ -19,6 +19,7 @@ name = "html"
 
 [[language]]
 name = "markdown"
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
 language-servers = [ "marksman", "markdown-oxide", "vale" ]
 diagnostic-severity = "warning"
 
