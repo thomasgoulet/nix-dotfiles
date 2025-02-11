@@ -55,7 +55,7 @@ module argo {
         if ($match | length) != 1 {
           return "No matching context";
         }
-        argocd ctx ($match | get NAME | to text);
+        argocd ctx ($match | get NAME | first);
     }
 
     # Login to a ArgoCD server
@@ -83,12 +83,12 @@ module argo {
         if (not (
             $app_match
             | get PATH
-            | to text
+            | first
             | path exists
         )) {
             return "No matching path for this application. Make sure you at the root of the right repository";
         }
-        argocd app diff --grpc-web ($app_match | get NAME | to text) --local ($app_match | get PATH | to text) --local-repo-root .;
+        argocd app diff --grpc-web ($app_match | get NAME | first) --local ($app_match | get PATH | first) --local-repo-root .;
     }
 
 }
