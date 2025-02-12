@@ -16,6 +16,11 @@ language-servers = ["omnisharp"]
 
 [[language]]
 name = "html"
+auto-format = false
+
+[[language]]
+name = "css"
+auto-format = false
 
 [[language]]
 name = "markdown"
