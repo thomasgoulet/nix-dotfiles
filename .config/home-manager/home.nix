@@ -68,6 +68,10 @@ extra@{ config, pkgs, pkgs-stable, ... }:
         nodejs_22
         nodePackages.prettier 
 
+        # Typst
+        typst
+        tinymist
+
       # Infrastructure
       argocd
       k9s
