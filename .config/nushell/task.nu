@@ -40,7 +40,7 @@ module task {
                 STATUS: ($task.status | str substring 0..3 | str upcase),
                 ENTRY: ($task.entry | into datetime),
                 NOTE: ($task.file != null),
-                TAGS: ($task.tags | str join ' ')
+                TAGS: (if ($task.tags == null) {[]} else {$task.tags} | str join ' ')
             }
         }
     }
