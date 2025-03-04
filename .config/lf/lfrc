@@ -3,7 +3,7 @@ set promptfmt "\033[97m%w"
 set hidden
 set icons
 set previewer ~/.config/lf/preview.sh
-set ratios 2:2:9
+set ratios 2:3:8
 
 cmd open $hx $fx
 
