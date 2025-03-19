@@ -18,6 +18,13 @@ extra@{ config, pkgs, pkgs-stable, ... }:
 
   home.packages = (
     with pkgs; [
+
+      # Azure
+      (azure-cli.withExtensions [
+        azure-cli.extensions.ssh
+        azure-cli.extensions.azure-devops
+      ])
+
       # Shell
       nushell
       starship
@@ -85,11 +92,6 @@ extra@{ config, pkgs, pkgs-stable, ... }:
   ) ++ (
     # Packages which do not build on unstable
     with pkgs-stable; [
-
-      # Azure
-      (azure-cli.withExtensions [
-        azure-cli.extensions.azure-devops
-      ])
 
     ]
   );
