@@ -199,13 +199,30 @@ themes {
         bg      "#2C323C"
         black   "#282C34"
         yellow  "#E5C07B"
-        blue    "#D19A66" // blue       "#61AFEF"
+        blue    "#61AFEF"
         red     "#E06C75"
         magenta "#ABB2BF"
-        green   "#61AFEF" // green      "#98C379"
-        orange  "#98C379" // orange     "#D19A66"
+        green   "#98C379"
+        orange  "#D19A66"
         cyan    "#56B6C2"
         white   "#ABB2BF"
+
+        frame_selected {
+            base 4
+            background 0
+            emphasis_0 0
+            emphasis_1 0
+            emphasis_2 0
+            emphasis_3 0
+        }
+        frame_highlight {
+            base 2
+            background 0
+            emphasis_0 0
+            emphasis_1 0
+            emphasis_2 0
+            emphasis_3 0
+        }
     }
 }
 
