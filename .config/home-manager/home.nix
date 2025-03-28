@@ -57,6 +57,10 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       terraform-ls            # HCL
       yaml-language-server    # YAML
 
+        # C#
+        dotnet-sdk_8
+        omnisharp-roslyn
+
         # Go
         go
         gopls
