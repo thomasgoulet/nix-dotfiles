@@ -5,7 +5,6 @@ module aliases {
     export alias b64 = decode base64
     export alias expl = explorer.exe .
     export alias f = lf
-    export alias k9t =  zellij action new-tab -c ~ -n k9s -l ~/.config/zellij/layouts/k9s.kdl
     export alias l = ls -las
     export alias lg = lazygit
     export alias procs = mprocs -c ~/.config/mprocs/mprocs.yaml
