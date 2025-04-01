@@ -32,6 +32,7 @@ extra@{ config, pkgs, pkgs-stable, ... }:
 
       # Utilities
       bat
+      broot
       btop
       delta
       eza

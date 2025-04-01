@@ -43,18 +43,16 @@ layout {
     }
     
     swap_tiled_layout name="STACK" {
-        default_tab max_panes=2 {
+        default_tab max_panes=1 {
             pane {
                 pane
             }
         }
         default_tab max_panes=9 {
             pane split_direction="vertical" {
-                pane size="70%" stacked=true {
-                    pane
-                    pane
-                }
+                pane size="70%"
                 pane stacked=true {
+                    pane
                     pane
                     pane
                     pane
@@ -75,18 +73,17 @@ layout {
 
     default_tab {
         pane split_direction="vertical" {
-            pane size="70%" stacked=true {
-                pane focus=true {
-                    command "lf"
-                    args "-config" "/home/thomas/.config/lf/lfrc-zellij"
-                    name "FILES"
-                }
+            pane size="70%" {
                 pane {
                     command "hx"
                     name "EDITOR"
                 }
             }
             pane stacked=true {
+                pane focus=true {
+                    command "broot"
+                    name "FILES"
+                }
                 pane {
                     command "lazygit"
                     name "GIT"

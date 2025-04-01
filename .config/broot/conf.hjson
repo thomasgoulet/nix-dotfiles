@@ -1,0 +1,133 @@
+# Configuration documentation is available at
+#     https://dystroy.org/broot
+
+default_flags: -ghi
+
+date_time_format: %Y-%m-%d
+
+# (you really should read https://dystroy.org/broot/modal/
+# before as it may not suit everybody even among vim users)
+#
+# You may start either in 'command' mode, or in 'input' mode
+#
+modal: true
+initial_mode: command
+
+show_selection_mark: true
+
+cols_order: [
+    mark
+    git
+    size
+    permission
+    date
+    count
+    branch
+    name
+]
+
+icon_theme: nerdfont
+
+###############################################################
+# Special paths
+# If some paths must be handled specially, uncomment (and change
+# this section as per the examples)
+# Setting "list":"never" on a dir prevents broot from looking at its 
+#  children when searching, unless the dir is the selected root.
+# Setting "sum":"never" on a dir prevents broot from looking at its
+#  children when computing the total size and count of files.
+# Setting "show":"always" makes a file visible even if its name
+#  starts with a dot.
+# Setting "list":"always" may be useful on a link to a directory
+#  (they're otherwise not entered by broot unless selected)
+#
+special_paths: {
+    "~/.config": { "show": "always" }
+    ".git": { "show": "never" }
+    ".gradle": { "show": "never" }
+    ".project": { "show": "never" }
+    ".settings": { "show": "never" }
+    "bin": { "show": "never" }
+    "build": { "show": "never" }
+    "node_modules": { "show": "never" }
+}
+
+###############################################################
+# Quit on last cancel
+# You can usually cancel the last state change on escape.
+# If you want the escape key to quit broot when there's nothing
+# to cancel (for example when you just opened broot), uncomment
+# this parameter
+# 
+# quit_on_last_cancel: true
+
+# https://dystroy.org/broot/input/#the-filtering-pattern
+search_modes: {
+    <empty>: fuzzy name
+    /: regex content
+}
+
+enable_kitty_keyboard: false
+
+lines_before_match_in_preview: 1
+lines_after_match_in_preview: 1
+
+preview_transformers: [
+    // # Use mutool to render any PDF file as an image
+    // # In this example we use placeholders for the input and output files
+    // {
+    //     input_extensions: [ "pdf" ] // case doesn't matter
+    //     output_extension: png
+    //     mode: image
+    //     command: [ "mutool", "draw", "-w", "1000", "-o", "{output-path}", "{input-path}" ]
+    // }
+
+    // # Use LibreOffice to render Office files as images
+    // # In this example, {output-dir} is used to specify where LibreOffice must write the result
+    // {
+    //     input_extensions: [ "xls", "xlsx", "doc", "docx", "ppt", "pptx", "ods", "odt", "odp" ]
+    //     output_extension: png
+    //     mode: image
+    //     command: [
+    //         "libreoffice", "--headless",
+    //         "--convert-to", "png",
+    //         "--outdir", "{output-dir}",
+    //         "{input-path}"
+    //     ]
+    // }
+
+    // # Use jq to beautify JSON
+    // # In this example, the command refers to neither the input nor the output,
+    // # so broot pipes them to the stdin and stdout of the jq process
+    // {
+    //     input_extensions: [ "json" ] 
+    //     output_extension: json
+    //     mode: text
+    //     command: [ "jq" ]
+    // }
+]
+
+imports: [
+
+    # Verbs are better configured in verbs.hjson. But you
+    # can also add another files for your personal verbs
+    verbs.hjson
+
+    # This file contains the skin to use when the terminal
+    # is dark (or when this couldn't be determined)
+    {
+        luma: [
+            dark
+            unknown
+        ]
+        file: skins/thom.hjson
+    }
+
+    # This skin is imported when your terminal is light
+    {
+        luma: light
+        # (un)comment to choose your preferred skin
+        //file: skins/solarized-light.hjson
+        file: skins/white.hjson
+    }
+]
