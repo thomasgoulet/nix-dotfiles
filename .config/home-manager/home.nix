@@ -40,7 +40,6 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       fx
       fzf
       just
-      lf
       ripgrep
       taskwarrior3
       wslu

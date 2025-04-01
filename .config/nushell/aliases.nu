@@ -4,7 +4,6 @@ module aliases {
     export alias c = clear
     export alias b64 = decode base64
     export alias expl = explorer.exe .
-    export alias f = lf
     export alias l = ls -las
     export alias lg = lazygit
     export alias procs = mprocs -c ~/.config/mprocs/mprocs.yaml
