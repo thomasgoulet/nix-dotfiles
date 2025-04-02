@@ -169,8 +169,8 @@ keybinds clear-defaults=true {
         bind "Alt T"         { BreakPane; }
         bind "Alt H"         { GoToPreviousTab; }
         bind "Alt L"         { GoToNextTab; }
-        bind "Alt J"         { MoveTab "Left"; }
-        bind "Alt K"         { MoveTab "Right"; }
+        bind "Alt J"         { MovePane "Down"; }
+        bind "Alt K"         { MovePane "Up"; }
         bind "Alt =" "Alt +" { Resize "Increase"; }
         bind "Alt -"         { Resize "Decrease"; }
     }

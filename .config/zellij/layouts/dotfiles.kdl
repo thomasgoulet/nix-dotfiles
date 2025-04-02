@@ -50,7 +50,6 @@ layout {
         }
         default_tab max_panes=9 {
             pane split_direction="vertical" {
-                pane size="70%"
                 pane stacked=true {
                     pane
                     pane
@@ -61,6 +60,7 @@ layout {
                     pane
                     pane
                 }
+                pane size="70%"
             }
         }
     }
@@ -73,13 +73,6 @@ layout {
 
     default_tab {
         pane split_direction="vertical" {
-            pane size="70%" {
-                pane {
-                    command "hx"
-                    cwd "/home/thomas/.config"
-                    name "EDITOR"
-                }
-            }
             pane stacked=true {
                 pane focus=true {
                     command "broot"
@@ -91,6 +84,13 @@ layout {
                     cwd "/home/thomas"
                     args "-g" "/home/thomas/.dotfiles" "-w" "/home/thomas"
                     name "GIT"
+                }
+            }
+            pane size="70%" {
+                pane {
+                    command "hx"
+                    cwd "/home/thomas/.config"
+                    name "EDITOR"
                 }
             }
         }

@@ -28,22 +28,22 @@
 
 skin: {
     directory: ansi(4)
-    file: ansi(7)
+    file: ansi(15)
     pruning: ansi(8) none italic
     selected_line: none ansi(8) italic
     tree: ansi(8)
 
     # Search
     char_match: ansi(3) none underlined
-    parent: ansi(8) none bold
+    parent: ansi(15) none italic
 
     # File properties
     exe: ansi(2)
-    link: ansi(13)
-    sparse: ansi(12)
+    link: ansi(5)
+    sparse: ansi(4)
 
     # Prompt
-    input: ansi(3)
+    input: ansi(15)
 
     # Status bar
     status_bold: ansi(15) none bold
@@ -55,8 +55,8 @@ skin: {
     status_normal: ansi(15)
 
     # Flag status
-    flag_label: ansi(6)
-    flag_value: ansi(14) none bold
+    flag_label: ansi(6) none italic
+    flag_value: ansi(6) none italic
 
     # Background
     default: none none
@@ -123,7 +123,7 @@ skin: {
     file_error: ansi(1)
 
     # Content searches
-    content_extract: ansi(7)
+    content_extract: ansi(5)
     content_match: ansi(3) none underlined
 
     # Used in status line
