@@ -10,7 +10,7 @@ $env.NIX_PROFILES = "/nix/var/nix/profiles/default /home/thomas/.nix-profile"
 $env.NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt"
 $env.PAGER = "less -RF --no-init"
 $env.STARSHIP_CONFIG = "/home/thomas/.config/starship/config.toml"
-$env._ZO_FZF_OPTS = "--height 40% --reverse --inline-info --tiebreak length --bind 'tab:down' --bind 'shift-tab:up' --preview 'exa -T -L2 {2}'"
+$env._ZO_FZF_OPTS = "--color=16 --inline-info --tiebreak length --bind 'tab:down' --bind 'shift-tab:up'"
 
 $env.ENV_CONVERSIONS = {
     "PATH": {
