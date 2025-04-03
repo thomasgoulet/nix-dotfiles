@@ -38,13 +38,19 @@ verbs: [
     }
 
     {
-        invocation: gtr
+        invocation: gr
         execution: ":focus {git-root}"
     }
 
     {
         invocation: gs
         execution: ":toggle_git_status"
+    }
+
+    {
+        invocation: j
+        external: "nu -c \"broot (zoxide query -i)\""
+        leave_broot: true
     }
 
 ]
