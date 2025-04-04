@@ -53,5 +53,21 @@ verbs: [
         leave_broot: true
     }
 
+    {
+        invocation: blame
+        apply_to: text_file
+        external: "zellij run --floating --name BLAME -- git blame {file}"
+        set_working_dir: true
+        leave_broot: false
+    }
+
+    {
+        invocation: diff
+        apply_to: text_file
+        external: "zellij run --floating --name DIFF -- git diff {file}"
+        set_working_dir: true
+        leave_broot: false
+    }
+
 ]
 

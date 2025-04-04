@@ -30,8 +30,10 @@ icon_theme: nerdfont
 
 special_paths: {
     "~/.config": { "show": "always" }
+    ".cache": { "list": "never" }
     ".git": { "show": "never" }
     ".gradle": { "show": "never" }
+    ".local": { "list": "never" }
     ".project": { "show": "never" }
     ".settings": { "show": "never" }
     "automated-tests": { "list":"never" }
