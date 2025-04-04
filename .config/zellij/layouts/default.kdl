@@ -119,6 +119,28 @@ layout {
         floating_panes max_panes=1 {
             pane x="10%" y="10%" width="80%" height="80%"
         }
+        floating_panes max_panes=2 {
+            pane x="9%" y="10%" width="80%" height="80%"
+            pane x="11%" y="10%" width="80%" height="80%"
+        }
+        floating_panes max_panes=3 {
+            pane x="8%" y="10%" width="80%" height="80%"
+            pane x="10%" y="10%" width="80%" height="80%"
+            pane x="12%" y="10%" width="80%" height="80%"
+        }
+        floating_panes max_panes=4 {
+            pane x="7%" y="10%" width="80%" height="80%"
+            pane x="9%" y="10%" width="80%" height="80%"
+            pane x="11%" y="10%" width="80%" height="80%"
+            pane x="13%" y="10%" width="80%" height="80%"
+        }
+        floating_panes max_panes=5 {
+            pane x="6%" y="10%" width="80%" height="80%"
+            pane x="8%" y="10%" width="80%" height="80%"
+            pane x="10%" y="10%" width="80%" height="80%"
+            pane x="12%" y="10%" width="80%" height="80%"
+            pane x="14%" y="10%" width="80%" height="80%"
+        }
     }
 
 }
