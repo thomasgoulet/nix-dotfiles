@@ -64,7 +64,15 @@ verbs: [
     {
         invocation: diff
         apply_to: text_file
-        external: "zellij run --floating --name DIFF -- git diff {file}"
+        external: "zellij run --floating --name DIFF -- git -c diff.external=difft diff {file}"
+        set_working_dir: true
+        leave_broot: false
+    }
+
+    {
+        invocation: diff
+        apply_to: directory
+        external: "zellij run --floating --name DIFF -- git -c diff.external=difft diff"
         set_working_dir: true
         leave_broot: false
     }

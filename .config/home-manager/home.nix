@@ -35,6 +35,7 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       broot
       btop
       delta
+      difftastic
       eza
       fd
       fx

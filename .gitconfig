@@ -15,7 +15,7 @@
     dark = true
     line-numbers = true
     navigate = true
-    side-by-side = false
+    side-by-side = true
     syntax-theme = base16
     blame-palette = "#2f4f4f #4f2f4f #4f4f2f"
     hunk-header-style = "omit"
