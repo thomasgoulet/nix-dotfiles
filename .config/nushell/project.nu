@@ -1,4 +1,4 @@
-module helix {
+module project {
 
     def "nu-complete zoxide repos" [] {
         zoxide query -l -s
@@ -11,7 +11,7 @@ module helix {
     }
 
     # Open folder from zoxide picker in a different zellij tab
-    export def prj [
+    export def work [
         ...hint: string@"nu-complete zoxide repos"
     ] {
         mut dir = "";

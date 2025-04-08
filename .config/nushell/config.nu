@@ -302,10 +302,6 @@ use az *
 source ~/.config/nushell/git.nu
 use git *
 
-# helix aliases and functions
-source ~/.config/nushell/helix.nu
-use helix *
-
 # kubectl aliases and functions
 source ~/.config/nushell/kubernetes.nu
 use kubernetes *
@@ -313,6 +309,10 @@ use kubernetes *
 # nix aliases and functions
 source ~/.config/nushell/nix.nu
 use nix *
+
+# project aliases and functions
+source ~/.config/nushell/project.nu
+use project *
 
 # taskwarrior aliases and functions
 source ~/.config/nushell/task.nu
