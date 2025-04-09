@@ -42,7 +42,6 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       fzf
       just
       ripgrep
-      taskwarrior3
       wslu
       zoxide
 
