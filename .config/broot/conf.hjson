@@ -30,10 +30,16 @@ icon_theme: nerdfont
 
 special_paths: {
     "~/.config": { "show": "always" }
+    ".azure-devops": { "list": "never" }
     ".cache": { "list": "never" }
+    ".dotnet": { "list": "never" }
+    ".eclipse": { "list": "never" }
     ".git": { "show": "never" }
     ".gradle": { "show": "never" }
     ".local": { "list": "never" }
+    ".nix": { "list": "never" }
+    ".npm": { "list": "never" }
+    ".nuget": { "list": "never" }
     ".project": { "show": "never" }
     ".settings": { "show": "never" }
     "automated-tests": { "list":"never" }
@@ -55,6 +61,8 @@ enable_kitty_keyboard: false
 
 lines_before_match_in_preview: 1
 lines_after_match_in_preview: 1
+
+show_matching_characters_on_path_searches: false
 
 preview_transformers: [ ]
 
