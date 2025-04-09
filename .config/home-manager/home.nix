@@ -93,12 +93,13 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       terraform
 
     ]
-  ) ++ (
-    # Packages which do not build on unstable
-    with pkgs-stable; [
-
-    ]
   );
+
+  # ++ (
+  #   # Packages which do not build on unstable
+  #   with pkgs-stable; [
+  #   ]
+  # );
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
