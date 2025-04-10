@@ -1,31 +1,78 @@
 module project {
 
-    def "nu-complete zoxide repos" [] {
-        zoxide query -l -s
-        | from ssv -m 1 -n
-        | rename score description
-        | where description =~ repos\/
-        | insert value {|r|
-            $r.description | path basename
+    const projectfile = "~/.projects.json" | path expand;
+
+    def "nu-complete projects" [] {
+        open $projectfile
+        | select path key
+        | rename value description
+    }
+
+    def get-projects [] {
+        try {
+            return (open $projectfile | sort-by weight --reverse);
+        } catch {
+            |err|
+            print $err
+            [] | save $projectfile
+            return [];
         }
     }
 
-    # Open folder from zoxide picker in a different zellij tab
-    export def work [
-        ...hint: string@"nu-complete zoxide repos"
+    #  Add a project to the project list
+    export def "project add" [
+        path: path
+        key: string
+        weight: int
     ] {
-        mut dir = "";
-        if ($hint == ["."]) {
-            $dir = $env.PWD;
-        } else if ($hint != []) {
-            $dir = (zoxide query ...$hint);
-        } else {
-            $dir = (zoxide query -i);
+        get-projects
+        | append {path: $path, key: $key, weight: $weight}
+        | sort-by weight --reverse
+        | save $projectfile -f
+    }
+
+    #  Directly edit the project JSON file with the configured editor
+    export def "project edit" [] {
+        run-external $env.EDITOR $projectfile
+    }
+
+    #  List the available projects, their keys and their weights
+    export def "project list" [] {
+        return (get-projects);
+    }
+
+    # Open a project using the configured ZelliJ, the available projects can be listed using `project list`
+    export def work [
+        ...hints: string@"nu-complete projects"
+    ] {
+        let open = {
+            |path|
+            zellij action new-tab -c $path -n (basename $path) -l ~/.config/zellij/layouts/edit.kdl
+        };
+
+        if ($hints == []) {
+            do $open (get-projects | first | get path)
+            return;
         }
 
-        if ($dir != "") {
-            zellij action new-tab -c $dir -n (basename $dir) -l ~/.config/zellij/layouts/edit.kdl
+        if ($hints == ["."]) {
+            do $open $env.PWD;
+            return;
         }
+
+        mut projects = get-projects
+        mut remaining_hints = $hints
+        while ($remaining_hints != []) {
+            let hint = ($remaining_hints | first);
+            $projects = ($projects | where key =~ $hint or path =~ $hint);
+            $remaining_hints = ($remaining_hints | skip 1);
+        }
+        if ($projects | is-not-empty) {
+            do $open ($projects | first | get path);
+            return;
+        }
+
+        return (get-projects);
     }
-  
+
 }
