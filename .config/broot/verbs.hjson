@@ -47,7 +47,7 @@ verbs: [
 
     {
         invocation: "rm"
-        internal: "trash"
+        external: "mv {file} ~/.trash"
         leave_broot: false
     }
 
