@@ -26,7 +26,7 @@ module project {
         weight: int
     ] {
         get-projects
-        | append {path: $path, key: $key, weight: $weight}
+        | append {key: $key, path: $path, weight: $weight}
         | sort-by weight --reverse
         | save $projectfile -f
     }
@@ -64,7 +64,7 @@ module project {
         mut remaining_hints = $hints
         while ($remaining_hints != []) {
             let hint = ($remaining_hints | first);
-            $projects = ($projects | where key =~ $hint or path =~ $hint);
+            $projects = ($projects | where key =~ $hint);
             $remaining_hints = ($remaining_hints | skip 1);
         }
         if ($projects | is-not-empty) {
