@@ -84,15 +84,16 @@ $env.config = {
     }
 
     table: {
-        mode: rounded
+        header_on_separator: false
         index_mode: auto
+        missing_value_symbol: $"(ansi red)-x-(ansi reset)"
+        mode: rounded
         padding: { left: 1, right: 1 }
         trim: {
             methodology: wrapping
             wrapping_try_keep_words: true
             truncating_suffix: "..."
         }
-        header_on_separator: false
     }
 
     datetime_format: {
@@ -313,10 +314,6 @@ use nix *
 # project aliases and functions
 source ~/.config/nushell/project.nu
 use project *
-
-# taskwarrior aliases and functions
-source ~/.config/nushell/task.nu
-use task *
 
 # Open ZelliJ session if not inside one
 if ($env | columns | where $it == ZELLIJ | is-empty) {

@@ -38,7 +38,7 @@ module cache {
         };
         stor insert -t cache -d {
             key: $key,
-            expirystamp: ($"in ($timeout) seconds" | into datetime | format date %s | into int),
+            expirystamp: ($"in ($timeout) seconds" | date from-human | format date %s | into int),
             value: ($value | to json)
         };
         return $value;
