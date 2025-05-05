@@ -26,3 +26,5 @@ os:
   editAtLine: 'hx +{{line}} {{filename}}'
   editInTerminal: true
   openDirInEditor: 'hx {{dir}}'
+  open: '~/.config/broot/open.sh {{filename}}'
+  openLink: 'wslview {{link}}'
