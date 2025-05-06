@@ -91,4 +91,10 @@ module argo {
         argocd app diff --grpc-web ($app_match | get NAME | first) --local ($app_match | get PATH | first) --local-repo-root .;
     }
 
+    # Sync applications quickly
+    export def "argo sync" [
+        app: string@"nu-complete argocd applications"
+    ] {
+        argocd app sync $app -o json | from json | get status.operationState;
+    }
 }
