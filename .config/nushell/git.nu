@@ -3,15 +3,6 @@ module git {
     # Git alias
     export alias g = git
 
-    # Add all files
-    export alias ga = git add .
-
-    # Pull and prune
-    export alias gpl = git pull --prune
-
-    # Push
-    export alias gps = git push
-
     def "nu-complete git branches" [] {
         ^git branch
         | lines
@@ -38,26 +29,9 @@ module git {
         | uniq;
     }
 
-    # Merge with another branch
-    export extern "git merge" [
-        branch: string@"nu-complete git branches"  # Branch to checkout
-    ]
-
-    # List branches
-    export def gb [] {
-        git branch -a
-        | lines;
+    def "nu-complete git tags" [] {
+        git tag -l | lines | reverse 
     }
-
-    # Delete branches
-    export def gbd [
-        branch: string@"nu-complete git branches"      # Branch to delete
-    ] {
-        git branch -D $branch;
-    }
-  
-    # Show git diff
-    export alias gd = git diff
 
     # Show git logs
     export def gl [] {
@@ -67,18 +41,6 @@ module git {
         );
         if ($commit != "") {
             git show --color=always ($commit | str substring 2..9);
-        }
-    }
-
-    # Commit with a message
-    export def gm [
-        message: string  # Commit message
-        --add (-a)  # Add files as well
-    ] {
-        if $add {
-            git commit -am $message;
-        } else {
-            git commit -m $message;
         }
     }
 
@@ -101,26 +63,10 @@ module git {
         return;
     }
 
-    # Show status
-    export def gs [] {
-        git status --short
-        | from ssv -m 1 -n
-        | rename STATUS FILE
-    }
-
-    # Switch to a new branch
-    export def gsc [
-        name: string
+    # List all commits since a specific tag
+    export def "git changelog" [
+        tag: string@"nu-complete git tags"  # Tag from which to start listing commits
     ] {
-        git switch -c $name;
+        git log --oneline $"($tag)..HEAD";
     }
-
-    # Switch branch
-    export def gsw [
-        target: string@"nu-complete git remote branches"  # Target to switch to
-    ] {
-        git switch $target;
-    }
-
-
 }

@@ -64,7 +64,7 @@ module project {
         mut remaining_hints = $hints
         while ($remaining_hints != []) {
             let hint = ($remaining_hints | first);
-            $projects = ($projects | where key =~ $hint);
+            $projects = ($projects | where path =~ $hint or key =~ $hint);
             $remaining_hints = ($remaining_hints | skip 1);
         }
         if ($projects | is-not-empty) {
