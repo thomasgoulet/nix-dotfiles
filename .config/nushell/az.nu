@@ -18,7 +18,7 @@ module az {
             open ~/.azure/msal_token_cache.json
             | get AccessToken
             | rotate
-            | filter {|$x| ($x.column0.expires_on | into int) > (date now | format date %s | into int) }
+            | where {|$x| ($x.column0.expires_on | into int) > (date now | format date %s | into int) }
             | length
             | into bool
         );
