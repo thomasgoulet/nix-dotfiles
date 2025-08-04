@@ -72,6 +72,9 @@ extra@{ config, pkgs, pkgs-stable, ... }:
         # Python
         python312
         python312Packages.python-lsp-server
+        python312Packages.jedi-language-server
+        ruff
+        ty
 
         # CSS, HTML, JS, JSON, Typescript
         vscode-langservers-extracted

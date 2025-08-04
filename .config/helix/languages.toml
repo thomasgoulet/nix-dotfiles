@@ -1,10 +1,20 @@
 [language-server]
-jdtls = { command = "jdtls", args = ["--jvm-arg=-javaagent:/home/thomas/.config/helix/java/lombok-1.18.32.jar"] }
-omnisharp = { command = "OmniSharp", args = ["--languageserver"] }
-vale = { command = "vale-ls" }
-yaml = { command = "yaml-language-server", args = ["--stdio"], config = { yaml = { format = { enable = true }, keyOrdering = false } } } # https://github.com/redhat-developer/yaml-language-server#language-server-settings
 none = { command = "" }
+
+# C#
+omnisharp = { command = "OmniSharp", args = ["--languageserver"] }
+
+# HTML
 vscode-esling-language-server = { command = "vscode-eslint-language-server", args = ["stdio"], config = { experimental = { useFlatConfig = true }, workingDirectory = { mode = "auto" }}}
+
+# Java
+jdtls = { command = "jdtls", args = ["--jvm-arg=-javaagent:/home/thomas/.config/helix/java/lombok-1.18.32.jar"] }
+
+# Markdown
+vale = { command = "vale-ls" }
+
+# YAML
+yaml = { command = "yaml-language-server", args = ["--stdio"], config = { yaml = { format = { enable = true }, keyOrdering = false } } } # https://github.com/redhat-developer/yaml-language-server#language-server-settings
 
 [[language]]
 name = "bash"
@@ -34,7 +44,7 @@ indent = { tab-width = 2, unit = "  " }
 
 [[language]]
 name = "python"
-auto-format = true
+auto-format = false
 indent = { tab-width = 4, unit = "	" }
 formatter = { command = "black", args = ["-", "-l160"]}
 
