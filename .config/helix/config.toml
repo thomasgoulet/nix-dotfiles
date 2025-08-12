@@ -92,6 +92,8 @@ q = ":q"
 Q = ":qa!"
 "[" = "jump_view_left"
 "]" = "jump_view_right"
+"," = ["save_selection", "goto_line_end", ":append-output echo ','", "collapse_selection", "jump_backward"]
+";" = ["save_selection", "goto_line_end", ":append-output echo ';'", "collapse_selection", "jump_backward"]
 tab = "save_selection"
 
 [keys.normal.space.i]
@@ -104,4 +106,17 @@ W = ["move_char_left", "move_next_long_word_end", "move_prev_long_word_start", "
 
 [keys.normal."]"]
 q = "@<space>'<tab><ret>"
+
+[keys.normal."["]
+q = "@<space>'<S-tab><ret>"
+
+[keys.normal."backspace"]
+C = ":bc"
+c = ":bc"
+Q = ":quit!"
+q = ":quit"
+R = ":reload-all"
+r = ":reload"
+S = ":write!"
+s = ":write"
 
