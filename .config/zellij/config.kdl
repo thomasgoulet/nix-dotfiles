@@ -226,10 +226,8 @@ themes {
     }
 }
 
-session_serialization false
-
-stacked_resize false
-
+advanced_mouse_actions false
 default_layout "default"
-
 default_mode "locked"
+stacked_resize false
+session_serialization false
