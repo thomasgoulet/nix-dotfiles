@@ -38,7 +38,6 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       difftastic
       eza
       fd
-      fx
       fzf
       just
       ripgrep
