@@ -111,7 +111,7 @@ q = "@<space>'<tab><ret>"
 q = "@<space>'<S-tab><ret>"
 
 [keys.normal."backspace"]
-C = ":bc"
+C = ":bc!"
 c = ":bc"
 Q = ":quit!"
 q = ":quit"
