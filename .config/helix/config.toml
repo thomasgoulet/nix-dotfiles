@@ -113,6 +113,7 @@ q = "@<space>'<S-tab><ret>"
 [keys.normal."backspace"]
 C = ":bc!"
 c = ":bc"
+f = ":format"
 Q = ":quit!"
 q = ":quit"
 R = ":reload-all"
