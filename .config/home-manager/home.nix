@@ -33,7 +33,6 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       # Utilities
       bat
       broot
-      btop
       delta
       difftastic
       eza
@@ -41,6 +40,7 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       fzf
       just
       ripgrep
+      sd
       wslu
       zoxide
 
@@ -54,7 +54,6 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       marksman markdown-oxide # Markdown
       nil                     # Nix
       terraform-ls            # HCL
-      yaml-language-server    # YAML
 
         # C#
         dotnet-sdk_8
@@ -85,6 +84,10 @@ extra@{ config, pkgs, pkgs-stable, ... }:
         # Typst
         typst
         tinymist
+
+        # YAML
+        yaml-language-server
+        yamlfmt
 
       # Infrastructure
       argocd
