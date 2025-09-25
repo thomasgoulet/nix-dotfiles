@@ -104,4 +104,15 @@ module nix {
     ] {
         nix-shell --command "nu -e '$env.config.keybindings = ($env.config.keybindings | append {name: exit modifier: none keycode: esc mode: [emacs] event: {send: ctrld} });'" -p ...$packages;
     }
+
+    # Launch a nix shell with the specified packages installed as well as numpy and pandas
+    export def "nx try-py" [
+        ...extrapackages  # Python packages to temporarily install
+    ] {
+        let version = python --version | parse "Python {major}.{minor}.{patch}"
+        let prefix = $"python($version.major | first)($version.minor | first)Packages"
+        let packages = ["numpy", "pandas"] | append $extrapackages | each {|p| $"($prefix).($p)"}
+        $packages
+        nix-shell --command "nu -e '$env.config.keybindings = ($env.config.keybindings | append {name: exit modifier: none keycode: esc mode: [emacs] event: {send: ctrld} });'" -p ...$packages;
+    }
 }

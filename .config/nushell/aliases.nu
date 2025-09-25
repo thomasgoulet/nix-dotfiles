@@ -7,6 +7,9 @@ module aliases {
     export alias l = ls -las
     export alias lg = lazygit
     export alias pshell = powershell.exe -NoExit -Command "Set-Location $env:USERPROFILE"
+    export alias vmake = python -m venv .venv
+    export alias vpip = .venv/bin/pip
+    export alias vpy = .venv/bin/python
     export alias tf = terraform
     export alias tg = terragrunt
 
