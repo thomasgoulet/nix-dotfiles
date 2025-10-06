@@ -1,5 +1,27 @@
 extra@{ config, pkgs, pkgs-stable, ... }:
 
+let
+
+  oasdiff-bin = pkgs.stdenv.mkDerivation {
+
+    pname = "oasdiff";
+    version = "1.11.7";
+    src = pkgs.fetchurl {
+      url = "https://github.com/oasdiff/oasdiff/releases/download/v1.11.7/oasdiff_1.11.7_linux_amd64.tar.gz";
+      sha256 = "093j69a9s1d4wysz7jwfpfp934z00s311ynqykb6ykppclihbwcp"; # nix-prefetch-url <url>
+    };
+
+    dontUnpack = true;
+
+    installPhase = ''
+      mkdir -p $out/bin
+      tar -xzvf $src
+      cp oasdiff $out/bin/
+    '';
+
+  };
+
+in
 {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -39,6 +61,7 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       fd
       fzf
       just
+      oasdiff-bin
       ripgrep
       sd
       wslu
@@ -95,7 +118,6 @@ extra@{ config, pkgs, pkgs-stable, ... }:
       kubectl
       kubelogin
       kustomize
-      podman
       terraform
 
     ]
@@ -106,15 +128,5 @@ extra@{ config, pkgs, pkgs-stable, ... }:
   #   with pkgs-stable; [
   #   ]
   # );
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # ".screenrc".source = dotfiles/screenrc;
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
  
 }
