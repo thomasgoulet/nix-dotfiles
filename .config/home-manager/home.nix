@@ -1,22 +1,6 @@
 extra@{ config, pkgs, pkgs-stable, ... }:
 let
 
-  cats-bin = pkgs.stdenv.mkDerivation {
-
-    pname = "cats";
-    version = "13.4.1";
-    src = pkgs.fetchurl {
-      url = "https://github.com/Endava/cats/releases/download/cats-13.4.1/cats_linux_amd64_13.4.1.tar.gz";
-      sha256 = "03jan2irfsnsbkgwiksr1k0qx9890v52c9vl9n83pnn0kwxpahbw"; # nix-prefetch-url <url>
-    };
-    dontUnpack = true;
-    installPhase = ''
-      mkdir -p $out/bin
-      tar -xzvf $src
-      cp cats $out/bin/
-    '';
-  };
-
   oasdiff-bin = pkgs.stdenv.mkDerivation {
     pname = "oasdiff";
     version = "1.11.7";
@@ -66,7 +50,6 @@ in
       # Utilities
       bat
       broot
-      cats-bin
       delta
       difftastic
       eza
