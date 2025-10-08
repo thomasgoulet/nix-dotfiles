@@ -60,13 +60,10 @@ module project {
             return;
         }
 
-        mut projects = get-projects
-        mut remaining_hints = $hints
-        while ($remaining_hints != []) {
-            let hint = ($remaining_hints | first);
-            $projects = ($projects | where path =~ $hint or key =~ $hint);
-            $remaining_hints = ($remaining_hints | skip 1);
-        }
+        let projects = ($hints | reduce -f (get-projects) {|hint, acc|
+            $acc | where path =~ $hint or key =~ $hint
+        })
+
         if ($projects | is-not-empty) {
             do $open ($projects | first | get path);
             return;
