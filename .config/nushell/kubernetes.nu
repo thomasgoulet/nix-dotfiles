@@ -177,8 +177,8 @@ module kubernetes {
         --restart (-r)  # Restart the resources's pods
     ] {
 
-        mut flags = (
-            if $all {["-A"]} else if ($namespace != null) {["-n" $namespace]} else {[]}
+        let namespace_flags = (
+            if $all { ["-A"] } else if ($namespace != null) { ["-n", $namespace] } else { [] }
         );
 
         # These can only execute if a name is specified
@@ -186,37 +186,34 @@ module kubernetes {
 
             # Restart a resource
             if ($restart) {
-                return (kubectl rollout restart $"($kind)/($name)" ...$flags);
+                return (kubectl rollout restart $"($kind)/($name)" ...$namespace_flags);
             }
 
             # Port-forward a resource
             if ($port_forward != null) {
                 if ($kind in [po pod pods]) {
-                    kubectl port-forward $name $"($port_forward):($port_forward)" ...$flags;
+                    kubectl port-forward $name $"($port_forward):($port_forward)" ...$namespace_flags;
                 } else {
-                    kubectl port-forward $"($kind)/($name)" $"($port_forward):($port_forward)" ...$flags;
+                    kubectl port-forward $"($kind)/($name)" $"($port_forward):($port_forward)" ...$namespace_flags;
                 }
                 return;
             }
 
             # Outputs the logs for a resource
             if ($logs or $logs_previous) {
-                if ($logs_previous) {
-                    $flags = ['-p'] | append $flags;
-                }
-
+                let log_flags = if $logs_previous { ['-p'] | append $namespace_flags } else { $namespace_flags }
 
                 if ($kind in [po pod pods]) {
-                    kubectl logs $name ...$flags | bat;
+                    kubectl logs $name ...$log_flags | bat;
                 } else {
-                    kubectl logs $"($kind)/($name)" ...$flags | bat;
+                    kubectl logs $"($kind)/($name)" ...$log_flags | bat;
                 }
                 return;
             }
 
             # Deletes a resource
             if ($delete) {
-                return (kubectl delete $kind $name ...$flags);
+                return (kubectl delete $kind $name ...$namespace_flags);
             }
 
         }
@@ -224,9 +221,9 @@ module kubernetes {
         # Edit a resource or a list of resource
         if ($edit) {
             if ($name == null) {
-                kubectl edit $kind ...$flags;
+                kubectl edit $kind ...$namespace_flags;
             } else {
-                kubectl edit $kind $name ...$flags;
+                kubectl edit $kind $name ...$namespace_flags;
             }
             return;
         }
@@ -235,10 +232,10 @@ module kubernetes {
         if ($get or $property != []) {
             let yaml = (
                 if ($name != null) {
-                    kubectl get $kind $name ...$flags -o yaml
+                    kubectl get $kind $name ...$namespace_flags -o yaml
                     | from yaml;
                 } else {
-                    kubectl get $kind ...$flags -o yaml
+                    kubectl get $kind ...$namespace_flags -o yaml
                     | from yaml
                     | get items;
                 }
@@ -255,8 +252,8 @@ module kubernetes {
         }
 
         # List the resources
-        mut $output = (
-            kubectl get $kind ...$flags
+        let output = (
+            kubectl get $kind ...$namespace_flags
             | from ssv
         );
 
@@ -278,33 +275,24 @@ module kubernetes {
     ] {
         cache invalidate
 
-        mut match = [];
-        $match = (
-            kubectl config get-contexts
-            | from ssv -a
-            | where NAME == $context
-        );
-        if ($match == []) {
-            $match = (
-                kubectl config get-contexts
-                | from ssv -a
-                | where NAME =~ $context
-            );
+        let contexts = (kubectl config get-contexts | from ssv -a)
+        mut match = ($contexts | where NAME == $context)
+        if ($match | is-empty) {
+            $match = ($contexts | where NAME =~ $context)
         }
 
-        if (($match | length) != 1) {
-            return "No or multiple matching contexts";
-        } else {
-            $match = (
-                $match
-                | first
-            );
+        if ($match | length) == 0 {
+            error make -u { msg: "No matching context found." }
+        } else if ($match | length) > 1 {
+            let names = ($match | get NAME | str join ", ")
+            error make -u { msg: $"Multiple contexts found: ($names)." }
         }
 
-        kubectl config use-context ($match | get NAME | to text) o+e> (null-device);
+        let final_context = ($match | first | get NAME | to text)
+        kubectl config use-context $final_context o+e> (null-device);
 
         if ($namespace != null) {
-            kubectl config set-context ($match | get NAME | to text) --namespace $namespace o+e> (null-device);
+            kubectl config set-context $final_context --namespace $namespace o+e> (null-device);
         }
 
         return null;
