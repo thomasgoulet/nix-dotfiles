@@ -55,6 +55,7 @@ in
       eza
       fd
       fzf
+      gemini-cli-bin
       just
       oasdiff-bin
       ripgrep
