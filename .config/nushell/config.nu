@@ -316,6 +316,6 @@ source ~/.config/nushell/project.nu
 use project *
 
 # Open ZelliJ session if not inside one
-if ($env | columns | where $it == ZELLIJ | is-empty) {
+if not ("ZELLIJ" in $env) {
     zellij attach -c thomas
 }
