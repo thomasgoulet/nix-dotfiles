@@ -110,6 +110,7 @@ in
 
       # Infrastructure
       argocd
+      dyff
       k9s
       kubectl
       kubelogin
