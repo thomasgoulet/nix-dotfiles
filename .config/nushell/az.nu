@@ -13,19 +13,11 @@ module az {
     export def azl [
         --silent (-s)  # Silent version of the command
     ] {
-        # FIX this currently does not properly check if I'm logged in or not
-        let logged_in = (
-            open ~/.azure/msal_token_cache.json
-            | get AccessToken
-            | rotate
-            | where {|$x| ($x.column0.expires_on | into int) > (date now | format date %s | into int) }
-            | length
-            | into bool
-        );
-        if (not $logged_in) {
-          az login o+e> (null-device);
+        let status = (do -i { az account show } | complete);
+        if $status.exit_code != 0 {
+            az login;
         } else if (not $silent) {
-                  return "Already logged in";
+            "Already logged in"
         }
     }
 
