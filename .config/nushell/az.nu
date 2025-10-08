@@ -32,7 +32,7 @@ module az {
         );
 
         if (($matches | length) == 0) {
-            return "No matching subscription";
+            error make -u { msg: "No matching subscription." };
         } else if (($matches | length) == 1) {
             let match = (
                 $matches

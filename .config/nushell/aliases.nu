@@ -22,13 +22,13 @@ module aliases {
         --new (-n)  # Create a new lab
     ] {
         if $new {
-            let path = $"($env.HOME)/labs/(date now | format date %Y-%m-%d)-($name)"
-            mkdir $path
-            cd $path
+            let path = $"($env.HOME)/labs/(date now | format date %Y-%m-%d)-($name)";
+            mkdir $path;
+            cd $path;
         } else if ($name in (nu-complete labs)) {
-            cd $"($env.HOME)/labs/($name)"
+            cd $"($env.HOME)/labs/($name)";
         } else {
-            "Could not find the folder."
+            error make -u { msg: "Could not find the folder." };
         }
     }
 

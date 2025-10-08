@@ -53,7 +53,7 @@ module argo {
         );
 
         if ($match | length) != 1 {
-          return "No matching context";
+          error make -u { msg: "No matching context." };
         }
         argocd ctx ($match | get NAME | first);
     }
@@ -78,7 +78,7 @@ module argo {
             | where NAME =~ $app
         );
         if ($app_match | length) == 0 {
-            return "No matching application";
+            error make -u { msg: "No matching application." };
         }
         if (not (
             $app_match
@@ -86,7 +86,7 @@ module argo {
             | first
             | path exists
         )) {
-            return "No matching path for this application. Make sure you at the root of the right repository";
+            error make -u { msg: "No matching path for this application. Make sure you at the root of the right repository." };
         }
         argocd app diff --grpc-web ($app_match | get NAME | first) --local ($app_match | get PATH | first) --local-repo-root .;
     }

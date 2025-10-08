@@ -247,7 +247,7 @@ module kubernetes {
                 );
                 return $output;
             } catch {
-                return "Path was not valid for the resource";
+                error make -u { msg: "Path was not valid for the resource." };
             }
         }
 
@@ -330,6 +330,6 @@ module kubernetes {
                 return;
             }
         }
-        return $"No resource called ($name). Specify '-n' to launch a new pod with that name"
+        error make -u { msg: $"No resource called ($name). Specify '-n' to launch a new pod with that name." }
     }
 }
