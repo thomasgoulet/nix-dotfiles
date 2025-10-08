@@ -46,10 +46,16 @@ path add '/home/thomas/.nix-profile/bin'
 $env.PATH = ($env.PATH | uniq)
 
 # Use zoxide
-mkdir ~/.cache/zoxide
-zoxide init nushell --cmd j | save -f ~/.cache/zoxide/init.nu
+let zoxide_init_path = '~/.cache/zoxide/init.nu' | path expand
+if not ($zoxide_init_path | path exists) {
+    mkdir ~/.cache/zoxide | ignore
+    zoxide init nushell --cmd j | save -f $zoxide_init_path
+}
 
 # Use starship
-mkdir ~/.cache/starship
-starship init nu | save -f ~/.cache/starship/init.nu
+let starship_init_path = '~/.cache/starship/init.nu' | path expand
+if not ($starship_init_path | path exists) {
+    mkdir ~/.cache/starship | ignore
+    starship init nu | save -f $starship_init_path
+}
 $env.TRANSIENT_PROMPT_COMMAND = {"\n " + (starship module directory) + (starship module character)}
