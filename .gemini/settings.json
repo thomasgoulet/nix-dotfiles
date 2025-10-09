@@ -1,0 +1,45 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "hideBanner": true,
+    "footer": {
+      "hideSandboxStatus": true
+    },
+    "showMemoryUsage": true,
+    "showLineNumbers": true,
+    "showCitations": true,
+    "hideFooter": true,
+    "hideTips": true,
+    "hideWindowTitle": true,
+    "customThemes": {
+      "onedark": {
+        "name": "onehalfdark",
+        "type": "custom",
+        "Background": "#282C34",
+        "Foreground": "#DCDFE4",
+        "LightBlue": "#61AFEF",
+        "AccentBlue": "#61AFEF",
+        "AccentPurple": "#C678DD",
+        "AccentCyan": "#56B6C2",
+        "AccentGreen": "#98C379",
+        "AccentYellow": "#E5C07B",
+        "AccentRed": "#E06C75",
+        "Comment": "#ABB2BF",
+        "Gray": "#ABB2BF"
+      }
+    },
+    "theme": "onedark"
+  },
+  "general": {
+    "vimMode": false
+  },
+  "tools": {
+    "shell": {
+      "showColor": true
+    }
+  }
+}

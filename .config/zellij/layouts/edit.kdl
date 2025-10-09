@@ -104,6 +104,10 @@ layout {
                     command "lazygit"
                     name "GIT"
                 }
+                pane {
+                    command "gemini"
+                    name "AI"
+                }
             }
             pane size="70%" {
                 pane {

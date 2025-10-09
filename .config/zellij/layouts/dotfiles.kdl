@@ -107,6 +107,10 @@ layout {
                     args "-g" "/home/thomas/.dotfiles" "-w" "/home/thomas"
                     name "GIT"
                 }
+                pane {
+                    command "gemini"
+                    name "AI"
+                }
             }
             pane size="70%" {
                 pane {
