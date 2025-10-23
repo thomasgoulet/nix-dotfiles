@@ -45,11 +45,11 @@ layout {
     swap_tiled_layout name="STACK" {
         default_tab max_panes=1 {
             pane {
-                pane
+                pane borderless=true
             }
         }
         default_tab max_panes=9 {
-            pane split_direction="vertical" {
+            pane {
                 pane stacked=true {
                     pane
                     pane
@@ -59,8 +59,8 @@ layout {
                     pane
                     pane
                     pane
+                    pane
                 }
-                pane size="70%"
             }
         }
     }
@@ -91,25 +91,28 @@ layout {
             pane x="12%" y="10%" width="80%" height="80%"
             pane x="14%" y="10%" width="80%" height="80%"
         }
+        floating_panes max_panes=6 {
+            pane x="5%" y="10%" width="80%" height="80%"
+            pane x="7%" y="10%" width="80%" height="80%"
+            pane x="9%" y="10%" width="80%" height="80%"
+            pane x="11%" y="10%" width="80%" height="80%"
+            pane x="13%" y="10%" width="80%" height="80%"
+            pane x="15%" y="10%" width="80%" height="80%"
+        }
+        floating_panes max_panes=7 {
+            pane x="4%" y="10%" width="80%" height="80%"
+            pane x="6%" y="10%" width="80%" height="80%"
+            pane x="8%" y="10%" width="80%" height="80%"
+            pane x="10%" y="10%" width="80%" height="80%"
+            pane x="12%" y="10%" width="80%" height="80%"
+            pane x="14%" y="10%" width="80%" height="80%"
+            pane x="16%" y="10%" width="80%" height="80%"
+        }
     }
 
     default_tab {
         pane split_direction="vertical" {
             pane stacked=true {
-                pane focus=true {
-                    command "broot"
-                    name "FILES"
-                }
-                pane {
-                    command "lazygit"
-                    name "GIT"
-                }
-                pane {
-                    command "gemini"
-                    name "AI"
-                }
-            }
-            pane size="70%" {
                 pane {
                     command "hx"
                     name "EDITOR"

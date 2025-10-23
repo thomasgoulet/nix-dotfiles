@@ -111,13 +111,9 @@ q = "@<space>'<tab><ret>"
 q = "@<space>'<S-tab><ret>"
 
 [keys.normal."backspace"]
-C = ":bc!"
-c = ":bc"
-f = ":format"
-Q = ":quit!"
-q = ":quit"
-R = ":reload-all"
-r = ":reload"
-S = ":write!"
-s = ":write"
+a = ":sh zellij run -c -f -n AI -- gemini"
+f = ":sh zellij run -c -f -n FILES -- broot"
+g = ":sh zellij run -c -f -n GIT -- lazygit"
+G = ":sh zellij run -c -f -n \"GIT (dotfiles)\"  -- lazygit -g /home/thomas/.dotfiles -w /home/thomas"
+t = ":sh zellij run -c -f -n TERM -- nu"
 

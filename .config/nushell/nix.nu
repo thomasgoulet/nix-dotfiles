@@ -3,7 +3,7 @@ module nix {
     ### GIT
 
     export alias dotfiles-git = git --git-dir=/home/thomas/.dotfiles/ --work-tree=/home/thomas;
-    export alias dotfiles = zellij action new-tab -c /home/thomas/ -n dotfiles -l ~/.config/zellij/layouts/dotfiles.kdl;
+    export alias dotfiles = zellij action new-tab -c /home/thomas/ -n dotfiles -l ~/.config/zellij/layouts/edit.kdl;
 
     ### Completions
 

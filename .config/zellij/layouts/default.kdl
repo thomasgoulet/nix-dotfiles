@@ -87,8 +87,13 @@ layout {
     }
 
     swap_tiled_layout name="STACK" {
+        default_tab max_panes=1 {
+            pane {
+                pane borderless=true
+            }
+        }
         default_tab max_panes=9 {
-            pane split_direction="vertical" {
+            pane {
                 pane stacked=true {
                     pane
                     pane
@@ -98,13 +103,8 @@ layout {
                     pane
                     pane
                     pane
+                    pane
                 }
-                pane size="60%"
-            }
-        }
-        default_tab max_panes=1 {
-            pane {
-                pane borderless=true
             }
         }
     }
