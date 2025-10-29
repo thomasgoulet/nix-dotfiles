@@ -269,7 +269,7 @@ module kubernetes {
     }
 
     # List and change context
-    export def kcon [
+    export def kc [
         context: string@"nu-complete kubectl contexts"  # Context (fuzzy)
         namespace?: string@"nu-complete kubectl namespaces"  # Namespace
     ] {
