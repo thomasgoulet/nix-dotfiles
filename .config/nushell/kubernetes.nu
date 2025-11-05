@@ -53,6 +53,32 @@ module kubernetes {
         return {command: ($args.0), args: ($args | skip 1), flags: $flags, flag_id: ($flags | str join ".")}
     }
 
+    def "recursive-paths" [
+        resource: any,
+        prefix = ""
+    ] {
+        let prefix_with_dot = if ($prefix | is-empty) { $prefix } else { $prefix + "." }
+
+        if ($resource | describe | str starts-with record) {
+            return (
+                $resource
+                | columns
+                | each { |inside| let i = $inside; recursive-paths ($resource | get $i) $"($prefix_with_dot)($i)" }
+                | flatten
+                | prepend { value: $prefix, description: ($resource | to json) }
+            );
+        } else if ($resource | describe | str starts-with table) or ($resource | describe | str starts-with list) {
+            return (
+                0..(($resource | length) - 1)
+                | each { |inside| let i = $inside; recursive-paths ($resource | get ($i | into cell-path)) $"($prefix_with_dot)($i)" }
+                | flatten
+                | prepend { value: $prefix, description: ($resource | to json) }
+            );
+        }
+
+        return { value: $prefix, description: $resource }
+    }
+
     ### Completions
 
     def "nu-complete kubectl contexts" [] {
@@ -99,47 +125,23 @@ module kubernetes {
         };
     }
 
-    # Completes the possible paths for kgp
-    def "nu-complete kubectl kind instance paths" [
+    # Completes the possible paths for k
+    export def "nu-complete kubectl kind instance paths" [
         context: string
     ] {
         let ctx = argparse $context
         let kind = $ctx.args.0;
         let instance = $ctx.args.1;
 
-        let current_path = (
-            $ctx.args
-            | skip 2
-            | drop 1
-        );
-        let cell_path = (
-            $current_path
-            | each {|in| let $i = $in; try {$i | into int} catch {$i} }
-            | into cell-path
-        );
-
         let resource = cache hit $"kube.($kind).($instance)" 30 {
             kubectl get $kind $instance ...$ctx.flags -o yaml | from yaml
         };
-        let yaml = (
-            $resource
-            | get $cell_path
-        );
 
-        if ($yaml | describe | str starts-with record) {
-            return (
-                $yaml
-                | columns
-                | each {|in| let i = $in; { value: $i, description: ($yaml | get $i | to text) } }
-            );
-        }
-        if ($yaml | describe | str starts-with table) {
-            return (
-                0..(($yaml | length) - 1)
-                | each {|in| let i = $in; {value: ($i | into string), description: ($yaml | get ($i | into cell-path) | to text)}}
-            );
-        }
+        return (
+            recursive-paths $resource
+        );
     }
+
 
     def "nu-complete kubectl shell" [] {
         cache hit kube.restartable 15 {
@@ -164,8 +166,8 @@ module kubernetes {
     # Powered-up kubectl
     export def k [
         kind: string@"nu-complete kubectl kinds"  # Kind
-        name?: string@"nu-complete kubectl kind instances"  # Name
-        ...property: any@"nu-complete kubectl kind instance paths"  # Path to filter
+        instance?: string@"nu-complete kubectl kind instances"  # Name
+        path?: string@"nu-complete kubectl kind instance paths"  # Path to filter
         --namespace (-n): string@"nu-complete kubectl namespaces"  # Namespace to list resources in
         --all (-a)  # Search in all namespaces
         --delete (-D)  # Delete a resource
@@ -182,19 +184,19 @@ module kubernetes {
         );
 
         # These can only execute if a name is specified
-        if ($name != null) {
+        if ($instance != null) {
 
             # Restart a resource
             if ($restart) {
-                return (kubectl rollout restart $"($kind)/($name)" ...$namespace_flags);
+                return (kubectl rollout restart $"($kind)/($instance)" ...$namespace_flags);
             }
 
             # Port-forward a resource
             if ($port_forward != null) {
                 if ($kind in [po pod pods]) {
-                    kubectl port-forward $name $"($port_forward):($port_forward)" ...$namespace_flags;
+                    kubectl port-forward $instance $"($port_forward):($port_forward)" ...$namespace_flags;
                 } else {
-                    kubectl port-forward $"($kind)/($name)" $"($port_forward):($port_forward)" ...$namespace_flags;
+                    kubectl port-forward $"($kind)/($instance)" $"($port_forward):($port_forward)" ...$namespace_flags;
                 }
                 return;
             }
@@ -204,51 +206,61 @@ module kubernetes {
                 let log_flags = if $logs_previous { ['-p'] | append $namespace_flags } else { $namespace_flags }
 
                 if ($kind in [po pod pods]) {
-                    kubectl logs $name ...$log_flags | bat;
+                    kubectl logs $instance ...$log_flags | bat;
                 } else {
-                    kubectl logs $"($kind)/($name)" ...$log_flags | bat;
+                    kubectl logs $"($kind)/($instance)" ...$log_flags | bat;
                 }
                 return;
             }
 
             # Deletes a resource
             if ($delete) {
-                return (kubectl delete $kind $name ...$namespace_flags);
+                return (kubectl delete $kind $instance ...$namespace_flags);
             }
 
         }
 
         # Edit a resource or a list of resource
         if ($edit) {
-            if ($name == null) {
+            if ($instance == null) {
                 kubectl edit $kind ...$namespace_flags;
             } else {
-                kubectl edit $kind $name ...$namespace_flags;
+                kubectl edit $kind $instance ...$namespace_flags;
             }
             return;
         }
 
-        # Get the full YAML of a list or resource
-        if ($get or $property != []) {
-            let yaml = (
-                if ($name != null) {
-                    kubectl get $kind $name ...$namespace_flags -o yaml
-                    | from yaml;
+        # Get the full definition
+        if ($get) {
+            return (
+                if ($instance != null) {
+                    cache hit $"kube.($kind).($instance)" 30 {
+                        kubectl get $kind $instance ...$namespace_flags -o yaml
+                        | from yaml
+                    };
                 } else {
-                    kubectl get $kind ...$namespace_flags -o yaml
-                    | from yaml
-                    | get items;
+                    cache hit $"kube.items.($kind)" 30 {
+                        kubectl get $kind ...$namespace_flags -o yaml
+                        | from yaml
+                        | get items
+                    };
                 }
             );
-            try {
-                let output = (
-                    $yaml
-                    | get ($property | into cell-path)
-                );
-                return $output;
-            } catch {
-                error make -u { msg: "Path was not valid for the resource." };
-            }
+        }
+
+        if ($path | is-not-empty) {
+            return (
+                cache hit $"kube.($kind).($instance)" 30 {
+                    kubectl get $kind $instance ...$namespace_flags -o yaml
+                    | from yaml
+                }
+                | get (
+                    $path
+                    | split row '.'
+                    | each { |in| let i = $in; try {$i | into int} catch {$i} }
+                    | into cell-path
+                )
+            );
         }
 
         # List the resources
@@ -257,13 +269,13 @@ module kubernetes {
             | from ssv
         );
 
-        if ($name == null) {
+        if ($instance == null) {
             return $output
         }
 
         return (
             $output
-            | where NAME =~ $name
+            | where NAME =~ $instance
         );
 
     }
