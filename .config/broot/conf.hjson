@@ -42,6 +42,7 @@ special_paths: {
     ".nuget": { "list": "never" }
     ".project": { "show": "never" }
     ".settings": { "show": "never" }
+    ".venv": { "show": "never" }
     "automated-tests": { "list":"never" }
     "bin": { "show": "never" }
     "build": { "show": "never" }
