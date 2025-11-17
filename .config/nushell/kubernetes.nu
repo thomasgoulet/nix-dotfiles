@@ -59,24 +59,28 @@ module kubernetes {
     ] {
         let prefix_with_dot = if ($prefix | is-empty) { $prefix } else { $prefix + "." }
 
-        if ($resource | describe | str starts-with record) {
-            return (
-                $resource
-                | columns
-                | each { |inside| let i = $inside; recursive-paths ($resource | get $i) $"($prefix_with_dot)($i)" }
-                | flatten
-                | prepend { value: $prefix, description: ($resource | to json) }
-            );
-        } else if ($resource | describe | str starts-with table) or ($resource | describe | str starts-with list) {
-            return (
-                0..(($resource | length) - 1)
-                | each { |inside| let i = $inside; recursive-paths ($resource | get ($i | into cell-path)) $"($prefix_with_dot)($i)" }
-                | flatten
-                | prepend { value: $prefix, description: ($resource | to json) }
-            );
+        match ($resource | describe -d | get type) {
+            "record" => {
+                return (
+                    $resource
+                    | columns
+                    | each { |inside| let i = $inside; recursive-paths ($resource | get $i) $"($prefix_with_dot)($i)" }
+                    | flatten
+                    | prepend { value: $prefix, description: ($resource | to json) }
+                );
+            },
+            "table" | "list" => {
+                return (
+                    0..(($resource | length) - 1)
+                    | each { |inside| let i = $inside; recursive-paths ($resource | get ($i | into cell-path)) $"($prefix_with_dot)($i)" }
+                    | flatten
+                    | prepend { value: $prefix, description: ($resource | to json) }
+                );
+            },
+            _ => {
+                return { value: $prefix, description: $resource }
+            }
         }
-
-        return { value: $prefix, description: $resource }
     }
 
     ### Completions
@@ -138,7 +142,9 @@ module kubernetes {
         };
 
         return (
-            recursive-paths $resource
+            cache hit $"kube.($kind).($instance).paths" 30 {
+                recursive-paths $resource
+            };
         );
     }
 
@@ -295,7 +301,8 @@ module kubernetes {
 
         if ($match | length) == 0 {
             error make -u { msg: "No matching context found." }
-        } else if ($match | length) > 1 {
+        }
+        if ($match | length) > 1 {
             let names = ($match | get NAME | str join ", ")
             error make -u { msg: $"Multiple contexts found: ($names)." }
         }
@@ -329,7 +336,8 @@ module kubernetes {
 
         if ($match | length) == 0 {
             error make -u { msg: "No matching context found." }
-        } else if ($match | length) > 1 {
+        }
+        if ($match | length) > 1 {
             let names = ($match | get NAME | str join ", ")
             error make -u { msg: $"Multiple contexts found: ($names)." }
         }
