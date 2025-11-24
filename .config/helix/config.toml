@@ -116,4 +116,3 @@ f = ":sh zellij run -c -f -n FILES -- broot"
 g = ":sh zellij run -c -f -n GIT -- lazygit"
 G = ":sh zellij run -c -f -n \"GIT (dotfiles)\"  -- lazygit -g /home/thomas/.dotfiles -w /home/thomas"
 t = ":sh zellij run -c -f -n TERM -- nu"
-
