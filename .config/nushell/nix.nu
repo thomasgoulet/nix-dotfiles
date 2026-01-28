@@ -47,6 +47,7 @@ module nix {
     ] {
         home-manager expire-generations $timestamp;
         nix store gc;
+        nix store optimise;
     }
   
     # List all available generations
@@ -96,6 +97,7 @@ module nix {
             nix flake update --flake ~/.config/home-manager/;
             home-manager switch --flake ~/.config/home-manager/;
         };
+        nx gc;
     }
 
     # Launch a nix shell with the specified packages installed
