@@ -89,7 +89,6 @@ in
         # Python
         python312
         python312Packages.python-lsp-server
-        python312Packages.jedi-language-server
         black
         ruff
         ty
