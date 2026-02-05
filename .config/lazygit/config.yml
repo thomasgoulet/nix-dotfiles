@@ -1,5 +1,5 @@
 customCommands:
-  - command: 'git checkout master; git pull --prune'
+  - command: 'git pull --prune'
     context: localBranches
     key: 'C'
 git:
