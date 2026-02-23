@@ -1,6 +1,21 @@
 extra@{ config, pkgs, pkgs-stable, ... }:
 let
 
+  hl-bin = pkgs.stdenv.mkDerivation {
+    pname = "hl";
+    version = "v0.35.3";
+    src = pkgs.fetchurl {
+      url = "https://github.com/pamburus/hl/releases/download/v0.35.3/hl-linux-x86_64-musl.tar.gz";
+      sha256 = "140hpyxccrn8ryc36bzzq7qf70dlimfpzvrxi6hcyyi023dvssck"; # nix-prefetch-url <url>
+    };
+    dontUnpack = true;
+    installPhase = ''
+      mkdir -p $out/bin
+      tar -xzvf $src
+      cp hl $out/bin/
+    '';
+  };
+
   oasdiff-bin = pkgs.stdenv.mkDerivation {
     pname = "oasdiff";
     version = "1.11.7";
@@ -56,6 +71,7 @@ in
       fd
       fzf
       gemini-cli-bin
+      hl-bin
       just
       oasdiff-bin
       ripgrep
