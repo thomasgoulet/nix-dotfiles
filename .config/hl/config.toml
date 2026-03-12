@@ -1,0 +1,334 @@
+# Time format, see https://man7.org/linux/man-pages/man1/date.1.html for details.
+time-format = "%m-%d %T.%3N"
+
+# Time zone name, see column "TZ identifier" at
+# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones page.
+time-zone = "UTC"
+
+# Layouts defining which information about the input file to display.
+# One or many of the following values can be specified: [`auto`, `none`, `minimal`, `compact`, `full`].
+# If multiple layouts are specified, only these layouts will be enabled.
+#
+# If `auto` is specified, the most suitable layout will be automatically chosen from the enabled layouts
+# based on the number of input files and the width of the terminal screen.
+#
+# If `auto` is specified but no other layouts are specified, all supported layouts will be enabled.
+#
+# Layout `none` means that no information about the input file is displayed.
+# Layout `minimal` means that only the input file number is displayed.
+# Layout `compact` means that the input file number and shortened path are displayed.
+# Layout `full` means that the input file number and full path are displayed.
+input-info = "auto"
+
+# When to use ASCII mode for punctuation [auto, never, always].
+# If set to `auto`, Unicode support is automatically detected.
+# See [formatting.punctuation] setting.
+ascii = "auto"
+
+# Currently selected theme.
+theme = "classic-plus"
+
+# Theme overlays to apply on top of the base theme and main configured theme.
+# Overlays are merged in the specified order: @base → theme → overlays (in list order).
+# Overlays are regular theme files that can customize specific aspects without replacing the entire theme.
+# Example: ["@accent-italic"] applies italic attribute to accent style.
+# Default: ["@accent-italic"].
+theme-overlays = ["@accent-italic"]
+
+[fields]
+
+# List of wildcard field names to ignore.
+ignore = ["_*"]
+#
+# List of exact field names to hide.
+hide = ["ecs.version", "process.pid", "process.thread", "service.name"]
+
+# Configuration of the predefined set of fields.
+[fields.predefined]
+#
+# Configuration of the predefined "time" field.
+[fields.predefined.time]
+# Determines when to show the time field automatically based on the presence of time variants.
+# Options: ["always", "auto"].
+show = "always"
+names = [
+  "ts",
+  "TS",
+  "time",
+  "TIME",
+  "Time",
+  "timestamp",
+  "Timestamp",
+  "TIMESTAMP",
+  "_SOURCE_REALTIME_TIMESTAMP",
+  "__REALTIME_TIMESTAMP",
+  "@timestamp"
+]
+
+# Configuration of the predefined "logger" field.
+[fields.predefined.logger]
+names = ["logger", "LOGGER", "Logger", "span.name", "log.logger"]
+
+# Configuration of the predefined "level" field.
+[fields.predefined.level]
+# Determines when to show the level field automatically based on the presence of level variants.
+# Options: ["always", "auto"].
+show = "always"
+
+# Common levels.
+[[fields.predefined.level.variants]]
+names = ["level", "LEVEL", "Level", "log.level"]
+
+[fields.predefined.level.variants.values]
+error = ["error", "err", "fatal", "critical", "panic"]
+warning = ["warning", "warn"]
+info = ["info", "information"]
+debug = ["debug"]
+trace = ["trace"]
+
+# Systemd levels.
+[[fields.predefined.level.variants]]
+names = ["PRIORITY"]
+
+[fields.predefined.level.variants.values]
+error = [3, 2, 1]
+warning = [5, 4]
+info = [6]
+debug = [7]
+
+# Configuration of the predefined "message" field.
+[fields.predefined.message]
+names = ["msg", "message", "MESSAGE", "Message"]
+
+# Configuration of the predefined "caller" field.
+[fields.predefined.caller]
+names = ["caller", "CALLER", "Caller"]
+
+# Configuration of the predefined "caller-file" field (combines to "caller").
+[fields.predefined.caller-file]
+names = []
+
+# Configuration of the predefined "caller-line" field (combines to "caller").
+[fields.predefined.caller-line]
+names = []
+
+#
+# Formatting settings.
+#
+
+[formatting]
+#
+# Flatten nested fields by joining them with a dot. Options: ["always", "never"].
+flatten = "always"
+#
+# Prettify field keys by replacing underscores with hyphens. Options: [true, false].
+prettify-field-keys = true
+
+# Message format [auto-quoted, always-quoted, always-double-quoted, delimited, raw]:
+# * "auto-quoted"          • Automatically enables or disables message quotation to improve clarity or avoid ambiguities.
+# * "always-quoted"        • Always prints messages in most appropriate to align them consistently and yet maintain readability.
+# * "always-double-quoted" • Always prints messages in double quotes to align them consistently.
+# * "delimited"            • Separates the message from fields with a supposedly rare delimiter to avoid quotation in most cases and avoid ambiguities at the same time.
+#                            See [formatting.punctuation.message-delimiter] setting.
+# * "raw"                  • Always prints messages without any quotes, escaping or delimiters.
+[formatting.message]
+format = "delimited"
+
+# Punctuation settings.
+# Each item here is either a string or an object with keys "ascii" and "unicode".
+# If set to a string, it is used for both ASCII mode and Unicode mode regardless of the [ascii] setting.
+# See [ascii] setting.
+[formatting.punctuation]
+logger-name-separator = ":"
+field-key-value-separator = "="
+string-opening-quote = "'"
+string-closing-quote = "'"
+caller-name-file-separator = " @ "
+hidden-fields-indicator = "..."
+level-left-separator = "["
+level-right-separator = "]"
+input-number-prefix = "#"
+input-number-left-separator = ""
+input-name-left-separator = ""
+array-separator = " "
+source-location-separator = { ascii = "-> ", unicode = "→ " }
+input-number-right-separator = { ascii = " | ", unicode = " │ " }
+input-name-right-separator = { ascii = " | ", unicode = " │ " }
+input-name-clipping = { ascii = "..", unicode = "··" }
+input-name-common-part = { ascii = "..", unicode = "··" }
+message-delimiter = { ascii = "::", unicode = "›" }
+
+# Expansion settings.
+[formatting.expansion]
+# Field expansion mode [never|inline|auto|always].
+# * "never"  • Single-line output, escape newlines/tabs as \n/\t
+# * "inline" • Preserve newlines/tabs as-is (legacy behavior)
+# * "auto"   • Expand fields with newlines/tabs into indented multi-line blocks
+# * "always" • Show each field on its own line, expand multi-line content with indentation
+mode = "auto"
+
+# Pager configuration.
+# Defines a list of candidates to try in order and named pager profiles.
+#
+# Candidates are tried in order until a usable pager is found.
+# Each candidate can be:
+#   - { env = "VAR_NAME" } - Simple environment variable reference
+#   - { env = { pager = "VAR1", follow = "VAR2", delimiter = "VAR3" } } - Structured env reference with role-specific vars
+#   - { profile = "profile_name" } - Reference to a named profile
+#
+# All candidate forms accept an optional `if` field with a condition string.
+# When specified, the candidate is skipped entirely unless the condition holds.
+# This is useful to exclude pagers that have issues on certain platforms.
+# See the conditions reference below for supported condition strings.
+#
+# Modes:
+#   - view: Used when viewing logs (non-follow mode)
+#   - follow: Used when following logs (--follow mode); if not configured, pager is disabled in follow mode
+[pager]
+# Candidate search list (checked in order).
+# The default configuration maintains backward compatibility with HL_PAGER, HL_FOLLOW_PAGER, HL_PAGER_DELIMITER, and PAGER env vars.
+candidates = [
+  # First, check application-specific environment variables.
+  { env = { pager = "HL_PAGER", follow = "HL_FOLLOW_PAGER", delimiter = "HL_PAGER_DELIMITER" }, profiles = true },
+  # Then, check if `PAGER` is set.
+  { env = "PAGER" },
+  # Then try configured profiles in priority order. Use `less` first for backward compatibility.
+  { profile = "less" },
+  # Prioritize `fzf` if not on Windows, skip on Windows due to known issues.
+  { profile = "fzf", if = "!os:windows" },
+  # Finally, try other common pagers with default configurations.
+  { profile = "ov" },
+  { profile = "most" },
+  { profile = "fzf", if = "os:windows" },
+]
+
+# Named pager profiles.
+# Each profile defines a pager command and optional mode-specific arguments.
+#
+# Profile structure:
+#   name = "..."                # Profile name
+#   command = "..."             # Base command (executable)
+#   args = [...]                # Base arguments
+#   env = {...}                 # Environment variables for the pager command
+#   delimiter = "..."           # Entry delimiter [newline, nul]
+#   conditions = [...]          # Conditional arguments and env vars based on platform/mode (see below)
+#   modes.view.enabled = ...    # Whether to enable pager for view mode [true, false]
+#   modes.view.args = [...]     # Additional arguments for view mode (appended to command)
+#   modes.follow.enabled = ...  # Whether to enable pager for follow mode [true, false]
+#   modes.follow.args = [...]   # Additional arguments for follow mode (appended to command)
+#
+# Conditional arguments (conditions field):
+#   Allows specifying platform-specific and mode-specific arguments.
+#   Each condition has:
+#     if = "condition"    # Condition string (see supported conditions below)
+#     args = [...]        # Arguments to append when condition matches
+#     env = {...}         # Environment variables to set when condition matches
+#
+#   Supported condition strings (used in both candidate `if` and profile `conditions[].if`):
+#     OS conditions:
+#       "os:macos"   - macOS only
+#       "os:linux"   - Linux only
+#       "os:windows" - Windows only
+#       "os:unix"    - Unix-like systems (macOS or Linux)
+#
+#     Mode conditions (only meaningful inside profile conditions; candidates are tested
+#       separately for each mode, so mode conditions work there too):
+#       "mode:view"   - View mode (non-follow)
+#       "mode:follow" - Follow mode (--follow flag)
+#
+#     Negation:
+#       "!<condition>" - Negates any condition
+#       Example: "!mode:follow" matches in view mode
+#       Example: "!os:windows" matches on any non-Windows platform
+#
+#   For profile conditions: evaluated in order; matching conditions append their args/env.
+[[pager.profiles]]
+name = "less"
+# Base command (executable).
+command = "less"
+# Base arguments for both view and follow modes.
+args = ["-R", "--mouse"]
+# Environment variables for the pager command.
+env = { LESSCHARSET = "UTF-8" }
+# Additional arguments for follow mode.
+modes.follow.args = ["+F"]
+# Enable pager for follow mode.
+modes.follow.enabled = false
+
+# Pager profile for `fzf`.
+[[pager.profiles]]
+name = "fzf"
+# Entry delimiter.
+delimiter = "newline"
+# Base command (executable).
+command = "fzf"
+# Base arguments for both view and follow modes.
+args = [
+  "--color=bg+:#3a404a",
+  "--highlight-line",
+  "--ansi",
+  "--exact",
+  "--multi",
+  "--no-sort",
+  "--no-bold",
+  "--bind=esc:track-current+clear-query+clear-multi+disable-raw",
+  "--bind=ctrl-q:abort",
+  "--bind=enter:toggle-raw",
+  "--bind=scroll-down:offset-down",
+  "--bind=scroll-up:offset-up",
+  "--bind=home:first",
+  "--bind=end:last"
+]
+# Conditional arguments based on platform and modes.
+conditions = [
+  { if = "os:macos", args = [
+    "--bind=ctrl-y:execute-silent(printf %s\\\\n {+} | pbcopy)",
+  ] },
+  { if = "os:linux", args = [
+    "--bind=ctrl-y:execute-silent(printf %s\\\\n {+} | xclip -in -sel clip)",
+  ] },
+  { if = "!mode:follow", args = [
+    "--layout=reverse-list",
+  ] },
+  { if = "mode:follow", args = [
+    "--tac",
+    "--bind=scroll-up:offset-up+unbind(result)",
+    "--bind=home:unbind(result)+last",
+    "--bind=end:rebind(result)+first",
+    "--bind=result:first",
+    "--bind=ctrl-f:rebind(result)+first",
+    "--bind=up:unbind(result)+up",
+    "--bind=page-up:unbind(result)+page-up",
+    "--bind=change:unbind(result)",
+    "--track",
+    "--tail=100000",
+  ] },
+]
+# Enable pager for follow mode.
+modes.follow.enabled = true
+
+# Pager profile for `most`.
+[[pager.profiles]]
+name = "most"
+# Base command (executable).
+command = "most"
+# Enable pager for follow mode.
+modes.follow.enabled = false
+
+# Pager profile for `ov`.
+[[pager.profiles]]
+name = "ov"
+# Base command (executable).
+command = "ov"
+# Base arguments for both view and follow modes.
+args = [
+  "--caption=>",
+  "--wrap=false",
+  "--hscroll-width=4",
+]
+# Additional arguments for follow mode.
+modes.follow.args = [
+  "--follow-mode",
+]
+# Enable pager for follow mode.
+modes.follow.enabled = true

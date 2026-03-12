@@ -212,9 +212,9 @@ module kubernetes {
                 let log_flags = if $logs_previous { ['-p'] | append $namespace_flags } else { $namespace_flags }
 
                 if ($kind in [po pod pods]) {
-                    kubectl logs $instance ...$log_flags | bat;
+                    kubectl logs $instance ...$log_flags | hl;
                 } else {
-                    kubectl logs $"($kind)/($instance)" ...$log_flags | bat;
+                    kubectl logs $"($kind)/($instance)" ...$log_flags | hl;
                 }
                 return;
             }
