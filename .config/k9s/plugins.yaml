@@ -1,0 +1,19 @@
+plugins:
+
+  # Defines a plugin to provide a `ctrl-l` shortcut to tail the logs while in pod view.
+  jsonlogs:
+    # Define a mnemonic to invoke the plugin
+    shortCut: Ctrl-L
+    # What will be shown on the K9s menu
+    description: HL Logs
+    # Collections of views that support this shortcut. (You can use `all`)
+    scopes:
+    - po
+    # The command to run upon invocation. Can use Krew plugins here too!
+    command: nu
+    # Whether or not to run the command in background mode
+    background: false
+    # Defines the command arguments
+    args:
+    - -e
+    - "$env.PAGER = 'less --no-init'; kubectl logs $NAME -n $NAMESPACE --context $CONTEXT | hl --paging always; exit"
