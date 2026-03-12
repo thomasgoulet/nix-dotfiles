@@ -11,6 +11,5 @@ k9s:
     tail: -1
     buffer: 10000
     sinceSeconds: -1
-    fullScreen: false
     textWrap: false
     showTime: false
