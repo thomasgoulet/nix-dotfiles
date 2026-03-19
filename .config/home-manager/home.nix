@@ -70,7 +70,6 @@ in
       eza
       fd
       fzf
-      gemini-cli-bin
       hl-bin
       just
       oasdiff-bin
@@ -81,6 +80,7 @@ in
 
       # Editor / Programming
       git
+      github-copilot-cli
       helix
       lazygit
 
