@@ -1,5 +1,13 @@
 plugins:
 
+  argorefresh:
+    background: false
+    description: Force refresh the application
+    shortCut: Shift-R
+    scopes: ["apps"]
+    command: kubectl
+    args: ["--context", "$CONTEXT", "--namespace", "$NAMESPACE", "annotate", "applications", "$NAME", "argocd.argoproj.io/refresh=hard"]
+
   jsonlogs:
     background: false
     description: HL Logs
@@ -14,4 +22,4 @@ plugins:
     shortCut: Shift-R
     scopes: ["deploy"]
     command: kubectl
-    args: ["rollout", "restart", "$RESOURCE_NAME/$NAME"]
+    args: ["--context", "$CONTEXT", "--namespace", "$NAMESPACE", "annotate", "rollout", "restart", "$RESOURCE_NAME/$NAME"]
