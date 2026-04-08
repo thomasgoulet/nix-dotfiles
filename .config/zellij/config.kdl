@@ -229,5 +229,6 @@ themes {
 advanced_mouse_actions false
 default_layout "default"
 default_mode "locked"
+mouse_hover_effects false
 stacked_resize false
 session_serialization false
