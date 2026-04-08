@@ -130,7 +130,7 @@ module kubernetes {
     }
 
     # Completes the possible paths for k
-    export def "nu-complete kubectl kind instance paths" [
+    def "nu-complete kubectl kind instance paths" [
         context: string
     ] {
         let ctx = argparse $context

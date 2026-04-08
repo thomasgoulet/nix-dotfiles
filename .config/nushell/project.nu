@@ -46,8 +46,7 @@ module project {
         ...hints: string@"nu-complete projects"
     ] {
         let open = {
-            |path|
-            zellij action new-tab -c $path -n (basename $path) -l ~/.config/zellij/layouts/edit.kdl
+            |path| zellij action new-tab -c $path -n (basename $path) -l ~/.config/zellij/layouts/edit.kdl
         };
 
         if ($hints == []) {
