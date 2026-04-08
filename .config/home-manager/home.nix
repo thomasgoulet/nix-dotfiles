@@ -83,6 +83,7 @@ in
       github-copilot-cli
       helix
       lazygit
+      opencode
 
       # LSPs
       vale vale-ls            # Spell checking
@@ -113,7 +114,7 @@ in
         vscode-langservers-extracted
         typescript-language-server
         nodejs_22
-        nodePackages.prettier 
+        prettier
 
         # Typst
         typst
@@ -130,7 +131,7 @@ in
       kubectl
       kubelogin
       kustomize
-      terraform
+      tenv
 
     ]
   );
