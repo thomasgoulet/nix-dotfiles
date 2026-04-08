@@ -90,10 +90,13 @@ $env.config = {
         mode: rounded
         padding: { left: 1, right: 1 }
         trim: {
-            methodology: wrapping
-            wrapping_try_keep_words: true
+            methodology: truncating
             truncating_suffix: "..."
         }
+    }
+
+    explore: {
+        selected_cell: { fg: red_underline  }
     }
 
     datetime_format: {
