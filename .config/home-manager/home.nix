@@ -100,7 +100,7 @@ in
         gopls
 
         # Java
-        jdk
+        jdk25_headless
         jdt-language-server
 
         # Python

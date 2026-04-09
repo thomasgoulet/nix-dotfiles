@@ -22,4 +22,4 @@ plugins:
     shortCut: Shift-R
     scopes: ["deploy"]
     command: kubectl
-    args: ["--context", "$CONTEXT", "--namespace", "$NAMESPACE", "annotate", "rollout", "restart", "$RESOURCE_NAME/$NAME"]
+    args: ["--context", "$CONTEXT", "--namespace", "$NAMESPACE", "rollout", "restart", "$RESOURCE_NAME/$NAME"]

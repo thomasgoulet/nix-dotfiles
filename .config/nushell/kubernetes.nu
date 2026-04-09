@@ -324,7 +324,7 @@ module kubernetes {
     ] {
 
         if ($context == null) {
-            zellij run -f -c -n "k9s" -- k9s -c pods;
+            zellij run -f -c -n "k9s" -- k9s -c pods o> (null-device);
             return;
         }
 
@@ -345,11 +345,11 @@ module kubernetes {
         let final_context = ($match | first | get NAME | to text)
 
         if ($namespace == null) {
-            zellij run -f -c -n $"k9s ($context)" -- k9s --context $context -c pods;
+            zellij run -f -c -n $"k9s ($context)" -- k9s --context $context -c pods o> (null-device);
             return;
         }
 
-        zellij run -f -c -n $"k9s ($context) ($namespace)" -- k9s --context $context --namespace $namespace -c pods;
+        zellij run -f -c -n $"k9s ($context) ($namespace)" -- k9s --context $context --namespace $namespace -c pods o> (null-device);
 
         return;
     }
