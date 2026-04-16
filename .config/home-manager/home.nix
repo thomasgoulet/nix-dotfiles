@@ -1,6 +1,23 @@
 extra@{ config, pkgs, pkgs-stable, ... }:
 let
 
+  backlog-md-bin = pkgs.stdenv.mkDerivation {
+    pname = "backlog-md";
+    version = "1.44.0";
+    src = pkgs.fetchurl {
+      url = "https://registry.npmjs.org/backlog.md-linux-x64/-/backlog.md-linux-x64-1.44.0.tgz";
+      sha256 = "1zc2kfzpw5m80gjnjnp8x9hpqxrldghls1p8a64hiana9j7b45zy";
+    };
+    dontUnpack = true;
+    dontFixup = true;
+    installPhase = ''
+      mkdir -p $out/bin
+      tar -xzf $src package/backlog
+      cp package/backlog $out/bin/backlog
+      chmod +x $out/bin/backlog
+    '';
+  };
+
   hl-bin = pkgs.stdenv.mkDerivation {
     pname = "hl";
     version = "v0.35.3";
@@ -79,6 +96,7 @@ in
       zoxide
 
       # Editor / Programming
+      backlog-md-bin
       git
       github-copilot-cli
       helix

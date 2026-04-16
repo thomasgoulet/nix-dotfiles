@@ -79,7 +79,7 @@ module az {
         az account set -s $subscription;
     }
 
-    export def "backlog list" [
+    export def "devops list" [
         query: string@"nu-complete azurecli board queries"
     ] {
         let query_id = (
@@ -94,7 +94,7 @@ module az {
     }
 
     # Describes a specific work item
-    export def "backlog get" [
+    export def "devops get" [
         id: string
     ] {
         az boards work-item show --id $id
@@ -129,7 +129,7 @@ module az {
             az repos pr show --id $id -o json
             | nu-parse azurecli pullrequests
             | upsert workitems { |pr|
-                $pr.workitems | each {|workitem| backlog get $workitem}
+                $pr.workitems | each {|workitem| devops get $workitem}
             }
         );
     }
