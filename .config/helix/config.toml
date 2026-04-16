@@ -114,7 +114,7 @@ q = "@<space>'<tab><ret>"
 q = "@<space>'<S-tab><ret>"
 
 [keys.normal."backspace"]
-a = ":sh zellij run -c -f -n AI -- copilot o> /dev/null"
+a = ":sh zellij run -c -f -n AI -- opencode o> /dev/null"
 f = ":sh zellij run -c -f -n FILES -- broot o> /dev/null"
 g = ":sh zellij run -c -f -n GIT -- lazygit o> /dev/null"
 G = ":sh zellij run -c -f -n \"GIT (dotfiles)\"  -- lazygit -g /home/thomas/.dotfiles -w /home/thomas o> /dev/null"

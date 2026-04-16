@@ -98,7 +98,6 @@ in
       # Editor / Programming
       backlog-md-bin
       git
-      github-copilot-cli
       helix
       lazygit
       opencode
