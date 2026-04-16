@@ -101,7 +101,8 @@ in
 
         # Java
         jdk25_headless
-        jdt-language-server
+        (jdt-language-server.override { jdk = jdk25_headless; })
+        # jdt-language-server
 
         # Python
         python312
@@ -141,5 +142,5 @@ in
   #   with pkgs-stable; [
   #   ]
   # );
- 
+
 }
