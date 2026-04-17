@@ -114,6 +114,10 @@ layout {
         pane split_direction="vertical" {
             pane stacked=true {
                 pane {
+                    command "hx"
+                    name "EDITOR"
+                }
+                pane {
                     command "backlog"
                     args "board"
                     name "BACKLOG"

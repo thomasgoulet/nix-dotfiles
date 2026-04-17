@@ -131,7 +131,7 @@ in
         # CSS, HTML, JS, JSON, Typescript
         vscode-langservers-extracted
         typescript-language-server
-        nodejs_22
+        nodejs_24
         prettier
 
         # Typst
