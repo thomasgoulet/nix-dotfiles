@@ -1,53 +1,6 @@
 extra@{ config, pkgs, pkgs-stable, ... }:
 let
-
-  backlog-md-bin = pkgs.stdenv.mkDerivation {
-    pname = "backlog-md";
-    version = "1.44.0";
-    src = pkgs.fetchurl {
-      url = "https://registry.npmjs.org/backlog.md-linux-x64/-/backlog.md-linux-x64-1.44.0.tgz";
-      sha256 = "1zc2kfzpw5m80gjnjnp8x9hpqxrldghls1p8a64hiana9j7b45zy";
-    };
-    dontUnpack = true;
-    dontFixup = true;
-    installPhase = ''
-      mkdir -p $out/bin
-      tar -xzf $src package/backlog
-      cp package/backlog $out/bin/backlog
-      chmod +x $out/bin/backlog
-    '';
-  };
-
-  hl-bin = pkgs.stdenv.mkDerivation {
-    pname = "hl";
-    version = "v0.35.3";
-    src = pkgs.fetchurl {
-      url = "https://github.com/pamburus/hl/releases/download/v0.35.3/hl-linux-x86_64-musl.tar.gz";
-      sha256 = "140hpyxccrn8ryc36bzzq7qf70dlimfpzvrxi6hcyyi023dvssck"; # nix-prefetch-url <url>
-    };
-    dontUnpack = true;
-    installPhase = ''
-      mkdir -p $out/bin
-      tar -xzvf $src
-      cp hl $out/bin/
-    '';
-  };
-
-  oasdiff-bin = pkgs.stdenv.mkDerivation {
-    pname = "oasdiff";
-    version = "1.11.7";
-    src = pkgs.fetchurl {
-      url = "https://github.com/oasdiff/oasdiff/releases/download/v1.11.7/oasdiff_1.11.7_linux_amd64.tar.gz";
-      sha256 = "093j69a9s1d4wysz7jwfpfp934z00s311ynqykb6ykppclihbwcp"; # nix-prefetch-url <url>
-    };
-    dontUnpack = true;
-    installPhase = ''
-      mkdir -p $out/bin
-      tar -xzvf $src
-      cp oasdiff $out/bin/
-    '';
-  };
-
+  binaries = import ./binaries.nix { inherit pkgs; };
 in
 {
   # This value determines the Home Manager release that your configuration is
@@ -80,23 +33,24 @@ in
       zellij
 
       # Utilities
+      binaries.backlog-md
+      binaries.hl
+      binaries.oasdiff
       bat
       broot
+      defuddle-cli
       delta
       difftastic
       eza
       fd
       fzf
-      hl-bin
       just
-      oasdiff-bin
       ripgrep
       sd
       wslu
       zoxide
 
       # Editor / Programming
-      backlog-md-bin
       git
       helix
       lazygit
