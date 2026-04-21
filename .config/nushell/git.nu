@@ -63,10 +63,18 @@ module git {
         return;
     }
 
+    export def "git push-bundle" [
+        branch: string  # Branch name to create the bundle from
+    ] {
+        let bundle = (git remote get-url origin);
+        git bundle create $bundle $branch
+    }
+
     # List all commits since a specific tag
     export def "git changelog" [
         tag: string@"nu-complete git tags"  # Tag from which to start listing commits
     ] {
         git log --oneline $"($tag)..HEAD";
     }
+
 }
