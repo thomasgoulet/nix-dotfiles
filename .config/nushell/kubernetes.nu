@@ -263,7 +263,7 @@ module kubernetes {
                 | get (
                     $path
                     | split row '.'
-                    | each { |in| let i = $in; try {$i | into int} catch {$i} }
+                    | each { let i = $in; try {$i | into int} catch {$i} }
                     | into cell-path
                 )
             );

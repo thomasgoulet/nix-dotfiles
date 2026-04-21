@@ -10,7 +10,7 @@ in
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
   programs.home-manager.enable = true;
 
   home.username = "thomas";
@@ -38,7 +38,6 @@ in
       binaries.oasdiff
       bat
       broot
-      defuddle-cli
       delta
       difftastic
       eza
@@ -47,7 +46,7 @@ in
       just
       ripgrep
       sd
-      wslu
+      wsl-open
       zoxide
 
       # Editor / Programming
