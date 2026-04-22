@@ -1,7 +1,7 @@
 # Nushell Environment Config File
 
 # Environment variables
-$env.BROWSER = "wslview" # `sudo ln -s (which wslview | get path.0) /usr/local/bin/xdg-open` to make app requiring xdg-open work
+$env.BROWSER = "wsl-open" # `sudo ln -s (which wsl-open | get path.0) /usr/local/bin/xdg-open` to make app requiring xdg-open work
 $env.EDITOR = "hx"
 $env.KUBE_CONFIG_PATH = "/home/thomas/.kube/config"
 $env.KUBECTL_EXTERNAL_DIFF = "dyff between --omit-header --set-exit-code"
