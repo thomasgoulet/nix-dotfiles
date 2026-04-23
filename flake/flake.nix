@@ -17,6 +17,11 @@
        inputs.nixpkgs.follows = "nixpkgs";
      };
 
+     nu-mcp = {
+       url = "github:ck3mp3r/nu-mcp";
+       inputs.nixpkgs.follows = "nixpkgs";
+     };
+
    };
 
   outputs = inputs@{ flake-parts, ... }:

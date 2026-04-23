@@ -3,7 +3,7 @@
   # This module defines the home-manager configuration
   # It's imported by the NixOS configuration in wsl.nix
   flake.homes = {
-    thomas = { config, pkgs, custom-bins, ... }: {
+    thomas = { config, pkgs, custom-bins, nu-mcp, ... }: {
 
       home.stateVersion = "25.11";
       programs.home-manager.enable = true;
@@ -96,6 +96,8 @@
         # Custom binaries from perSystem
         custom-bins.backlog-md
         custom-bins.oasdiff
+        # nu-mcp from upstream flake (via inputs')
+        nu-mcp
       ];
     };
   };

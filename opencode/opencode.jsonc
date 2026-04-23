@@ -3,6 +3,13 @@
   "model": "anthropic/claude-haiku-4-5",
   "default_agent": "build",
   "autoupdate": false,
+  "mcp": {
+    "nu-mcp": {
+      "type": "local",
+      "command": ["nu-mcp", "--tools-dir", "/home/thomas/.config/nu/tools", "--enable-run-nu"],
+      "enabled": true,
+    },
+  },
   "provider": {
     "github-copilot": {
       "models": {

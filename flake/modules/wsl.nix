@@ -58,6 +58,7 @@
             home-manager.extraSpecialArgs = { 
               pkgs-stable = inputs'.nixpkgs-stable.legacyPackages;
               custom-bins = config.packages;
+              nu-mcp = inputs'.nu-mcp.packages.default;
             };
             
             # Import the home-manager module from the flake
