@@ -1,6 +1,7 @@
 argocd/*
 btop/*
 environment.d/*
+fontconfig/*
 gh/*
 glow/*
 go/telemetry/*
@@ -8,4 +9,4 @@ helm/*
 k9s/config.yml
 lazygit/state.yml
 nushell/history.*
-wslu/*
+systemd/*
