@@ -191,21 +191,21 @@ ui {
     }
 }
 
-theme "thom"
+theme "catppuccin-mocha"
 
 themes {
-    thom {
-        fg      "#ABB2BF"
-        bg      "#2C323C"
-        black   "#282C34"
-        yellow  "#E5C07B"
-        blue    "#61AFEF"
-        red     "#E06C75"
-        magenta "#ABB2BF"
-        green   "#98C379"
-        orange  "#D19A66"
-        cyan    "#56B6C2"
-        white   "#ABB2BF"
+    catppuccin-mocha {
+        fg      "#CDD6F4"
+        bg      "#1E1E2E"
+        black   "#45475A"
+        yellow  "#F9E2AF"
+        blue    "#89B4FA"
+        red     "#F38BA8"
+        magenta "#F5C2E7"
+        green   "#A6E3A1"
+        orange  "#FAB387"
+        cyan    "#94E2D5"
+        white   "#BAC2DE"
 
         frame_selected {
             base 4

@@ -1,15 +1,16 @@
-# OneDark presets
-foreground: &foreground "#dcdfe4"
-background: &background "#3d4148"
-black: &black "#282c34"
-blue: &blue "#61afef"
-green: &green "#98c379"
-grey: &grey "#5a6374"
-orange: &orange "#e09563"
-purple: &purple "#c678dd"
-red: &red "#e06370"
-yellow: &yellow "#e5c07b"
-yellow_bright: &yellow_bright "#c18401"
+# Catppuccin Mocha presets
+foreground: &foreground "#CDD6F4"
+background: &background "#1E1E2E"
+black: &black "#45475A"
+blue: &blue "#89B4FA"
+green: &green "#A6E3A1"
+grey: &grey "#6C7086"
+orange: &orange "#FAB387"
+purple: &purple "#CBA6F7"
+red: &red "#F38BA8"
+yellow: &yellow "#F9E2AF"
+teal: &teal "#94E2D5"
+surface0: &surface0 "#313244"
 
 k9s:
   body:
@@ -34,15 +35,15 @@ k9s:
     fieldFgColor: *green
   frame:
     border:
-      fgColor: *background
-      focusColor: *background
+      fgColor: *surface0
+      focusColor: *surface0
     menu:
       fgColor: *grey
       keyColor: *yellow
       numKeyColor: *yellow
     crumbs:
       fgColor: *foreground
-      bgColor: *background
+      bgColor: *surface0
       activeColor: *blue
     status:
       newColor: *green
@@ -61,7 +62,7 @@ k9s:
       filterColor: *blue
   views:
     charts:
-      bgColor: *background
+      bgColor: *surface0
       defaultDialColors:
         - *green
         - *red
@@ -73,7 +74,7 @@ k9s:
       bgColor: default
       cursorFgColor: *black
       cursorBgColor: *blue
-      markColor: *yellow_bright
+      markColor: *orange
       header:
         fgColor: *blue
         bgColor: default
@@ -81,8 +82,8 @@ k9s:
     xray:
       fgColor: *blue
       bgColor: default
-      cursorColor: *background
-      graphicColor: *yellow_bright
+      cursorColor: *surface0
+      graphicColor: *orange
     yaml:
       keyColor: *green
       colonColor: *grey
@@ -95,6 +96,6 @@ k9s:
         bgColor: default
     help:
       fgColor: *grey
-      bgColor: *background
+      bgColor: *surface0
       indicator:
         fgColor: *blue

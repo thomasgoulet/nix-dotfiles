@@ -1,5 +1,5 @@
 # Theme
---theme=base16
+--theme="Catppuccin Mocha"
 
 # Style
 --style="changes,numbers,header,grid"

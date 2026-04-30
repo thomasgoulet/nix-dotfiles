@@ -11,6 +11,30 @@
       home.username = "thomas";
       home.homeDirectory = "/home/thomas";
 
+      programs.git = {
+        enable = true;
+        settings = {
+          credential.helper = "store";
+          push.autoSetupRemote = true;
+
+          core.pager = "delta";
+          diff.colorMoved = "default";
+          interactive.diffFilter = "delta --color-only";
+          merge.conflictstyle = "diff3";
+
+          delta = {
+            dark = true;
+            line-numbers = true;
+            navigate = true;
+            side-by-side = true;
+            syntax-theme = "Catppuccin Mocha";
+            blame-palette = "#1e1e2e #181825 #313244";
+            hunk-header-style = "omit";
+            file-style = "white";
+          };
+        };
+      };
+
       home.packages = (with pkgs; [
 
         # Azure
@@ -39,7 +63,6 @@
         zoxide
 
         # Editor / Programming
-        git
         helix
         lazygit
         opencode
@@ -72,7 +95,7 @@
           # CSS, HTML, JS, JSON, Typescript
           vscode-langservers-extracted
           typescript-language-server
-          nodejs_24
+          nodejs_25
           prettier
 
           # Typst

@@ -20,10 +20,6 @@
             
             wsl.enable = true;
             wsl.defaultUser = "thomas";
-
-            wsl.wslConf = {
-              wsl2.networkingMode = "mirrored";
-            };
             
             # Allow unfree packages globally
             nixpkgs.config.allowUnfree = true;

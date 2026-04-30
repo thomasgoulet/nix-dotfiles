@@ -6,7 +6,7 @@ k9s:
     crumbsless: false
     noIcons: true
     reactive: false
-    skin: onedark
+    skin: catppuccin-mocha
   logger:
     tail: -1
     buffer: 10000

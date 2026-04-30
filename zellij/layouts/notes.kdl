@@ -4,10 +4,10 @@ layout {
         children
         pane size=1 borderless=true {
             plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-                format_left   "#[bg=#2C323C]{mode} #[fg=#ABB2BF,bg=#2C323C,bold]{session}"
-                format_center "#[bg=#2C323C]{tabs}"
-                format_right  "#[bg=#2C323C]{datetime}"
-                format_space  "#[bg=#2C323C]"
+                format_left   "#[bg=#1E1E2E]{mode} #[fg=#CDD6F4,bg=#1E1E2E,bold]{session}"
+                format_center "#[bg=#1E1E2E]{tabs}"
+                format_right  "#[bg=#1E1E2E]{datetime}"
+                format_space  "#[bg=#1E1E2E]"
 
                 border_enabled  "false"
                 border_char     "─"
@@ -17,7 +17,7 @@ layout {
                 hide_frame_for_single_pane "false"
 
                 mode_normal        "#[bg=blue] "
-                mode_locked        "#[bg=#ABB2BF] "
+                mode_locked        "#[bg=#585B70] "
                 mode_resize        "#[fg=black,bg=yellow] R "
                 mode_pane          "#[fg=black,bg=green] P "
                 mode_tab           "#[fg=black,bg=cyan] T "
@@ -31,11 +31,11 @@ layout {
                 mode_prompt        "#[fg=black,bg=green] PR "
                 mode_tmux          "#[fg=black,bg=green] {name} "
 
-                tab_normal    "#[fg=#ABB2BF,bg=#2C323C] {name} "
-                tab_active    "#[fg=yellow,bg=#2C323C,bold,italic] {name} "
-                tab_separator "#[fg=#ABB2BF,bg=#2C323C] / "
+                tab_normal    "#[fg=#CDD6F4,bg=#1E1E2E] {name} "
+                tab_active    "#[fg=yellow,bg=#1E1E2E,bold,italic] {name} "
+                tab_separator "#[fg=#CDD6F4,bg=#1E1E2E] / "
 
-                datetime        "#[fg=#ABB2BF,bg=#2C323C]{format}"
+                datetime        "#[fg=#CDD6F4,bg=#1E1E2E]{format}"
                 datetime_format "%H:%M %F"
                 datetime_timezone "America/Montreal"
             }
