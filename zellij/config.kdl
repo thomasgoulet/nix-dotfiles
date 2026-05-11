@@ -191,18 +191,20 @@ ui {
     }
 }
 
-theme "catppuccin-mocha"
+theme "catppuccinmocha"
 
 themes {
-    catppuccin-mocha {
+    catppuccinmocha {
         fg      "#CDD6F4"
         bg      "#1E1E2E"
         black   "#45475A"
         yellow  "#F9E2AF"
-        blue    "#89B4FA"
+        // blue    "#89B4FA"
+        green   "#89B4FA"
         red     "#F38BA8"
         magenta "#F5C2E7"
-        green   "#A6E3A1"
+        // green   "#A6E3A1"
+        blue    "#A6E3A1"
         orange  "#FAB387"
         cyan    "#94E2D5"
         white   "#BAC2DE"
