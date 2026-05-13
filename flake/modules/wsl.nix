@@ -26,6 +26,7 @@
             
             users.users.thomas = {
               shell = inputs'.nixpkgs.legacyPackages.nushell;
+              extraGroups = [ "docker" ];
             };
             
             nix.settings = {
@@ -43,6 +44,8 @@
             environment.variables = {
               NH_FLAKE = "/home/thomas/.config/flake";
             };
+
+            virtualisation.docker.enable = true;
           }
           
           # Home-Manager Configuration
