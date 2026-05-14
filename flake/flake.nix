@@ -12,6 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    den.url = "github:denful/den";
+
     backlog-md = {
       url = "github:MrLesk/Backlog.md";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,11 +23,18 @@
       url = "github:ck3mp3r/nu-mcp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    import-tree.url = "github:vic/import-tree";
   };
 
-  outputs = inputs@{ flake-parts, import-tree, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; }
-      (import-tree ./modules);
+  outputs = inputs@{ flake-parts, den, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        den.flakeModule
+        ./modules/nixos/oric.nix
+        ./modules/aspects/developer.nix
+        ./modules/aspects/sysops.nix
+        ./modules/thomas.nix
+        ./modules/packages/backlog-md.nix
+        ./modules/packages/oasdiff.nix
+      ];
+    };
 }

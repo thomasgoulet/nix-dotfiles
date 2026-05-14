@@ -1,10 +1,8 @@
-{ ... }:
+{ self', inputs', ... }:
 {
-  flake.homes.thomas = { custom-bins, nu-mcp, ... }: {
-    home.packages = [
-      custom-bins.backlog-md
-      custom-bins.oasdiff
-      nu-mcp
-    ];
-  };
+  home.packages = [
+    self'.packages.backlog-md
+    self'.packages.oasdiff
+    inputs'.nu-mcp.packages.default
+  ];
 }

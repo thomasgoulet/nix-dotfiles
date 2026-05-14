@@ -1,4 +1,4 @@
-{ inputs', ... }:
+{ pkgs, ... }:
 {
   system.stateVersion = "25.11";
 
@@ -7,10 +7,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with inputs'.nixpkgs.legacyPackages; [
+  environment.systemPackages = with pkgs; [
     nh
     wsl-open
   ];
-
-
 }
