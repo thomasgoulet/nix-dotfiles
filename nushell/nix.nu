@@ -13,10 +13,10 @@ module nix {
 
     ### Alias
 
-    export alias "os build" = nh os switch --diff always;
-    export alias "os update" = nh os switch --update --diff always;
+    export alias "os build" = nh os switch --diff always --hostname $env.NH_HOST;
+    export alias "os update" = nh os switch --update --diff always --hostname $env.NH_HOST;
 
-    export alias "os diff" = nh os test --dry --diff always;
+    export alias "os diff" = nh os test --dry --diff always --hostname $env.NH_HOST;
     export alias "os gc" = nh clean all;
 
     ### Commands

@@ -3,6 +3,7 @@ btop/*
 environment.d/*
 fontconfig/*
 gh/*
+git/config
 glow/*
 go/telemetry/*
 helm/*
