@@ -2,16 +2,11 @@
 #     https://dystroy.org/broot
 
 default_flags: -g
-
 date_time_format: %Y-%m-%d
 
-# (you really should read https://dystroy.org/broot/modal/
-# before as it may not suit everybody even among vim users)
-#
-# You may start either in 'command' mode, or in 'input' mode
-#
-# modal: true
-# initial_mode: command
+# (https://dystroy.org/broot/modal/)
+modal: true
+initial_mode: command
 
 show_selection_mark: true
 
@@ -27,7 +22,6 @@ cols_order: [
 ]
 
 icon_theme: nerdfont
-
 special_paths: {
     "~/.config": { "show": "always" }
     ".azure-devops": { "list": "never" }

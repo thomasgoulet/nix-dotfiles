@@ -2,6 +2,13 @@
 verbs: [
 
     {
+        invocation: quit
+        key: q
+        internal: ":quit"
+        leave_broot: true
+    }
+
+    {
         invocation: edit
         shortcut: e
         key: enter
@@ -20,25 +27,6 @@ verbs: [
     }
 
     {
-        key: ctrl-s
-        internal: ":clear_stage"
-        leave_broot: false
-    }
-
-    {
-        key: ctrl-l
-        internal: ":panel_right"
-        leave_broot: false
-    }
-
-    {
-        invocation: left_panel
-        key: ctrl-h
-        internal: ":panel_left_no_open"
-        leave_broot: false
-    }
-
-    {
         name: touch
         invocation: touch {new_file}
         external: "touch {directory}/{new_file}"
@@ -52,36 +40,15 @@ verbs: [
     }
 
     {
+        key: t
         invocation: term
-        key: ctrl-t
         external: "~/.config/broot/shell.sh"
         set_working_dir: true
         leave_broot: false
     }
 
     {
-        invocation: home
-        key: ctrl-home
-        execution: ":focus ~"
-    }
-
-    {
-        invocation: gr
-        execution: ":focus {git-root}"
-    }
-
-    {
-        invocation: gs
-        execution: ":toggle_git_status"
-    }
-
-    {
-        invocation: j
-        external: "nu -c \"broot (zoxide query -i)\""
-        leave_broot: true
-    }
-
-    {
+        key: b
         invocation: blame
         apply_to: text_file
         external: "zellij run --floating --name BLAME -- git blame {file}"
@@ -90,6 +57,7 @@ verbs: [
     }
 
     {
+        key: d
         invocation: diff
         apply_to: text_file
         external: "zellij run --floating --name DIFF -- git -c diff.external=difft diff {file}"
@@ -98,6 +66,7 @@ verbs: [
     }
 
     {
+        key: d
         invocation: diff
         apply_to: directory
         external: "zellij run --floating --name DIFF -- git -c diff.external=difft diff"
