@@ -7,7 +7,6 @@
     zellij
 
     # General utilities
-    bat
     delta
     difftastic
     eza
@@ -19,6 +18,21 @@
     zoxide
 
   ];
+
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "Catppuccin Mocha";
+      style = "changes,numbers,header,grid";
+      pager = "less -RF --no-init";
+    };
+    syntaxes = {
+      nushell = {
+        src = ./bat/syntaxes;
+        file = "nushell.sublime-syntax";
+      };
+    };
+  };
 
   programs.starship = {
     enable = true;

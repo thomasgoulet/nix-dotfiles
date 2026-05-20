@@ -1,8 +1,0 @@
-# Theme
---theme="Catppuccin Mocha"
-
-# Style
---style="changes,numbers,header,grid"
-
-# Pager
---pager="less -RF --no-init"
