@@ -1,13 +1,14 @@
-argocd/*
-btop/*
-environment.d/*
-fontconfig/*
-gh/*
-git/config
-glow/*
-go/telemetry/*
-helm/*
-k9s/config.yml
-lazygit/state.yml
-nushell/history.*
-systemd/*
+/*
+
+# Tracked directories
+!.gitignore
+!bat/
+!flake/
+!hl/
+!k9s/
+!nix/
+!nushell/
+!opencode/
+!vale/
+!windowsterminal/
+!zellij/

@@ -9,7 +9,6 @@ $env.LS_COLORS = "di=1;34:ln=0;34:pi=0;33:bd=1;33:cd=1;33:so=1;31:ex=1;32:*READM
 $env.NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt"
 $env.OPENCODE_DISABLE_LSP_DOWNLOAD = "true"
 $env.PAGER = "less -RF --no-init"
-$env.STARSHIP_CONFIG = "/home/thomas/.config/starship/config.toml"
 $env._ZO_FZF_OPTS = "--color=16 --inline-info --tiebreak length --bind 'tab:down' --bind 'shift-tab:up'"
 
 $env.ENV_CONVERSIONS = {

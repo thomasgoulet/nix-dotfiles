@@ -1,0 +1,114 @@
+{ ... }:
+{
+  programs.helix.settings = {
+    theme = "catppuccin_mocha";
+    editor = {
+      bufferline = "always";
+      color-modes = true;
+      end-of-line-diagnostics = "hint";
+      idle-timeout = 0;
+      jump-label-alphabet = "hjklvbnmyuiopasdfg";
+      line-number = "relative";
+      mouse = false;
+      shell = [ "nu" "-c" ];
+      true-color = true;
+      undercurl = true;
+      statusline = {
+        left = [ "mode" "spinner" ];
+        center = [ "file-name" "file-modification-indicator" "spacer" "version-control" ];
+        right = [ "register" "diagnostics" "selections" "position" "position-percentage" "file-encoding" "file-line-ending" "file-type" ];
+        separator = "-";
+        mode.normal = "NORMAL";
+        mode.insert = "INSERT";
+        mode.select = "SELECT";
+      };
+      lsp.display-messages = true;
+      cursor-shape = {
+        insert = "bar";
+        normal = "block";
+        select = "underline";
+      };
+      file-picker.hidden = false;
+      auto-pairs = {
+        "(" = ")";
+        "{" = "}";
+        "[" = "]";
+        "'" = "'";
+        "\"" = "\"";
+        "`" = "`";
+      };
+      soft-wrap.enable = true;
+      whitespace = {
+        render.tab = "all";
+        characters = {
+          tab = "→";
+          tabpad = "·";
+        };
+      };
+      gutters.layout = [ "diagnostics" "spacer" "diff" "line-numbers" "spacer" ];
+      indent-guides = {
+        character = "|";
+        render = true;
+      };
+      inline-diagnostics.cursor-line = "hint";
+    };
+    keys.normal = {
+      "\\" = "command_palette";
+      "esc" = "keep_primary_selection";
+      "A-y" = "select_prev_sibling";
+      "A-u" = "shrink_selection";
+      "A-i" = "expand_selection";
+      "A-o" = "select_next_sibling";
+      "C-k" = "remove_selections";
+      "C-r" = ":redraw";
+      "C-s" = "split_selection_on_newline";
+      "C-w" = "rotate_view";
+      "B" = "extend_prev_word_start";
+      "D" = "delete_char_backward";
+      "E" = "extend_next_word_end";
+      "G" = "goto_word";
+      "H" = ":bp";
+      "L" = ":bn";
+      "S" = "@%s";
+      "W" = "extend_next_word_start";
+      "y" = [ "yank" ":primary-clipboard-yank" ":clipboard-yank" ];
+      "X" = "extend_line_above";
+      "tab" = "jump_backward";
+      "S-tab" = "jump_forward";
+      space = {
+        space = ":wa";
+        "C" = ":bc!";
+        "c" = ":bc";
+        "F" = "file_picker_in_current_buffer_directory";
+        "G" = ":reset-diff-change";
+        "q" = ":q";
+        "Q" = ":qa!";
+        "[" = "jump_view_left";
+        "]" = "jump_view_right";
+        "," = [ "save_selection" "goto_line_end" ":append-output echo ','" "collapse_selection" "jump_backward" ];
+        ";" = [ "save_selection" "goto_line_end" ":append-output echo ';'" "collapse_selection" "jump_backward" ];
+        "tab" = "save_selection";
+        i = {
+          b = '':insert-output $"- [ ] "'';
+          d = '':insert-output $"# (date now | format date %%Y-%%m-%%d)"'';
+        };
+      };
+      m = {
+        w = [ "move_char_left" "move_next_word_end" "move_prev_word_start" "move_next_word_end" "search_selection" ];
+        W = [ "move_char_left" "move_next_long_word_end" "move_prev_long_word_start" "move_next_long_word_end" "search_selection" ];
+      };
+      "]" = {
+        q = "@<space>'<tab><ret>";
+      };
+      "[" = {
+        q = "@<space>'<S-tab><ret>";
+      };
+      backspace = {
+        a = ":sh zellij run -c -f -n AI -- opencode o> /dev/null";
+        f = ":sh zellij run -c -f -n FILES -- broot o> /dev/null";
+        g = ":sh zellij run -c -f -n GIT -- lazygit o> /dev/null";
+        t = ":sh zellij run -c -f -n TERM -- nu o> /dev/null";
+      };
+    };
+  };
+}
