@@ -8,6 +8,7 @@
   ];
 
   den.hosts.x86_64-linux.oric = {
+    isWSL = true;
     users.thomas = {
       classes = [ "homeManager" "user" ];
     };
@@ -15,7 +16,7 @@
 
   den.aspects.oric = {
     nixos =
-      { ... }:
+      { host, ... }:
       {
         imports = [
           inputs.nixos-wsl.nixosModules.default
@@ -27,7 +28,7 @@
 
         environment.variables = {
           NH_FLAKE = "/home/thomas/.config/flake";
-          NH_HOST = "oric";
+          NH_HOST = host.name;
         };
 
         home-manager.useUserPackages = true;

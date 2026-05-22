@@ -52,9 +52,10 @@ flake/
     ├── nixos/ # Hosts
     ├── aspects/ # Shared den aspects to be re-used
     ├── homes/ # Home-manager configurations
-    │   ├── thomas/
     │   └── shared/
-    │       └── editor/ # Helix configuration
+    │       ├── bat/ # Syntax files for bat
+    │       ├── azure.nix
+    │       └── infra.nix
     └── packages/ # Non-nix custom packages
 ```
 
