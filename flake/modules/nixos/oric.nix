@@ -5,10 +5,11 @@
   den.default.includes = [
     den.batteries.inputs' # injects inputs' into all nixos/homeManager modules
     den.batteries.self' # injects self' (flake packages) into all modules
+    den.batteries.hostname
   ];
 
   den.hosts.x86_64-linux.oric = {
-    isWSL = true;
+    wsl.enable = true;
     users.thomas = {
       classes = [ "homeManager" "user" ];
     };
@@ -19,7 +20,6 @@
       { host, ... }:
       {
         imports = [
-          inputs.nixos-wsl.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           ./oric/wsl.nix
           ./oric/docker.nix

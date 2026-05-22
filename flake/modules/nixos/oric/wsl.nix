@@ -2,8 +2,6 @@
 {
   system.stateVersion = "25.11";
 
-  wsl.enable = true;
-  wsl.defaultUser = "thomas";
   wsl.useWindowsDriver = true;
   wsl.startMenuLaunchers = true;
 

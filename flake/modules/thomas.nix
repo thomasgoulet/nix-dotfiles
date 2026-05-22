@@ -1,7 +1,12 @@
 { den, ... }:
 {
   den.aspects.thomas = {
-    includes = [ den.aspects.developer den.aspects.sysops ];
+    includes = [
+      den.aspects.developer
+      den.aspects.azure
+      den.aspects.infra
+      den.batteries.primary-user
+    ];
 
     homeManager =
       { self', inputs', ... }:
