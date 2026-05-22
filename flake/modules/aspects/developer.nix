@@ -1,11 +1,12 @@
 { den, ... }:
 {
   den.aspects.developer = {
+    includes = [ den.aspects.shell ];
+
     homeManager =
       { ... }:
       {
         imports = [
-          ../homes/shared/shell.nix
           ../homes/shared/editor
         ];
       };

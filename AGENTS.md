@@ -64,7 +64,7 @@ flake/
 
 ## Developer aspect
 
-**`homes/shared/shell.nix`** installs and configures the shell for the user.
+**`aspects/shell.nix`** installs and configures the shell for the user (den aspect).
 
 ## Sysops aspect
 
