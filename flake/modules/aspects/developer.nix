@@ -1,15 +1,7 @@
 { den, ... }:
 {
   den.aspects.developer = {
-    includes = [ den.aspects.shell ];
-
-    homeManager =
-      { ... }:
-      {
-        imports = [
-          ../homes/shared/editor
-        ];
-      };
+    includes = [ den.aspects.shell den.aspects.editor ];
 
     user =
       { pkgs, ... }:

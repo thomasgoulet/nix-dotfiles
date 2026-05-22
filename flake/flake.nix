@@ -31,6 +31,7 @@
         den.flakeModule
         ./modules/nixos/oric.nix
         ./modules/aspects/shell.nix
+        ./modules/aspects/editor.nix
         ./modules/aspects/developer.nix
         ./modules/aspects/sysops.nix
         ./modules/thomas.nix

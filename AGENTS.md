@@ -75,7 +75,7 @@ flake/
 
 # Helix
 
-Configuration lives in `modules/homes/shared/editor/`:
+Configuration lives in `modules/aspects/editor/`. The aspect entry point is `modules/aspects/editor.nix`, with implementation files co-located under `modules/aspects/editor/`:
 
 | File                  | Purpose                                                                                     |
 | --------------------- | ------------------------------------------------------------------------------------------- |
