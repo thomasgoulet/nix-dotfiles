@@ -1,21 +1,21 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
+  home.packages = [
 
     # Core functionality
-    nushell
-    zellij
+    pkgs.nushell
+    pkgs.zellij
 
     # General utilities
-    delta
-    difftastic
-    eza
-    fd
-    fzf
-    just
-    ripgrep
-    sd
-    zoxide
+    pkgs.delta
+    pkgs.difftastic
+    pkgs.eza
+    pkgs.fd
+    pkgs.fzf
+    pkgs.just
+    pkgs.ripgrep
+    pkgs.sd
+    pkgs.zoxide
 
   ];
 

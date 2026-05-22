@@ -6,7 +6,7 @@
       {
         imports = [
           ../homes/shared/shell.nix
-          ../homes/shared/editor.nix
+          ../homes/shared/editor
         ];
       };
 
