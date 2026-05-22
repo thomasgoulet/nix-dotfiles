@@ -4,6 +4,8 @@
 
   wsl.enable = true;
   wsl.defaultUser = "thomas";
+  wsl.useWindowsDriver = true;
+  wsl.startMenuLaunchers = true;
 
   nixpkgs.config.allowUnfree = true;
 
