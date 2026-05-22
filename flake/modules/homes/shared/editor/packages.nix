@@ -4,6 +4,8 @@
 
     # AI
     opencode
+    ctx7
+    context7-mcp
 
     # CSS, HTML, JS, JSON, TypeScript
     vscode-langservers-extracted

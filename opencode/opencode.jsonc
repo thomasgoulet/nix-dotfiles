@@ -3,11 +3,46 @@
   "model": "anthropic/claude-haiku-4-5",
   "default_agent": "build",
   "autoupdate": false,
+  "tools": {
+    "context7*": false,
+  },
   "mcp": {
+    "context7": {
+      "type": "local",
+      "command": [
+        "context7-mcp"
+      ],
+      "enabled": true,
+    },
     "nu-mcp": {
       "type": "local",
-      "command": ["nu-mcp", "--tools-dir", "/home/thomas/.config/nu/tools", "--enable-run-nu"],
+      "command": [
+        "nu-mcp",
+        "--tools-dir",
+        "/home/thomas/.config/nu/tools",
+        "--enable-run-nu"
+      ],
       "enabled": true,
+    },
+  },
+  "agent": {
+    "docs": {
+      "mode": "primary",
+      "color": "info",
+      "tools": {
+        "*": false,
+        "read": true,
+        "webfetch": true,
+        "websearch": true,
+        "context7*": true,
+      },
+      "prompt": "You research documentation. Use the Context7 MCP to search official documentation, then answer the user's prompt based on what you find. Never guess — always search.",
+    },
+    "build": {
+      "color": "secondary",
+    },
+    "plan": {
+      "color": "success",
     },
   },
   "provider": {
