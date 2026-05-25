@@ -12,7 +12,6 @@
 
           # General utilities
           pkgs.delta
-          pkgs.difftastic
           pkgs.eza
           pkgs.fd
           pkgs.fzf
@@ -73,7 +72,7 @@
 
             kubernetes = {
               style = "green";
-              symbol = "";
+              symbol = "";
               format = " [\\[[$symbol$context([/](bright-white)[$namespace](purple))]($style)\\]](bright-white)";
               disabled = false;
               contexts = [
@@ -85,7 +84,7 @@
             };
             azure = {
               style = "yellow";
-              symbol = "";
+              symbol = "";
               format = " [\\[[$symbol$subscription]($style)\\]](bright-white)";
               disabled = false;
             };
