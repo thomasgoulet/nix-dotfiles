@@ -16,6 +16,7 @@
           pkgs.fd
           pkgs.fzf
           pkgs.just
+          pkgs.jq
           pkgs.ripgrep
           pkgs.sd
           pkgs.zoxide
@@ -72,7 +73,7 @@
 
             kubernetes = {
               style = "green";
-              format = " [\\[[[k8s::](bright-white)$context([:](bright-white)[$namespace](purple))]($style)\\]](bright-white)";
+              format = " [\\[[[k8s::](bright-white)$context([:](bright-white)[$namespace](yellow))]($style)\\]](bright-white)";
               disabled = false;
               contexts = [
                 {
