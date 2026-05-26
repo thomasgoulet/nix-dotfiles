@@ -72,8 +72,7 @@
 
             kubernetes = {
               style = "green";
-              symbol = "";
-              format = " [\\[[$symbol$context([/](bright-white)[$namespace](purple))]($style)\\]](bright-white)";
+              format = " [\\[[[k8s::](bright-white)$context([:](bright-white)[$namespace](purple))]($style)\\]](bright-white)";
               disabled = false;
               contexts = [
                 {
@@ -81,12 +80,6 @@
                   style = "red";
                 }
               ];
-            };
-            azure = {
-              style = "yellow";
-              symbol = "";
-              format = " [\\[[$symbol$subscription]($style)\\]](bright-white)";
-              disabled = false;
             };
             git_status = {
               style = "red";

@@ -1,9 +1,6 @@
-// If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds clear-defaults=true {
 
     shared_except "locked" "entersearch" "renametab" "renamepane" {
-        // Stop all input to terminal when not in locked mode to prevent unintentional keystrokes
-        bind "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "1" "2" "3" "4" "5" "6" "7" "8" "9" "Backspace" "Left" "Right" "Up" "Down" "Home" "End" "PageUp" "PageDown" "Tab" "Delete" "Insert" "Space" "Enter" {}
         bind "Esc"    { SwitchToMode "Locked"; }
         bind "Ctrl q" { Quit; }
     }
@@ -13,7 +10,6 @@ keybinds clear-defaults=true {
     }
 
     locked {
-        // Master key is F1
         bind "Ctrl g" { SwitchToMode "Normal"; }
         bind "F1"     { SwitchToMode "Normal"; }
     }
@@ -186,7 +182,7 @@ plugins {
 
 ui {
     pane_frames {
-        rounded_corners true
+        rounded_corners false
         hide_session_name true
     }
 }
@@ -232,5 +228,6 @@ advanced_mouse_actions false
 default_layout "default"
 default_mode "locked"
 mouse_hover_effects false
+pane_frames false
 stacked_resize false
 session_serialization false

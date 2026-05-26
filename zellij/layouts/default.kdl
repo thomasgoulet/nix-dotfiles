@@ -6,17 +6,8 @@ layout {
         children
         pane size=1 borderless=true {
             plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-                format_left   "#[bg=#1E1E2E]{mode} #[fg=#CDD6F4,bg=#1E1E2E,bold]{session}"
-                format_center "#[bg=#1E1E2E]{tabs}"
-                format_right  "#[bg=#1E1E2E]{datetime}"
-                format_space  "#[bg=#1E1E2E]"
-
-                border_enabled  "false"
-                border_char     "─"
-                border_format   "#[fg=#6C7086]{char}"
-                border_position "top"
-
-                hide_frame_for_single_pane "false"
+                format_left   "#[bg=bg]{mode} #[fg=fg,bg=bg,bold]{session}  -> {tabs}"
+                format_space "#[bg=#1E1E2E]"
 
                 mode_normal        "#[bg=blue] "
                 mode_locked        "#[bg=#585B70] "
@@ -33,32 +24,18 @@ layout {
                 mode_prompt        "#[fg=black,bg=green] PR "
                 mode_tmux          "#[fg=black,bg=green] {name} "
 
-                tab_normal    "#[fg=#CDD6F4,bg=#1E1E2E] {name} "
-                tab_active    "#[fg=blue,bg=#1E1E2E,bold,italic] {name} "
-                tab_separator "#[fg=#CDD6F4,bg=#1E1E2E] / "
-
-                datetime        "#[fg=#CDD6F4,bg=#1E1E2E]{format}"
-                datetime_format "%H:%M %F"
-                datetime_timezone "America/Montreal"
+                tab_normal    "#[fg=fg,bg=bg] {name} "
+                tab_active    "#[fg=black,bg=blue,bold,italic] {name} "
             }
         }
     }
-    
+
     tab_template name="default_tab" {
         children
         pane size=1 borderless=true {
             plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-                format_left   "#[bg=#1E1E2E]{mode} #[fg=#CDD6F4,bg=#1E1E2E,bold]{session}"
-                format_center "#[bg=#1E1E2E]{tabs}"
-                format_right  "#[bg=#1E1E2E]{datetime}"
-                format_space  "#[bg=#1E1E2E]"
-
-                border_enabled  "false"
-                border_char     "─"
-                border_format   "#[fg=#6C7086]{char}"
-                border_position "top"
-
-                hide_frame_for_single_pane "false"
+                format_left   "#[bg=bg]{mode} #[fg=fg,bg=bg,bold]{session}  -> {tabs}"
+                format_space "#[bg=#1E1E2E]"
 
                 mode_normal        "#[bg=blue] "
                 mode_locked        "#[bg=#585B70] "
@@ -75,13 +52,8 @@ layout {
                 mode_prompt        "#[fg=black,bg=green] PR "
                 mode_tmux          "#[fg=black,bg=green] {name} "
 
-                tab_normal    "#[fg=#CDD6F4,bg=#1E1E2E] {name} "
-                tab_active    "#[fg=blue,bg=#1E1E2E,bold,italic] {name} "
-                tab_separator "#[fg=#CDD6F4,bg=#1E1E2E] / "
-
-                datetime        "#[fg=#CDD6F4,bg=#1E1E2E]{format}"
-                datetime_format "%H:%M %F"
-                datetime_timezone "America/Montreal"
+                tab_normal    "#[fg=fg,bg=bg] {name} "
+                tab_active    "#[fg=black,bg=blue,bold,italic] {name} "
             }
         }
     }
