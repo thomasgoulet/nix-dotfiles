@@ -60,14 +60,14 @@ flake/
 
 Configuration lives in `modules/aspects/editor/`. The aspect entry point is `modules/aspects/editor.nix`, with implementation files co-located under `modules/aspects/editor/`:
 
-| File                  | Purpose                                                                                     |
-| --------------------- | ------------------------------------------------------------------------------------------- |
-| `helix-settings.nix`  | Editor settings (theme, shell, keybindings, UI options)                                     |
-| `helix-languages.nix` | Per-language LSP and formatter wiring                                                       |
-| `packages.nix`        | Nix packages for all LSPs and formatters                                                    |
-| `broot.nix`           | `broot` file manager configuration                                                          |
-| `lazygit.nix`         | `lazygit` configuration, wired to `helix` and `zellij`                                      |
-| `scripts.nix`         | Two shell script derivations (`zellijEditorOpen`, `brootShell`) injected via `_module.args` |
+| File                  | Purpose                                                                                  |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| `helix-settings.nix`  | Editor settings (theme, shell, keybindings, UI options)                                  |
+| `helix-languages.nix` | Per-language LSP and formatter wiring                                                    |
+| `packages.nix`        | Nix packages for all LSPs and formatters                                                 |
+| `broot.nix`           | `broot` file manager configuration                                                       |
+| `lazygit.nix`         | `lazygit` configuration, wired to `helix` and `zellij`                                   |
+| `scripts.nix`         | Two shell script derivations (`editorWrapper`, `brootShell`) injected via `_module.args` |
 
 ---
 

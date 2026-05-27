@@ -1,4 +1,4 @@
-{ brootShell, zellijEditorOpen, ... }:
+{ brootShell, editorWrapper, ... }:
 {
   programs.broot = {
     enable = true;
@@ -129,7 +129,7 @@
           shortcut = "e";
           key = "enter";
           apply_to = "text_file";
-          execution = "${zellijEditorOpen} {file}:{line}";
+          execution = "${editorWrapper} {file}:{line}";
           leave_broot = false;
         }
         {
@@ -137,7 +137,7 @@
           shortcut = "e";
           key = "ctrl-e";
           apply_to = "text_file";
-          execution = "${zellijEditorOpen} {file}:{line}";
+          execution = "${editorWrapper} {file}:{line}";
           leave_broot = false;
         }
         {

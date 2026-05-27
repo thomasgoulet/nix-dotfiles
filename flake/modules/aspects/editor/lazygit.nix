@@ -1,4 +1,4 @@
-{ zellijEditorOpen, ... }:
+{ editorWrapper, ... }:
 {
   programs.lazygit = {
     enable = true;
@@ -31,7 +31,7 @@
         editAtLine = "hx +{{line}} {{filename}}";
         editInTerminal = true;
         openDirInEditor = "hx {{dir}}";
-        open = "${zellijEditorOpen} {{filename}}";
+        open = "${editorWrapper} {{filename}}";
         openLink = "wsl-open {{link}}";
       };
     };
