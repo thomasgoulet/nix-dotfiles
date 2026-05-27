@@ -13,8 +13,8 @@
       git.branchLogCmd = ''git log --pretty=format:"%C(brightwhite)%s%Creset%n%C(yellow)%ar%Creset - %C(cyan)%ae%Creset%n" --color=always --stat --'';
       gui = {
         border = "single";
-        nerdFontsVersion = "2";
         showBottomLine = false;
+        showFileIcons = false;
         showPanelJumps = false;
         showRandomTip = false;
         statusPanelView = "allBranchesLog";

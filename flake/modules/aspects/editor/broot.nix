@@ -9,7 +9,6 @@
       initial_mode = "command";
       show_selection_mark = true;
       cols_order = [ "mark" "git" "size" "permission" "date" "count" "branch" "name" ];
-      icon_theme = "nerdfont";
       special_paths = {
         "~/.config" = { show = "always"; };
         ".azure-devops" = { list = "never"; };
