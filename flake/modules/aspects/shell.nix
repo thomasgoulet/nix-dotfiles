@@ -13,6 +13,10 @@
       { pkgs, ... }:
       let
         scripts = import ./editor/scripts.nix { inherit pkgs; };
+        zjstatus = pkgs.fetchurl {
+          url = "https://github.com/dj95/zjstatus/releases/download/v0.23.0/zjstatus.wasm";
+          sha256 = "1zv173qh67x4bf4k4m5fpz22vy0pbp6f88c0c7dkjhjj4c9901p0";
+        };
       in
       {
 
@@ -44,6 +48,8 @@
           pkgs.zoxide
 
         ];
+
+        xdg.configFile."zellij/zjstatus.wasm".source = zjstatus;
 
         programs.bat = {
           enable = true;
