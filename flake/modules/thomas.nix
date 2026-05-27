@@ -2,9 +2,9 @@
 {
   den.aspects.thomas = {
     includes = [
-      den.aspects.developer
       den.aspects.azure
       den.aspects.infra
+      den.aspects.shell
       den.batteries.primary-user
     ];
 
