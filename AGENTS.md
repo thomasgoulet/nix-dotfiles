@@ -8,18 +8,17 @@ This repository lives at `~/.config` and serves two purposes simultaneously: it 
 
 Rebuilds are driven by `nh` under the hood, with `NH_FLAKE` and `NH_HOST` set system-wide as environment variables so no flags are needed.
 
-The `nushell` module `nushell/modules/nix.nu` provides the day-to-day interface.
+The `nushell` module `nushell/modules/nix.nu` provides the day-to-day interface. And should be used when changing the configuration. `os diff` allows to validate
 
-| Command          | Effect                                                     |
-| ---------------- | ---------------------------------------------------------- |
-| `os switch`      | Build and activate. Equivalent to `nh os switch`.          |
-| `os build`       | Build without activating.                                  |
-| `os update`      | Update flake inputs (`nix flake update`) then switch.      |
-| `os diff`        | Show the package diff between current and next generation. |
-| `os rollback`    | Roll back to the previous generation or a specific one.    |
-| `os generations` | List all generations with timestamps.                      |
-| `os repl`        | Open `nix repl` with the flake loaded.                     |
-| `os try <pkg>`   | Ad-hoc `nix-shell` with a package.                         |
+| Command          | Effect                                                                                                                                   |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `os diff`        | Show the package diff between current and next generation. Should be used whenever changes are being made to validate compilation first. |
+| `os build`       | Build and activate. Equivalent to `nh os switch`.                                                                                        |
+| `os update`      | Update flake inputs (`nix flake update`) then switch.                                                                                    |
+| `os rollback`    | Roll back to the previous generation or a specific one.                                                                                  |
+| `os generations` | List all generations with timestamps.                                                                                                    |
+| `os repl`        | Open `nix repl` with the flake loaded.                                                                                                   |
+| `os try <pkg>`   | Ad-hoc `nix-shell` with a package.                                                                                                       |
 
 ---
 
