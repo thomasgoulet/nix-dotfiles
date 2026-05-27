@@ -14,11 +14,6 @@
 
     den.url = "github:denful/den";
 
-    backlog-md = {
-      url = "github:MrLesk/Backlog.md";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nu-mcp = {
       url = "github:ck3mp3r/nu-mcp";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +31,6 @@
         ./modules/aspects/azure.nix
         ./modules/aspects/infra.nix
         ./modules/thomas.nix
-        ./modules/packages/backlog-md.nix
         ./modules/packages/oasdiff.nix
       ];
     };
