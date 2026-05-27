@@ -18,7 +18,6 @@
         home.homeDirectory = "/home/thomas";
 
         home.packages = [
-          self'.packages.oasdiff
           inputs'.nu-mcp.packages.default
         ];
 

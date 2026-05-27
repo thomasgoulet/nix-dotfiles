@@ -31,7 +31,6 @@
         ./modules/aspects/azure.nix
         ./modules/aspects/infra.nix
         ./modules/thomas.nix
-        ./modules/packages/oasdiff.nix
       ];
     };
 }
