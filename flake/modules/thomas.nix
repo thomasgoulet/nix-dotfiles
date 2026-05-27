@@ -16,10 +16,6 @@
         home.username = "thomas";
         home.homeDirectory = "/home/thomas";
 
-        home.packages = [
-          inputs'.nu-mcp.packages.default
-        ];
-
         programs.git = {
           enable = true;
           settings = {
