@@ -208,7 +208,6 @@ $env.config = {
 
 # Required modules
 use std *
-
 source ~/.config/nushell/modules/cache.nu; use cache
 
 # Third-party

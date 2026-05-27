@@ -1,13 +1,5 @@
 plugins:
 
-  argorefresh:
-    background: false
-    description: Force refresh the application
-    shortCut: Shift-R
-    scopes: ["apps"]
-    command: kubectl
-    args: ["--context", "$CONTEXT", "--namespace", "$NAMESPACE", "annotate", "applications", "$NAME", "argocd.argoproj.io/refresh=hard"]
-
   jsonlogs:
     background: false
     description: HL Logs
@@ -17,7 +9,7 @@ plugins:
     args: ["-e", "$env.PAGER = 'less --no-init'; kubectl logs $NAME -n $NAMESPACE --context $CONTEXT | hl --paging always; exit"]
 
   restartdeployment:
-    background: false
+    background: true
     description: Restart
     shortCut: Shift-R
     scopes: ["deploy"]
