@@ -37,7 +37,7 @@ let theme = {
     list: white
     block: white
     hints: light_gray
-    search_result: { bg: red fg: white }
+    search_result: blue
     shape_and: purple
     shape_binary: purple
     shape_block: blue
@@ -52,7 +52,6 @@ let theme = {
     shape_flag: blue
     shape_float: purple
     shape_garbage: red_underline
-    # shape_garbage: red_underline
     shape_globpattern: cyan
     shape_int: purple
     shape_internalcall: cyan
@@ -75,20 +74,12 @@ let theme = {
 
 $env.config = {
     ls: {
-        use_ls_colors: true
         clickable_links: false
     }
 
-    rm: {
-        always_trash: false
-    }
-
     table: {
-        header_on_separator: false
         index_mode: auto
         missing_value_symbol: $"(ansi red)-x-(ansi reset)"
-        mode: rounded
-        padding: { left: 1, right: 1 }
         trim: {
             methodology: truncating
             truncating_suffix: "..."
@@ -104,29 +95,16 @@ $env.config = {
         # table: '%m/%d/%y %I:%M:%S%p'          # generally shows up in tabular outputs such as ls. commenting this out will change it to the default human readable datetime format
     }
 
-    display_errors: {
-        exit_code: false
-        termination_signal: true
-    }
-    error_style: "fancy"
-
     history: {
         max_size: 10000
-        sync_on_enter: true
         file_format: "sqlite"
     }
 
     completions: {
-        case_sensitive: false
-        quick: true
-        partial: true
         algorithm: "fuzzy"
         external: {
-            enable: false # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up my be very slow
-            max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: null
+            enable: false
         }
-        use_ls_colors: true
     }
 
     cursor_shape: {
@@ -136,26 +114,12 @@ $env.config = {
     }
 
     color_config: $theme
-    footer_mode: 25 # always, never, number_of_rows, auto
-    float_precision: 2
     use_ansi_coloring: true
-    edit_mode: emacs
     shell_integration: {
-        osc2: true
-        osc7: true
-        osc8: true
         osc9_9: true
-        osc133: true
-        osc633: true
-        reset_application_mode: true
     }
 
     show_banner: false
-
-    render_right_prompt_on_last_line: false
-    use_kitty_protocol: false
-    highlight_resolved_externals: false
-    recursion_limit: 50
 
     hooks: {
         display_output: { ||
@@ -172,20 +136,6 @@ $env.config = {
                 layout: columnar
                 columns: 1
                 col_padding: 2
-            }
-            style: {
-                text: yellow
-                selected_text: yellow_reverse
-                description_text: blue
-            }
-        }
-        {
-            name: history_menu
-            only_buffer_difference: true
-            marker: "? "
-            type: {
-                layout: list
-                page_size: 20
             }
             style: {
                 text: yellow
@@ -215,25 +165,6 @@ $env.config = {
     keybindings: [
         # Default keybindings
         {
-            name: completion_menu
-            modifier: none
-            keycode: tab
-            mode: [emacs vi_normal vi_insert]
-            event: {
-                until: [
-                    { send: menu name: completion_menu }
-                    { send: menunext }
-                ]
-            }
-        }
-        {
-            name: completion_previous
-            modifier: shift
-            keycode: backtab
-            mode: [emacs, vi_normal, vi_insert] # Note: You can add the same keybinding to all modes by using a list
-            event: { send: menuprevious }
-        }
-        {
             name: help_menu
             modifier: control
             keycode: char_h
@@ -246,7 +177,7 @@ $env.config = {
             }
         }
         {
-            name: fuzzy_history
+            name: history
             modifier: control
             keycode: char_r
             mode: [emacs, vi_normal, vi_insert]
@@ -259,10 +190,7 @@ $env.config = {
                               | get command
                               | reverse
                               | uniq
-                              | str join (char -i 0)
-                              | fzf --read0 --height 40% --reverse --inline-info +s --bind 'tab:down' --bind 'shift-tab:up' -q (commandline)
-                              | decode utf-8
-                              | str trim
+                              | input list --fuzzy --no-footer
                           )"
                 }
             ]
@@ -281,42 +209,25 @@ $env.config = {
 # Required modules
 use std *
 
-source ~/.config/nushell/cache.nu
-use cache
+source ~/.config/nushell/modules/cache.nu; use cache
 
-# Use zoxide
+# Third-party
+source ~/.cache/starship/init.nu
 source ~/.cache/zoxide/init.nu
 
-# Use starship
-source ~/.cache/starship/init.nu
-
 # Source aliases
-source ~/.config/nushell/aliases.nu
-use aliases *
+source ~/.config/nushell/aliases.nu; use aliases *
 
-# argo aliases and functions
-source ~/.config/nushell/argo.nu
-use argo *
+const NU_LIB_DIRS = [
+    '~/.config/nushell/modules'
+]
 
-# azure-cli aliases and functions
-source ~/.config/nushell/az.nu
-use az *
-
-# git aliases and functions
-source ~/.config/nushell/git.nu
-use git *
-
-# kubectl aliases and functions
-source ~/.config/nushell/kubernetes.nu
-use kubernetes *
-
-# nix aliases and functions
-source ~/.config/nushell/nix.nu
-use nix *
-
-# project aliases and functions
-source ~/.config/nushell/project.nu
-use project *
+source argo.nu; use argo *
+source az.nu; use az *
+source git.nu; use git *
+source kubernetes.nu; use kubernetes *
+source nix.nu; use nix *
+source project.nu; use project *
 
 # Open ZelliJ session if not inside one
 if not ("ZELLIJ" in $env) {
