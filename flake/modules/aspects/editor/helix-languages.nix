@@ -21,7 +21,6 @@ in
           };
         };
         jdtls = { command = "jdtls"; args = [ "--jvm-arg=-javaagent:${lombok}" ]; };
-        vale = { command = "vale-ls"; };
         yaml = {
           command = "yaml-language-server";
           args = [ "--stdio" ];
@@ -39,7 +38,7 @@ in
         {
           name = "markdown";
           formatter = { command = "prettier"; args = [ "--parser" "markdown" ]; };
-          language-servers = [ "marksman" "markdown-oxide" "vale" ];
+          language-servers = [ "marksman" "markdown-oxide" ];
           diagnostic-severity = "warning";
         }
         { name = "nu"; indent = { tab-width = 2; unit = "  "; }; }

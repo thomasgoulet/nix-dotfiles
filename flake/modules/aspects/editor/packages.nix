@@ -39,10 +39,6 @@
     ruff
     ty
 
-    # Spell checking
-    vale
-    vale-ls
-
     # Terraform / HCL
     terraform-ls
 

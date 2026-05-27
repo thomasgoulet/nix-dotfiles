@@ -1,5 +1,5 @@
 {
-  description = "Configuration for NixOs / WSL";
+  description = "configuration for nixos";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
