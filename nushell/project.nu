@@ -41,12 +41,12 @@ module project {
         return (get-projects);
     }
 
-    # Open a project using the configured ZelliJ, the available projects can be listed using `project list`
+    # Open a project using the configured zellij, the available projects can be listed using `project list`
     export def work [
         ...hints: string@"nu-complete projects"
     ] {
         let open = {
-            |path| zellij action new-tab -c $path -n (basename $path) o> (null-device)
+            |path| zellij action new-tab -c $path -n (basename $path) -- $env.EDITOR o> (null-device)
         };
 
         if ($hints == []) {
