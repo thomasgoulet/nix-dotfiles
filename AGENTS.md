@@ -50,15 +50,14 @@ flake/
 └── modules/
     ├── nixos/ # Hosts
     ├── aspects/ # Shared den aspects to be re-used
-    ├── homes/ # Home-manager configurations
-    └── packages/ # Non-nix custom packages
+    └── homes/ # Home-manager configurations
 ```
 
 ---
 
-# Helix
+# Editor
 
-Configuration lives in `modules/aspects/editor/`. The aspect entry point is `modules/aspects/editor.nix`, with implementation files co-located under `modules/aspects/editor/`:
+Configuration lives in `modules/aspects/editor/`. The aspect entry point is `modules/aspects/shell.nix`.
 
 | File                  | Purpose                                                                                  |
 | --------------------- | ---------------------------------------------------------------------------------------- |
@@ -80,17 +79,3 @@ Configuration lives in `modules/aspects/editor/`. The aspect entry point is `mod
 ## Theme
 
 Every tool uses the same Catppuccin Mocha theme.
-
-## `zellij`
-
-`zellij` is the workflow manager. Named panes (`EDITOR`, `AI`, `BACKLOG`, `FILES`, `GIT`, `TERM`) interact with dedicated scripts. The naming convention allows scripts to reliably send inputs to specific panes.
-
-## SQLite completion cache
-
-`nushell/modules/cache.nu` implements a per-process SQLite cache using `nushell`'s built-in `stor` command. All expensive completions are cached with per-key time-to-lives (15–60 seconds).
-
-## WSL-aware design
-
-- Windows Terminal configuration (`windowsterminal/`) is tracked in the repository
-- `wsl-open` is used as `$BROWSER` and as the link opener in `lazygit`
-- `bye` aliases `wsl.exe --shutdown`
