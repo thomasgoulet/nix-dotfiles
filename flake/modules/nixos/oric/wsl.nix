@@ -11,4 +11,8 @@
     nh
     wsl-open
   ];
+
+  environment.variables = {
+    BROWSER = "wsl-open"; # `sudo ln -s (which wsl-open | get path.0) /usr/local/bin/xdg-open` to make app requiring xdg-open work
+  };
 }

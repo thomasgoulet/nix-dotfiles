@@ -10,8 +10,15 @@
       };
 
     homeManager =
-      { pkgs, ... }:
+      { config, lib, pkgs, ... }:
       let
+        inherit (lib) concatStringsSep mapAttrsToList;
+
+        env = {
+          skeleton = builtins.readFile ./shell/env.nu;
+          extra = concatStringsSep "\n" (mapAttrsToList (name: value: "$env.${name} = \"${value}\"") config.home.sessionVariables);
+        };
+
         scripts = import ./editor/scripts.nix { inherit pkgs; };
         zjstatus = pkgs.fetchurl {
           url = "https://github.com/dj95/zjstatus/releases/download/v0.23.0/zjstatus.wasm";
@@ -29,6 +36,10 @@
           ./editor/lazygit.nix
           ./editor/broot.nix
         ];
+
+        home.sessionVariables = {
+          PAGER = "less -RF --no-init";
+        };
 
         home.packages = [
 
@@ -48,6 +59,10 @@
           pkgs.zoxide
 
         ];
+
+        xdg.configFile."nushell/env.nu" = {
+          text = env.extra + "\n" + env.skeleton;
+        };
 
         xdg.configFile."zellij/zjstatus.wasm".source = zjstatus;
 

@@ -1,5 +1,9 @@
 { ... }:
 {
+  home.sessionVariables = {
+    EDITOR = "hx";
+  };
+
   programs.helix.settings = {
     theme = "catppuccin_mocha";
     editor = {

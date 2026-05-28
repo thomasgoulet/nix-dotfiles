@@ -52,4 +52,8 @@
     pkgs.yamlfmt
 
   ];
+
+  home.sessionVariables = {
+    OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
+  };
 }

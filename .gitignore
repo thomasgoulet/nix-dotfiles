@@ -11,4 +11,6 @@
 !opencode/
 !windowsterminal/
 !zellij/
+
+nushell/env.nu
 zellij/zjstatus.wasm

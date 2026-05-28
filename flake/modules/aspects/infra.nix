@@ -1,6 +1,7 @@
 { den, ... }:
 {
   den.aspects.infra = {
+
     homeManager = { pkgs, ... }: {
       home.packages = [
         pkgs.argocd
@@ -17,6 +18,10 @@
           pkgs.azure-cli.extensions.azure-devops
         ])
       ];
+
+      home.sessionVariables = {
+        KUBECTL_EXTERNAL_DIFF = "dyff between --omit-header --set-exit-code";
+      };
     };
   };
 }
