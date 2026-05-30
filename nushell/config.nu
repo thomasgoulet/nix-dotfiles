@@ -200,10 +200,19 @@ $env.config = {
             modifier: control
             keycode: char_x
             mode: [emacs, vi_normal, vi_insert]
-            event: { until: [ {edit: cutfromstart} ]
-            }
+            event: { until: [ {edit: cutfromstart} ] }
         }
     ]
+}
+
+if ("ESCAPE_MODE" in $env) {
+    $env.config.keybindings = ($env.config.keybindings | append {
+        name: exit
+        modifier: none
+        keycode: esc
+        mode: [emacs]
+        event: {send: ctrld}
+    })
 }
 
 # Required modules
@@ -221,7 +230,6 @@ const NU_LIB_DIRS = [
     '~/.config/nushell/modules'
 ]
 
-source argo.nu; use argo *
 source az.nu; use az *
 source git.nu; use git *
 source kubernetes.nu; use kubernetes *

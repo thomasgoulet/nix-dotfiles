@@ -8,17 +8,17 @@ This repository lives at `~/.config` and serves two purposes simultaneously: it 
 
 Rebuilds are driven by `nh` under the hood, with `NH_FLAKE` and `NH_HOST` set system-wide as environment variables so no flags are needed.
 
-The `nushell` module `nushell/modules/nix.nu` provides the day-to-day interface. And should be used when changing the configuration. `os diff` allows to validate
+The `nushell` module `nushell/modules/nix.nu` provides the day-to-day interface. And should be used when changing the configuration. `nix diff` allows to validate
 
-| Command          | Effect                                                                                                                                   |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `os diff`        | Show the package diff between current and next generation. Should be used whenever changes are being made to validate compilation first. |
-| `os build`       | Build and activate. Equivalent to `nh os switch`.                                                                                        |
-| `os update`      | Update flake inputs (`nix flake update`) then switch.                                                                                    |
-| `os rollback`    | Roll back to the previous generation or a specific one.                                                                                  |
-| `os generations` | List all generations with timestamps.                                                                                                    |
-| `os repl`        | Open `nix repl` with the flake loaded.                                                                                                   |
-| `os try <pkg>`   | Ad-hoc `nix-shell` with a package.                                                                                                       |
+| Command             | Effect                                                                                                                                   |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `nix diff`          | Show the package diff between current and next generation. Should be used whenever changes are being made to validate compilation first. |
+| `nix switch`        | Build and activate. Equivalent to `nh os switch`.                                                                                        |
+| `nix update`        | Update flake inputs (`nix flake update`) then switch.                                                                                    |
+| `nix rollback`      | Roll back to the previous generation or a specific one.                                                                                  |
+| `nix generations`   | List all generations with timestamps.                                                                                                    |
+| `nix flake-repl`    | Open `nix repl` with the flake loaded.                                                                                                   |
+| `nix install <pkg>` | Ad-hoc `nix-shell` with a package.                                                                                                       |
 
 ---
 
@@ -58,14 +58,13 @@ flake/
 
 Configuration lives in `modules/aspects/editor/`. The aspect entry point is `modules/aspects/shell.nix`.
 
-| File                  | Purpose                                                                                  |
-| --------------------- | ---------------------------------------------------------------------------------------- |
-| `helix-settings.nix`  | Editor settings (theme, shell, keybindings, UI options)                                  |
-| `helix-languages.nix` | Per-language LSP and formatter wiring                                                    |
-| `packages.nix`        | Nix packages for all LSPs and formatters                                                 |
-| `broot.nix`           | `broot` file manager configuration                                                       |
-| `lazygit.nix`         | `lazygit` configuration, wired to `helix` and `zellij`                                   |
-| `scripts.nix`         | Two shell script derivations (`editorWrapper`, `brootShell`) injected via `_module.args` |
+| File                  | Purpose                                                 |
+| --------------------- | ------------------------------------------------------- |
+| `helix-settings.nix`  | Editor settings (theme, shell, keybindings, UI options) |
+| `helix-languages.nix` | Per-language LSP and formatter wiring                   |
+| `packages.nix`        | Nix packages for all LSPs and formatters                |
+| `broot.nix`           | `broot` file manager configuration                      |
+| `lazygit.nix`         | `lazygit` configuration, wired to `helix` and `zellij`  |
 
 ---
 

@@ -1,4 +1,7 @@
-{ brootShell, editorWrapper, ... }:
+{ pkgs, editorWrapper, ... }:
+let
+  brootShell = pkgs.writeShellScript "broot-shell" ''nu -c "with-env {ESCAPE_MODE: 'file'} {nu}"'';
+in
 {
   programs.broot = {
     enable = true;

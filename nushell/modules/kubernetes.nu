@@ -199,23 +199,14 @@ module kubernetes {
 
             # Port-forward a resource
             if ($port_forward != null) {
-                if ($kind in [po pod pods]) {
-                    kubectl port-forward $instance $"($port_forward):($port_forward)" ...$namespace_flags;
-                } else {
-                    kubectl port-forward $"($kind)/($instance)" $"($port_forward):($port_forward)" ...$namespace_flags;
-                }
+                kubectl port-forward $"($kind)/($instance)" $"($port_forward):($port_forward)" ...$namespace_flags;
                 return;
             }
 
             # Outputs the logs for a resource
             if ($logs or $logs_previous) {
                 let log_flags = if $logs_previous { ['-p'] | append $namespace_flags } else { $namespace_flags }
-
-                if ($kind in [po pod pods]) {
-                    kubectl logs $instance ...$log_flags | hl;
-                } else {
-                    kubectl logs $"($kind)/($instance)" ...$log_flags | hl;
-                }
+                kubectl logs $"($kind)/($instance)" ...$log_flags | hl;
                 return;
             }
 
@@ -318,7 +309,7 @@ module kubernetes {
     }
 
     # Open a floating k9s pane
-    export def kt [
+    export def "k term" [
         context?: string@"nu-complete kubectl contexts"  # Context (fuzzy)
         namespace?: string@"nu-complete kubectl namespaces"  # Namespace
     ] {
@@ -355,7 +346,7 @@ module kubernetes {
     }
 
     # Exec into a pod or a node
-    export def ksh [
+    export def "k shell" [
         name: string@"nu-complete kubectl shell"  # Name of node or pod to exec into
         shell = "/bin/bash"  # Process to launch (when specifying a pod)
         --new (-n)  # Start a new pod with the specified name using an alpine image

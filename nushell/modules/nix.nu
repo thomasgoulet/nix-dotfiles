@@ -13,41 +13,40 @@ module nix {
 
     ### Alias
 
-    export alias "os build" = nh os switch --diff always --hostname $env.NH_HOST;
-    export alias "os update" = nh os switch --update --diff always --hostname $env.NH_HOST;
-
-    export alias "os diff" = nh os test --dry --diff always --hostname $env.NH_HOST;
-    export alias "os gc" = nh clean all;
+    export alias "nix diff" = nh os test --dry --diff always --hostname $env.NH_HOST;
+    export alias "nix switch" = nh os switch --diff always --hostname $env.NH_HOST;
+    export alias "nix update" = nh os switch --update --diff always --hostname $env.NH_HOST;
+    export alias "nix gc" = nh clean all;
 
     ### Commands
 
     # List all available generations
-    export def "os generations" [] {
+    export def "nix generations" [] {
         nu-complete nix generations
         | rename ID DATE VERSION CURRENT;
     }
 
     # Rollback to a specific generation or the previous one
-    export def "os rollback" [
+    export def "nix rollback" [
         generation?: int@"nu-complete nix generations"  # Optional: generation ID to rollback to
     ] {
         if ($generation == null) {
-            nh os rollback --diff always
+            nh os rollback --diff always;
         } else {
             # Switch to specific generation
-            nh os rollback --to $generation --diff always
+            nh os rollback --to $generation --diff always;
         }
     }
 
     # Open Nix REPL with flake loaded
-    export def "os repl" [] {
-        nix repl --expr $"builtins.getFlake \"($env.NH_FLAKE)\""
+    export def "nix flake-repl" [] {
+        nix repl --expr $"builtins.getFlake \"($env.NH_FLAKE)\"";
     }
 
     # Launch a nix shell with the specified packages installed
-    export def "os try" [
+    export def "nix install" [
         ...packages  # Packages to temporarily install
     ] {
-        nix-shell --command "nu -e '$env.config.keybindings = ($env.config.keybindings | append {name: exit modifier: none keycode: esc mode: [emacs] event: {send: ctrld} });'" -p ...$packages;
+        nix-shell --command $"ESCAPE_MODE=\"($packages)\" nu" -p ...$packages;
     }
 }
