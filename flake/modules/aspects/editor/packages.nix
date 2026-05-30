@@ -11,7 +11,7 @@
     # CSS, HTML, JS, JSON, TypeScript
     pkgs.vscode-langservers-extracted
     pkgs.typescript-language-server
-    pkgs.nodejs_25
+    pkgs.nodejs_26
     pkgs.prettier
 
     # C#
