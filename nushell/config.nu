@@ -138,9 +138,9 @@ $env.config = {
                 col_padding: 2
             }
             style: {
-                text: yellow
-                selected_text: yellow_reverse
-                description_text: blue
+                text: blue
+                selected_text: green
+                description_text: { attr: i }
             }
         }
         {
@@ -191,6 +191,7 @@ $env.config = {
                               | reverse
                               | uniq
                               | input list --fuzzy --no-footer
+                              | default ""
                           )"
                 }
             ]
