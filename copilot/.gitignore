@@ -1,0 +1,9 @@
+command-history-state.json
+config.json
+ide/
+installed-plugins/
+logs/
+permissions-config.json
+plugin-data/
+session-state/
+session-store.db

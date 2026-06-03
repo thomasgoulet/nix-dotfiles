@@ -1,9 +1,10 @@
-{ inputs', pkgs, ... }:
+{ inputs', config, pkgs, ... }:
 {
   home.packages = [
 
     # AI
     pkgs.opencode
+    pkgs.github-copilot-cli
     pkgs.ctx7
     pkgs.context7-mcp
     inputs'.nu-mcp.packages.default
@@ -54,6 +55,7 @@
   ];
 
   home.sessionVariables = {
+    COPILOT_HOME = "${config.home.homeDirectory}/.config/copilot";
     OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
   };
 }

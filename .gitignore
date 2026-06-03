@@ -3,6 +3,7 @@
 # Tracked directories
 !AGENTS.md
 !.gitignore
+!copilot/
 !flake/
 !hl/
 !k9s/
@@ -11,6 +12,3 @@
 !opencode/
 !windowsterminal/
 !zellij/
-
-nushell/env.nu
-zellij/zjstatus.wasm
