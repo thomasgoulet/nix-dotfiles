@@ -1,4 +1,27 @@
 { inputs', config, pkgs, ... }:
+let
+
+  zk = pkgs.buildGoModule {
+    pname = "zk";
+    version = "unstable-2025-06-04";
+    src = pkgs.fetchFromGitHub {
+      owner = "zk-org";
+      repo = "zk";
+      rev = "d62622f99f99b67e89ce29453f868f85f9e7850c";
+      hash = "sha256-bA3RIr+x4JxSyklKaHRlCDRrfq9yMwmujc3kW+WKI08=";
+    };
+    vendorHash = "sha256-YX+voBRKC/2LN7ByS8XWgJkm6dAip8L0kHpt754wHck=";
+    doCheck = false;
+    env.CGO_ENABLED = 1;
+    tags = [ "fts5" ];
+    ldflags = [
+      "-s" "-w"
+      "-X=main.Build=unstable"
+      "-X=main.Version=unstable"
+    ];
+  };
+
+in
 {
   home.packages = [
 
@@ -28,8 +51,7 @@
     (pkgs.jdt-language-server.override { jdk = pkgs.jdk25_headless; })
 
     # Markdown
-    pkgs.marksman
-    pkgs.markdown-oxide
+    zk
 
     # Nix
     pkgs.nil
