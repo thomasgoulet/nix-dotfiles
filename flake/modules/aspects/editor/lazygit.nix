@@ -17,6 +17,11 @@
         showFileIcons = false;
         showPanelJumps = false;
         showRandomTip = false;
+        sidePanels = [
+          ["files" "worktrees" "status"]
+          ["branches" "remotes" "tags"]
+          ["commits" "reflog" "stash"]
+        ];
         statusPanelView = "allBranchesLog";
         theme = {
           activeBorderColor = [ "blue" "bold" ];

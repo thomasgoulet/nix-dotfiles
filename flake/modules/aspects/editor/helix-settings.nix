@@ -92,9 +92,10 @@
         "," = [ "save_selection" "goto_line_end" ":append-output echo ','" "collapse_selection" "jump_backward" ];
         ";" = [ "save_selection" "goto_line_end" ":append-output echo ';'" "collapse_selection" "jump_backward" ];
         "tab" = "save_selection";
-        i = {
-          b = '':insert-output $"- [ ] "'';
-          d = '':insert-output $"# (date now | format date %%Y-%%m-%%d)"'';
+        t = {
+          n = "@o- [ ] ";
+          N = "@O- [ ] ";
+          d = "@ghf[lrx";
         };
       };
       m = {
