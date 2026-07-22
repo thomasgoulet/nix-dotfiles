@@ -23,7 +23,7 @@ module kubernetes {
             }
         );
 
-        if ($namespace_position != -1) {
+        if ($namespace_position != null) {
             $flags = [
                 "-n"
                 ($args | get ($namespace_position + 1))
@@ -42,7 +42,7 @@ module kubernetes {
             }
         );
 
-        if ($all_position != -1) {
+        if ($all_position != null) {
             $flags = ["-A"];
             $args = (
                 $args
