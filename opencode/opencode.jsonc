@@ -26,8 +26,20 @@
     },
   },
   "agent": {
+    "review": {
+      "mode": "all",
+      "color": "accent",
+      "tools": {
+        "*": false,
+        "read": true,
+        "webfetch": true,
+        "websearch": true,
+        "context7*": true,
+      },
+      "prompt": "You review the current branch against master (or main) branch. Structure your feedback in three sections: High-Level Architecture Decisions, Good Practices, Code Smells (nit & bugs). Pipe the feedback into `clip.exe` for sharing purposes. Delegate documentation research (docs agent) when required to clarify library usage.",
+    },
     "docs": {
-      "mode": "primary",
+      "mode": "all",
       "color": "info",
       "tools": {
         "*": false,
