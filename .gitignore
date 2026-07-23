@@ -3,6 +3,7 @@
 # Tracked directories
 !AGENTS.md
 !.gitignore
+!argonaut/
 !copilot/
 !flake/
 !hl/

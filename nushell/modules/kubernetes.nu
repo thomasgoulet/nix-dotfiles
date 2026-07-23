@@ -2,6 +2,7 @@ module kubernetes {
 
     ### Aliases
 
+    export alias argo = argonaut;
     export alias kube = kubectl;
 
     ### Utility
