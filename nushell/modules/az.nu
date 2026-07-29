@@ -15,7 +15,7 @@ module az {
         | upsert description {|pr| $"($pr.title) by ($pr.creator) \(($pr.branch)\)"}
     }
 
-    def "nu-parse azurecli pullrequests" []: binary -> any {
+    def "nu-parse azurecli pullrequests" []: string -> any {
         const pr_fields = {
             id: $.pullRequestId
             repo: $.repository.name
@@ -41,7 +41,7 @@ module az {
         $queries
     }
 
-    def "nu-parse azurecli workitems" []: binary -> any {
+    def "nu-parse azurecli workitems" []: string -> any {
         const workitem_fields = {
             id: $.id
             title: $.fields."System.Title"

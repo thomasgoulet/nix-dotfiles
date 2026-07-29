@@ -8,7 +8,7 @@
       "command": "nu-mcp",
       "args": [
         "--tools-dir",
-        "/home/thomas/.config/nu/tools",
+        "/home/thomas/.config/nushell/tools",
         "--enable-run-nu"
       ]
     }

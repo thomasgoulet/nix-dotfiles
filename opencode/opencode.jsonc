@@ -19,7 +19,7 @@
       "command": [
         "nu-mcp",
         "--tools-dir",
-        "/home/thomas/.config/nu/tools",
+        "/home/thomas/.config/nushell/tools",
         "--enable-run-nu"
       ],
       "enabled": true,
