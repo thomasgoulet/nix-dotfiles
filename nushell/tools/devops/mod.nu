@@ -18,7 +18,7 @@ def "main list-tools" [] {
                 properties: {
                     projectName: {
                         type: "string"
-                        description: "Name of the DevOps project to list PRs for."
+                        description: "Name of the DevOps project to list PRs for"
                     }
                 }
                 required: ["projectName"]
@@ -33,11 +33,11 @@ def "main list-tools" [] {
                 properties: {
                     projectName: {
                         type: "string"
-                        description: "Name of the DevOps project to list PRs for."
+                        description: "Name of the DevOps project to list PRs for"
                     }
                     date: {
                         type: "string"
-                        description: "Refines the query for pull requests created or closed after a certain date. The format is `YYYY-mm-dd`. Defaults to last business day"
+                        description: "Refines the query for pull requests created or closed after a certain date. Defaults to last business day"
                         pattern: "^\\d{4}-\\d{2}-\\d{2}$"
                         examples: ["2024-01-01"]
                     }
@@ -59,7 +59,7 @@ def "main list-tools" [] {
                     }
                     includeComments: {
                         type: "boolean"
-                        description: "Whether to include the pull request's comments in the result."
+                        description: "Whether to include the pull request's comments in the result"
                         default: true
                     }
                 }
@@ -69,7 +69,7 @@ def "main list-tools" [] {
         }
         {
             name: "get_work_item"
-            description: "Gets a work item from its ID. Does not include information about related items."
+            description: "Gets a work item from its ID. Does not include information about related items"
             input_schema: {
                 type: "object"
                 properties: {
@@ -85,7 +85,7 @@ def "main list-tools" [] {
         }
         {
             name: "get_work_item_with_context"
-            description: "Gets a work item from its ID. Resolves all parents and child items including their description. Is used to provide full context surrounding a work item. Prefer `get_work_item` unless the context is required."
+            description: "Gets a work item from its ID. Resolves all parents and child items including their description. Is used to provide full context surrounding a work item. Prefer `get_work_item` unless the context is required"
             input_schema: {
                 type: "object"
                 properties: {
@@ -96,6 +96,37 @@ def "main list-tools" [] {
                     }
                 }
                 required: ["workItemId"]
+                additionalProperties: false
+            }
+        }
+        {
+            name: "team_activity"
+            description: "Returns all pull request and work items updated by a list of users within given projects"
+            input_schema: {
+                type: "object"
+                properties: {
+                    users: {
+                        type: "array"
+                        items: {
+                            type: "string"
+                        }
+                        description: "List of users to filter the output by. Fuzzy matches on e-mails. Surnames are enough context"
+                    }
+                    projectNames: {
+                        type: "array"
+                        items: {
+                            type: "string"
+                        }
+                        description: "Names of the DevOps projects"
+                    }
+                    date: {
+                        type: "string"
+                        description: "Refines the query. Defaults to last business day"
+                        pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+                        examples: ["2024-01-01"]
+                    }
+                }
+                required: ["users", "projectNames"]
                 additionalProperties: false
             }
         }
@@ -123,6 +154,9 @@ def "main call-tool" [
         }
         "get_work_item_with_context" => {
             get-work-item-with-context ($parsed_args | get workItemId) | to json
+        }
+        "team_activity" => {
+            team-activity ($parsed_args | get users) ($parsed_args | get projectNames) ($parsed_args | get -o date) | to json
         }
         _ => {
             error make {msg: $"Unknown tool: ($tool_name)"}
@@ -174,12 +208,12 @@ export def team-activity [
         $project_names
         | each {|project| work-item-list-recent $project $parsed_date}
         | flatten
-    ) | where createdby in $users or changedby in $users
+    ) | where {|item| ($item.createdby | partial-match-in-list $users) or ($item.changedby | partial-match-in-list $users) }
     let pull_requests = (
         $project_names
         | each {|project| pull-request-list-recently-updated $project $parsed_date}
         | flatten
-    ) | where createdby in $users;
+    ) | where {|item| ($item.createdby | partial-match-in-list $users) }
 
     {
         pullrequests: $pull_requests

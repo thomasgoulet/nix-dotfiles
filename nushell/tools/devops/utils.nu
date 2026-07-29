@@ -18,3 +18,16 @@ export def parse-date-or-last-business-day [
         return ($date | into datetime)
     }
 }
+
+# Partial match for strings in list
+export def partial-match-in-list [
+    matches?: list<string>  # Date to parse or `null`
+]: string -> any {
+    let input = $in | str lowercase;
+    for $match in $matches {
+        if ($input =~ ($match | str lowercase)) {
+            return true;
+        }
+    }
+    return false;
+}
