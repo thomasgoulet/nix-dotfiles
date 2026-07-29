@@ -50,7 +50,8 @@ in
     pkgs.jdk25_headless
     (pkgs.jdt-language-server.override { jdk = pkgs.jdk25_headless; })
 
-    # Markdown
+    # Notes
+    pkgs.tuxedo
     zk
 
     # Nix
