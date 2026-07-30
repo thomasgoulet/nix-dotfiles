@@ -91,46 +91,46 @@ layout {
 
     swap_floating_layout name="STACKED" {
         floating_panes max_panes=1 {
-            pane x="10%" y="10%" width="80%" height="80%"
+            pane x="8%" y="4%" width="84%" height="92%"
         }
         floating_panes max_panes=2 {
-            pane x="9%" y="10%" width="80%" height="80%"
-            pane x="11%" y="10%" width="80%" height="80%"
+            pane x="7%" y="4%" width="84%" height="92%"
+            pane x="9%" y="4%" width="84%" height="92%"
         }
         floating_panes max_panes=3 {
-            pane x="8%" y="10%" width="80%" height="80%"
-            pane x="10%" y="10%" width="80%" height="80%"
-            pane x="12%" y="10%" width="80%" height="80%"
+            pane x="6%" y="4%" width="84%" height="92%"
+            pane x="8%" y="4%" width="84%" height="92%"
+            pane x="10%" y="4%" width="84%" height="92%"
         }
         floating_panes max_panes=4 {
-            pane x="7%" y="10%" width="80%" height="80%"
-            pane x="9%" y="10%" width="80%" height="80%"
-            pane x="11%" y="10%" width="80%" height="80%"
-            pane x="13%" y="10%" width="80%" height="80%"
+            pane x="5%" y="4%" width="84%" height="92%"
+            pane x="7%" y="4%" width="84%" height="92%"
+            pane x="9%" y="4%" width="84%" height="92%"
+            pane x="11%" y="4%" width="84%" height="92%"
         }
         floating_panes max_panes=5 {
-            pane x="6%" y="10%" width="80%" height="80%"
-            pane x="8%" y="10%" width="80%" height="80%"
-            pane x="10%" y="10%" width="80%" height="80%"
-            pane x="12%" y="10%" width="80%" height="80%"
-            pane x="14%" y="10%" width="80%" height="80%"
+            pane x="4%" y="4%" width="84%" height="92%"
+            pane x="6%" y="4%" width="84%" height="92%"
+            pane x="8%" y="4%" width="84%" height="92%"
+            pane x="10%" y="4%" width="84%" height="92%"
+            pane x="12%" y="4%" width="84%" height="92%"
         }
         floating_panes max_panes=6 {
-            pane x="5%" y="10%" width="80%" height="80%"
-            pane x="7%" y="10%" width="80%" height="80%"
-            pane x="9%" y="10%" width="80%" height="80%"
-            pane x="11%" y="10%" width="80%" height="80%"
-            pane x="13%" y="10%" width="80%" height="80%"
-            pane x="15%" y="10%" width="80%" height="80%"
+            pane x="3%" y="4%" width="84%" height="92%"
+            pane x="5%" y="4%" width="84%" height="92%"
+            pane x="7%" y="4%" width="84%" height="92%"
+            pane x="9%" y="4%" width="84%" height="92%"
+            pane x="11%" y="4%" width="84%" height="92%"
+            pane x="13%" y="4%" width="84%" height="92%"
         }
         floating_panes max_panes=7 {
-            pane x="4%" y="10%" width="80%" height="80%"
-            pane x="6%" y="10%" width="80%" height="80%"
-            pane x="8%" y="10%" width="80%" height="80%"
-            pane x="10%" y="10%" width="80%" height="80%"
-            pane x="12%" y="10%" width="80%" height="80%"
-            pane x="14%" y="10%" width="80%" height="80%"
-            pane x="16%" y="10%" width="80%" height="80%"
+            pane x="2%" y="4%" width="84%" height="92%"
+            pane x="4%" y="4%" width="84%" height="92%"
+            pane x="6%" y="4%" width="84%" height="92%"
+            pane x="8%" y="4%" width="84%" height="92%"
+            pane x="10%" y="4%" width="84%" height="92%"
+            pane x="12%" y="4%" width="84%" height="92%"
+            pane x="14%" y="4%" width="84%" height="92%"
         }
     }
 
