@@ -1,6 +1,8 @@
 { inputs', config, pkgs, ... }:
 let
 
+  stable-pkgs = inputs'.nixpkgs-stable.legacyPackages;
+
   zk = pkgs.buildGoModule {
     pname = "zk";
     version = "unstable-2025-06-04";
@@ -59,10 +61,10 @@ in
 
     # Python
     pkgs.python312
-    pkgs.python312Packages.python-lsp-server
-    pkgs.black
-    pkgs.ruff
-    pkgs.ty
+    stable-pkgs.python312Packages.python-lsp-server
+    stable-pkgs.black
+    stable-pkgs.ruff
+    stable-pkgs.ty
 
     # Terraform / HCL
     pkgs.terraform-ls
@@ -80,5 +82,7 @@ in
   home.sessionVariables = {
     COPILOT_HOME = "${config.home.homeDirectory}/.config/copilot";
     OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
+    TODO_DIR = "${config.home.homeDirectory}/notebook";
+    TODO_FILE = "${config.home.homeDirectory}/notebook/tasks.txt";
   };
 }
