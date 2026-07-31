@@ -1,7 +1,7 @@
 { inputs', config, pkgs, ... }:
 let
 
-  stable-pkgs = inputs'.nixpkgs-stable.legacyPackages;
+  pkgs-stable = inputs'.nixpkgs-stable.legacyPackages;
 
   zk = pkgs.buildGoModule {
     pname = "zk";
@@ -26,13 +26,6 @@ let
 in
 {
   home.packages = [
-
-    # AI
-    pkgs.opencode
-    pkgs.github-copilot-cli
-    pkgs.ctx7
-    pkgs.context7-mcp
-    inputs'.nu-mcp.packages.default
 
     # CSS, HTML, JS, JSON, TypeScript
     pkgs.vscode-langservers-extracted
@@ -61,10 +54,10 @@ in
 
     # Python
     pkgs.python312
-    stable-pkgs.python312Packages.python-lsp-server
-    stable-pkgs.black
-    stable-pkgs.ruff
-    stable-pkgs.ty
+    pkgs-stable.python312Packages.python-lsp-server
+    pkgs-stable.black
+    pkgs-stable.ruff
+    pkgs-stable.ty
 
     # Terraform / HCL
     pkgs.terraform-ls
@@ -80,8 +73,6 @@ in
   ];
 
   home.sessionVariables = {
-    COPILOT_HOME = "${config.home.homeDirectory}/.config/copilot";
-    OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
     TODO_DIR = "${config.home.homeDirectory}/notebook";
     TODO_FILE = "${config.home.homeDirectory}/notebook/tasks.txt";
   };

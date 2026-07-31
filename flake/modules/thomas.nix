@@ -2,6 +2,7 @@
 {
   den.aspects.thomas = {
     includes = [
+      den.aspects.ai
       den.aspects.infra
       den.aspects.shell
       den.batteries.primary-user

@@ -54,6 +54,29 @@
     },
   },
   "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "local",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      },
+      "models": {
+        "qwen2.5-coder:7b-instruct-q4_K_M": {
+          "name": "qwen2.5-coder",
+          "limit": {
+            "context": 16384,
+            "output": 4096
+          }
+        },
+        "qwen3:8b": {
+          "name": "qwen3-8B",
+          "limit": {
+            "context": 16384,
+            "output": 8192
+          }
+        }
+      }
+    },
     "github-copilot": {
       "models": {
         "claude-haiku-4.5": {
