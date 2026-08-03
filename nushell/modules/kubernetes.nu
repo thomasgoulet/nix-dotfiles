@@ -309,43 +309,6 @@ module kubernetes {
         return null;
     }
 
-    # Open a floating k9s pane
-    export def "k term" [
-        context?: string@"nu-complete kubectl contexts"  # Context (fuzzy)
-        namespace?: string@"nu-complete kubectl namespaces"  # Namespace
-    ] {
-
-        if ($context == null) {
-            zellij run -f -c -n "k9s" -- k9s -c pods o> (null-device);
-            return;
-        }
-
-        let contexts = (kubectl config get-contexts | from ssv -a)
-        mut match = ($contexts | where NAME == $context)
-        if ($match | is-empty) {
-            $match = ($contexts | where NAME =~ $context)
-        }
-
-        if ($match | length) == 0 {
-            error make -u { msg: "No matching context found." }
-        }
-        if ($match | length) > 1 {
-            let names = ($match | get NAME | str join ", ")
-            error make -u { msg: $"Multiple contexts found: ($names)." }
-        }
-
-        let final_context = ($match | first | get NAME | to text)
-
-        if ($namespace == null) {
-            zellij run -f -c -n $"k9s ($context)" -- k9s --context $context -c pods o> (null-device);
-            return;
-        }
-
-        zellij run -f -c -n $"k9s ($context) ($namespace)" -- k9s --context $context --namespace $namespace -c pods o> (null-device);
-
-        return;
-    }
-
     # Exec into a pod or a node
     export def "k shell" [
         name: string@"nu-complete kubectl shell"  # Name of node or pod to exec into

@@ -3,12 +3,12 @@ def format-pull-requests []: string -> any {
     const pr_fields = {
         id: $.pullRequestId
         repo: $.repository.name
-        createdby: $.createdBy.uniqueName
+        created_by: $.createdBy.uniqueName
         title: $.title
         branch: $.sourceRefName
         date: $.creationDate
         description: $.description
-        workitems: $.workItemRefs?.id?
+        work_items: $.workItemRefs?.id?
     }
 
     $in
