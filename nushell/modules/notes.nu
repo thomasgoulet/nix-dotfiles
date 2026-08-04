@@ -4,6 +4,7 @@ module notes {
 
     export alias n = zk;
     export alias t = tuxedo;
+    export alias notebook = zellij action new-tab --cwd $env.ZK_NOTEBOOK_DIR -n notebook;
 
     export def "t edit" [] {
         let task_lines = (
