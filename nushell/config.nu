@@ -235,6 +235,7 @@ source az.nu; use az *
 source git.nu; use git *
 source kubernetes.nu; use kubernetes *
 source nix.nu; use nix *
+source notes.nu; use notes *
 source project.nu; use project *
 
 # Open ZelliJ session if not inside one

@@ -75,5 +75,7 @@ in
   home.sessionVariables = {
     TODO_DIR = "${config.home.homeDirectory}/notebook";
     TODO_FILE = "${config.home.homeDirectory}/notebook/tasks.txt";
+    ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/notebook";
+    ZK_SHELL = "/bin/bash";
   };
 }

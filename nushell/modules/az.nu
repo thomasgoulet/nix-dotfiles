@@ -2,7 +2,7 @@ use ../tools/devops/pull_request.nu *
 
 module az {
 
-    export def "nu-complete azurecli subscriptions" [] {
+    def "nu-complete azurecli subscriptions" [] {
         cache hit az.subscriptions 60 {
             az account list
             | from json

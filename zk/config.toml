@@ -1,0 +1,50 @@
+[note]
+language = "en"
+default-title = "untitled"
+filename = "{{format-date now '%Y-%m-%d'}}-{{slug title}}"
+template = "default.md"
+
+exclude = ["drafts/*"]
+
+id-charset = "numbers"
+id-length = 5
+
+[extra]
+id = "{{id}}"
+
+[format.markdown]
+link-format = "wiki"
+hashtags = true
+colon-tags = true
+multiword-tags = false
+
+[tool]
+pager = "less -FIRX"
+fzf-preview = "bat -p --color always {-1}"
+
+[lsp.diagnostics]
+wiki-title = "none"
+dead-link = "error"
+self-link = "error"
+missing-backlink = { level = "hint", position = "bottom" }
+
+[lsp.completion]
+# Customize the completion pop-up of your LSP client.
+# Show the note title in the completion pop-up, or fallback on its path if empty.
+#note-label = "{{title-or-path}}"
+# Filter out the completion pop-up using the note title or its path.
+#note-filter-text = "{{title}} {{path}}"
+# Show the note filename without extension as detail.
+#note-detail = "{{filename-stem}}"
+
+
+[filter]
+# Matches the notes created the last two weeks. For example:
+#    $ zk list recents --limit 15
+#    $ zk edit recents --interactive
+#recents = "--sort created- --created-after 'last two weeks'"
+
+[alias]
+i = "zk edit -i"
+last = "zk edit --limit 1 --sort modified- $@"
+list = "zk list -q -f oneline $@"
