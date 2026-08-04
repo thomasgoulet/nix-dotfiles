@@ -37,14 +37,8 @@ missing-backlink = { level = "hint", position = "bottom" }
 # Show the note filename without extension as detail.
 #note-detail = "{{filename-stem}}"
 
-
-[filter]
-# Matches the notes created the last two weeks. For example:
-#    $ zk list recents --limit 15
-#    $ zk edit recents --interactive
-#recents = "--sort created- --created-after 'last two weeks'"
-
 [alias]
-i = "zk edit -i"
+config = "hx $ZK_NOTEBOOK_DIR/.zk/config.toml ~/.config/zk/config.toml"
+e = "zk edit -i $@"
 last = "zk edit --limit 1 --sort modified- $@"
 list = "zk list -q -f oneline $@"

@@ -2,6 +2,7 @@ use ../tools/tasks/todo_format.nu *
 
 module notes {
 
+    export alias n = zk;
     export alias t = tuxedo;
 
     export def "t edit" [] {
