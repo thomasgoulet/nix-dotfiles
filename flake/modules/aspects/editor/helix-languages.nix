@@ -10,6 +10,28 @@ in
     enable = true;
     languages = {
       language-server = {
+        harper-ls = {
+          command = "harper-ls";
+          args = [ "--stdio" ];
+          config.harper-ls = {
+            diagnosticSeverity = "warning";
+            dialect = "Canadian";
+            linters = {
+              SpellCheck = true;
+              SpelledNumbers = true;
+              AnA = true;
+              SentenceCapitalization = true;
+              UnclosedQuotes = true;
+              WrongApostrophe = true;
+              LongSentences = false;
+              RepeatedWords = true;
+              Spaces = true;
+              CorrectNumberSuffix = true;
+            };
+            markdown.IgnoreLinkTitle = true;
+          };
+        };
+        jdtls = { command = "jdtls"; args = [ "--jvm-arg=-javaagent:${lombok}" ]; };
         none = { command = ""; };
         omnisharp = { command = "OmniSharp"; args = [ "--languageserver" ]; };
         vscode-esling-language-server = {
@@ -20,7 +42,6 @@ in
             workingDirectory.mode = "auto";
           };
         };
-        jdtls = { command = "jdtls"; args = [ "--jvm-arg=-javaagent:${lombok}" ]; };
         yaml = {
           command = "yaml-language-server";
           args = [ "--stdio" ];
@@ -29,13 +50,19 @@ in
             keyOrdering = false;
           };
         };
+        zk = { command = "zk"; args = [ "lsp" ]; };
       };
       language = [
         { name = "bash"; language-servers = [ "none" ]; }
         { name = "c-sharp"; language-servers = [ "omnisharp" ]; }
         { name = "html"; auto-format = false; }
         { name = "css"; auto-format = false; }
-        { name = "markdown"; formatter = { command = "prettier"; args = [ "--parser" "markdown" ]; }; }
+        {
+          name = "markdown";
+          formatter = { command = "prettier"; args = [ "--parser" "markdown" ]; };
+          roots = [ ".zk" ];
+          language-servers = [ "marksman" "harper-ls" "zk" ];
+        }
         { name = "nu"; indent = { tab-width = 2; unit = "  "; }; }
         {
           name = "python";

@@ -45,6 +45,10 @@ in
     pkgs.jdk25_headless
     (pkgs.jdt-language-server.override { jdk = pkgs.jdk25_headless; })
 
+    # Markdown
+    pkgs.harper
+    pkgs.marksman
+
     # Notes
     pkgs.tuxedo
     zk

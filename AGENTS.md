@@ -8,7 +8,7 @@ This repository lives at `~/.config` and serves two purposes simultaneously: it 
 
 Rebuilds are driven by `nh` under the hood, with `NH_FLAKE` and `NH_HOST` set system-wide as environment variables so no flags are needed.
 
-The `nushell` module `nushell/modules/nix.nu` provides the day-to-day interface. And should be used when changing the configuration. `nix diff` allows to validate
+The `nushell` module `nushell/modules/nix.nu` provides the day-to-day interface. And should be used when changing the configuration. `nix diff` allows validation.
 
 | Command             | Effect                                                                                                                                   |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -24,7 +24,7 @@ The `nushell` module `nushell/modules/nix.nu` provides the day-to-day interface.
 
 # Flake Structure
 
-**Entrypoint:** `flake/flake.nix`
+**Entry point:** `flake/flake.nix`
 
 The flake uses [`flake-parts`](https://github.com/hercules-ci/flake-parts) for output composition and [`den`](https://github.com/denful/den) as an abstraction layer over NixOS and Home Manager.
 `den` introduces **aspects** (role bundles) and **hosts** that compose in a declarative way.
@@ -60,7 +60,7 @@ Configuration lives in `modules/aspects/editor/`. The aspect entry point is `mod
 
 | File                  | Purpose                                                 |
 | --------------------- | ------------------------------------------------------- |
-| `helix-settings.nix`  | Editor settings (theme, shell, keybindings, UI options) |
+| `helix-settings.nix`  | Editor settings (theme, shell, key bindings, UI options) |
 | `helix-languages.nix` | Per-language LSP and formatter wiring                   |
 | `packages.nix`        | Nix packages for all LSPs and formatters                |
 | `broot.nix`           | `broot` file manager configuration                      |
