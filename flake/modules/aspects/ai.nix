@@ -79,6 +79,9 @@
           pkgs.context7-mcp
           inputs'.nu-mcp.packages.default
 
+          # Tools
+          pkgs.pdf-oxide
+
         ];
 
         home.sessionVariables = {
