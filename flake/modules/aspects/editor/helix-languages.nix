@@ -18,7 +18,7 @@ in
             dialect = "Canadian";
             linters = {
               SpellCheck = true;
-              SpelledNumbers = true;
+              SpelledNumbers = false;
               AnA = true;
               SentenceCapitalization = true;
               UnclosedQuotes = true;
