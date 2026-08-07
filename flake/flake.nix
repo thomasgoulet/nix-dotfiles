@@ -42,6 +42,7 @@
         den.flakeModule
         ./modules/aspects/ai.nix
         ./modules/aspects/infra.nix
+        ./modules/aspects/notes.nix
         ./modules/aspects/shell.nix
         ./modules/nixos/oric.nix
         ./modules/thomas.nix

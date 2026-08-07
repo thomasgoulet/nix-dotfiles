@@ -4,6 +4,7 @@
     includes = [
       den.aspects.ai
       den.aspects.infra
+      den.aspects.notes
       den.aspects.shell
       den.batteries.primary-user
     ];
