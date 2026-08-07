@@ -1,0 +1,17 @@
+[metadata]
+name = "sessions"
+description = "Manage ZelliJ Sessions"
+requirements = ["zellij"]
+
+[source]
+command = "zellij list-sessions"
+output = "{strip_ansi|split: :0}"
+ansi = true
+
+[actions.switch]
+description = "Switch to selected session"
+command = "zellij action switch-session {strip_ansi|split: :0}"
+mode = "execute"
+
+[keybindings]
+enter = "actions:switch"

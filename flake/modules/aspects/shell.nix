@@ -56,6 +56,7 @@
 
           # Core functionality
           pkgs.nushell
+          pkgs.television
           pkgs.zellij
 
           # General utilities

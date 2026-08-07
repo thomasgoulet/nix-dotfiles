@@ -154,9 +154,11 @@ keybinds clear-defaults=true {
         bind "Alt j" "Alt Down"  { MoveFocus "Down"; }
         bind "Alt k" "Alt Up"    { MoveFocus "Up"; }
         bind "Alt s" {
-            LaunchOrFocusPlugin "zellij:session-manager" {
+            Run "tv" "sessions" {
+                close_on_exit true
                 floating true
                 move_to_focused_tab true
+                name "Sessions"
             };
             SwitchToMode "Locked"
         }
