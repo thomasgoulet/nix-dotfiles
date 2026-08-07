@@ -50,19 +50,12 @@ in
             keyOrdering = false;
           };
         };
-        zk = { command = "zk"; args = [ "lsp" ]; };
       };
       language = [
         { name = "bash"; language-servers = [ "none" ]; }
         { name = "c-sharp"; language-servers = [ "omnisharp" ]; }
         { name = "html"; auto-format = false; }
         { name = "css"; auto-format = false; }
-        {
-          name = "markdown";
-          formatter = { command = "prettier"; args = [ "--parser" "markdown" ]; };
-          roots = [ ".zk" ];
-          language-servers = [ "marksman" "harper-ls" "zk" ];
-        }
         { name = "nu"; indent = { tab-width = 2; unit = "  "; }; }
         {
           name = "python";
