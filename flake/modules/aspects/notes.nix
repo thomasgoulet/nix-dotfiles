@@ -1,11 +1,10 @@
 { den, ... }:
 {
-  den.aspects.notes = { user, ... }: {
+  den.aspects.notes = { ... }: {
 
     includes = [ den.aspects.shell ];
 
-    homeManager =
-      { config, pkgs, ... }:
+    homeManager = { config, pkgs, ... }:
       let
         zk = pkgs.buildGoModule {
           pname = "zk";
@@ -54,9 +53,6 @@
       };
 
     nixos = { config, ... }:
-      let
-        home = config.users.users.${user.userName}.home;
-      in
       {
         virtualisation.oci-containers.backend = "docker";
 
@@ -93,7 +89,7 @@
               TRUST_PROXY = "false";
               FRONTEND_URL = "http://localhost:6767,http://0.0.0.0:6767";
             };
-            volumes = [ "${home}/notebook/excalidraw:/app/prisma" ];
+            volumes = [ "/var/lib/excalidash:/app/prisma" ];
             extraOptions = [ "--network=excalidash" "--network-alias=backend" ];
           };
           excalidash-frontend = {
