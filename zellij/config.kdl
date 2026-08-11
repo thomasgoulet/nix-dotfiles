@@ -163,7 +163,7 @@ keybinds clear-defaults=true {
             SwitchToMode "Locked"
         }
         bind "Alt r"         { SwitchToMode "RenameTab"; TabNameInput 0; }
-        bind "Alt t"         { NewTab; }
+        bind "Alt t"         { NewTab; SwitchToMode "RenameTab"; TabNameInput 0; }
         bind "Alt T"         { BreakPane; }
         bind "Alt H"         { GoToPreviousTab; }
         bind "Alt L"         { GoToNextTab; }
@@ -236,4 +236,4 @@ default_mode "locked"
 mouse_hover_effects false
 pane_frames false
 stacked_resize false
-session_serialization false
+session_serialization true

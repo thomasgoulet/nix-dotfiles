@@ -109,10 +109,10 @@
         q = "@<space>'<S-tab><ret>";
       };
       backspace = {
-        a = ":sh zellij run -c -f -n AI -- opencode o> /dev/null";
+        a = ":sh zellij action new-tab -n opencode -- opencode o> /dev/null";
         f = ":sh zellij run -c -f -n FILES -- broot o> /dev/null";
         g = ":sh zellij run -c -f -n GIT -- lazygit o> /dev/null";
-        t = ":sh zellij run -c -f -n TERM -- nu o> /dev/null";
+        t = ":sh zellij action new-tab -n shell -- nu o> /dev/null";
       };
     };
   };
