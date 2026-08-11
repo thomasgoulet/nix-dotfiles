@@ -87,7 +87,7 @@ module kubernetes {
     ### Completions
 
     def "nu-complete kubectl contexts" [] {
-        cache hit kube.contexts 60 {
+        cache hit kube.contexts 120 {
             kubectl config get-contexts
             | from ssv -a
             | iter filter-map {|c|
@@ -97,7 +97,7 @@ module kubernetes {
     }
 
     def "nu-complete kubectl namespaces" [] {
-        cache hit kube.namespaces 60 {
+        cache hit kube.namespaces 120 {
             kubectl get namespaces
             | from ssv
             | where NAME != "default"
@@ -107,7 +107,7 @@ module kubernetes {
     }
 
     def "nu-complete kubectl kinds" [] {
-        cache hit kube.kinds 60 {
+        cache hit kube.kinds 120 {
             kubectl api-resources
             | from ssv
             | select SHORTNAMES NAME
@@ -123,10 +123,10 @@ module kubernetes {
         context: string
     ] {
         let ctx = argparse $context
-        cache hit $"kube.kind.($ctx.args.0).($ctx.flag_id)" 15 {
+        cache hit $"kube.kind.($ctx.args.0).($ctx.flag_id)" 120 {
             kubectl get $ctx.args.0 ...$ctx.flags
             | from ssv
-            | get NAME
+            | each { {value: $in.NAME, description: ($in | reject NAME | to nuon)} }
         };
     }
 
@@ -138,12 +138,12 @@ module kubernetes {
         let kind = $ctx.args.0;
         let instance = $ctx.args.1;
 
-        let resource = cache hit $"kube.($kind).($instance)" 30 {
+        let resource = cache hit $"kube.($kind).($instance)" 120 {
             kubectl get $kind $instance ...$ctx.flags -o yaml | from yaml
         };
 
         return (
-            cache hit $"kube.($kind).($instance).paths" 30 {
+            cache hit $"kube.($kind).($instance).paths" 120 {
                 recursive-paths $resource
             };
         );
@@ -151,7 +151,7 @@ module kubernetes {
 
 
     def "nu-complete kubectl shell" [] {
-        cache hit kube.restartable 15 {
+        cache hit kube.restartable 120 {
             kubectl get pods -o wide
             | from ssv -a
             | select NAME NODE
@@ -213,6 +213,7 @@ module kubernetes {
 
             # Deletes a resource
             if ($delete) {
+                cache invalidate;
                 return (kubectl delete $kind $instance ...$namespace_flags);
             }
 
@@ -232,12 +233,12 @@ module kubernetes {
         if ($get) {
             return (
                 if ($instance != null) {
-                    cache hit $"kube.($kind).($instance)" 30 {
+                    cache hit $"kube.($kind).($instance)" 120 {
                         kubectl get $kind $instance ...$namespace_flags -o yaml
                         | from yaml
                     };
                 } else {
-                    cache hit $"kube.items.($kind)" 30 {
+                    cache hit $"kube.items.($kind)" 120 {
                         kubectl get $kind ...$namespace_flags -o yaml
                         | from yaml
                         | get items
@@ -248,7 +249,7 @@ module kubernetes {
 
         if ($path | is-not-empty) {
             return (
-                cache hit $"kube.($kind).($instance)" 30 {
+                cache hit $"kube.($kind).($instance)" 120 {
                     kubectl get $kind $instance ...$namespace_flags -o yaml
                     | from yaml
                 }

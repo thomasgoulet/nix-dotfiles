@@ -1,5 +1,6 @@
 module cache {
 
+    # Returns the cache result if available or executes the given closure
     export def hit [
         key: string  # Cache key
         timeout: int  # Timeout in seconds after which the cache is invalidated
@@ -44,6 +45,7 @@ module cache {
         return $value;
     }
 
+    # Clears the cache completely
     export def invalidate [] {
         try {
             stor delete -t cache o+e> (null-device);
