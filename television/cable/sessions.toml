@@ -1,0 +1,21 @@
+[metadata]
+name = "sessions"
+description = "Manage sessions"
+requirements = ["zellij"]
+
+[source]
+command = "zellij list-sessions -s"
+ansi = true
+
+[actions.switch]
+description = "Switch to selected session"
+command = "zellij action switch-session {}"
+mode = "execute"
+
+[actions.kill]
+description = "Kill selected session"
+command = "zellij kill-session {}"
+
+[keybindings]
+enter = "actions:switch"
+ctrl-d = "actions:kill"

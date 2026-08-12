@@ -1,7 +1,5 @@
 layout {
 
-    cwd "~"
-
     default_tab_template name="default_tab" {
         children
         pane size=1 {

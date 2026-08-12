@@ -236,9 +236,9 @@ source git.nu; use git *
 source kubernetes.nu; use kubernetes *
 source nix.nu; use nix *
 source notes.nu; use notes *
-source project.nu; use project *
+source zellij.nu; use zellij *
 
 # Open ZelliJ session if not inside one
 if not ("ZELLIJ" in $env) {
-    zellij attach -c thomas
+    zellij attach -c (whoami)
 }
