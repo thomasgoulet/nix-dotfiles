@@ -56,7 +56,7 @@
 
           # Core functionality
           pkgs.nushell
-          pkgs.television
+          pkgs.carapace
           pkgs.zellij
 
           # General utilities
@@ -68,6 +68,7 @@
           pkgs.jq
           pkgs.ripgrep
           pkgs.sd
+          pkgs.television
           pkgs.zoxide
 
         ];
