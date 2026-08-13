@@ -8,14 +8,14 @@
       let
         zk = pkgs.buildGoModule {
           pname = "zk";
-          version = "unstable-2025-06-04";
+          version = "0.15.6";
           src = pkgs.fetchFromGitHub {
             owner = "zk-org";
             repo = "zk";
-            rev = "d62622f99f99b67e89ce29453f868f85f9e7850c";
-            hash = "sha256-bA3RIr+x4JxSyklKaHRlCDRrfq9yMwmujc3kW+WKI08=";
+            rev = "v0.15.6";
+            hash = "sha256-owHbrQwoQS+SbfZ6EQO/ii10zX73MmUpohuIIltlnw8=";
           };
-          vendorHash = "sha256-YX+voBRKC/2LN7ByS8XWgJkm6dAip8L0kHpt754wHck=";
+          vendorHash = "sha256-Y5KI3o4HYWyqQl/RnOetyIKOI+CbYWSgrbkGkpAKsX4=";
           doCheck = false;
           env.CGO_ENABLED = 1;
           tags = [ "fts5" ];
