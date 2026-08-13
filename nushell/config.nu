@@ -79,6 +79,7 @@ $env.config = {
 
     table: {
         index_mode: auto
+        mode: single
         missing_value_symbol: $"(ansi red)-x-(ansi reset)"
         trim: {
             methodology: truncating
