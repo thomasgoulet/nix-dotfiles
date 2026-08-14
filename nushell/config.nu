@@ -37,7 +37,7 @@ let theme = {
     list: white
     block: white
     hints: light_gray
-    search_result: blue
+    search_result: green
     shape_and: purple
     shape_binary: purple
     shape_block: blue

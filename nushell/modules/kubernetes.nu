@@ -54,6 +54,30 @@ module kubernetes {
         return {command: ($args.0), args: ($args | skip 1), flags: $flags, flag_id: ($flags | str join ".")}
     }
 
+    export def "watch" [
+        closure: closure
+        delay: int
+    ] {
+        mut lines_printed = 0
+        mut iterations = 1;
+        let start_time = (date now);
+        loop {
+            let output = (do $closure);
+
+            if $lines_printed > 0 { print -n $"\e[($lines_printed + 1)A\e[J" }
+
+            print $output
+            print $"(ansi light_gray_italic)  ran ($iterations) time(if ($iterations > 1) {"s"} else {""}) since ($start_time | date humanize) - press q to quit"
+
+            # block for up to 1 second waiting for a single keypress; empty output on timeout
+            let key = (^bash -c $"read -t ($delay) -n 1 key; echo \"$key\"" | str trim)
+            if ($key == "q") { break; }
+
+            $lines_printed = ($output | table | lines | length)
+            $iterations += 1;
+        }
+    }
+
     def "recursive-paths" [
         resource: any,
         prefix = ""
@@ -184,6 +208,7 @@ module kubernetes {
         --logs-previous (-L)  # Get the logs of the previous pod
         --port_forward (-p): int  # Port-forward the resource's port to localhost
         --restart (-r)  # Restart the resources's pods
+        --watch (-w)  # Watch the output
     ] {
 
         let namespace_flags = (
@@ -263,19 +288,17 @@ module kubernetes {
         }
 
         # List the resources
-        let output = (
+        let output = {
             kubectl get $kind ...$namespace_flags
             | from ssv
-        );
+            | find ($instance | default "") --columns [NAME]
+        };
 
-        if ($instance == null) {
-            return $output
+        if ($watch) {
+            return (watch $output 3);
         }
 
-        return (
-            $output
-            | where NAME =~ $instance
-        );
+        return ( do $output );
 
     }
 
