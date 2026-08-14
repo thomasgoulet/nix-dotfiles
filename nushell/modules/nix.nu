@@ -20,6 +20,14 @@ module nix {
 
     ### Commands
 
+    export def "to nix" []: any -> any {
+        $in
+        | to json
+        | with-env {data: $"($in)"} {
+            nix eval --impure --raw --expr 'let pkgs = import <nixpkgs> {}; in pkgs.lib.generators.toPretty { } (builtins.fromJSON (builtins.getEnv "data"))'
+        }
+    }
+
     # List all available generations
     export def "nix generations" [] {
         nu-complete nix generations
