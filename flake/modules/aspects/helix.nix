@@ -5,9 +5,9 @@
       { ... }: {
 
         imports = [
-          ./helix/helix-languages.nix
-          ./helix/packages.nix
-          ./helix/settings.nix
+          ./_helix/helix-languages.nix
+          ./_helix/packages.nix
+          ./_helix/settings.nix
         ];
 
         home.sessionVariables = {

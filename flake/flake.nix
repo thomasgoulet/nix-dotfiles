@@ -2,17 +2,21 @@
   description = "configuration for nixos";
 
   inputs = {
+
+    # nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/25.11";
 
+    # os & home
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     den.url = "github:denful/den";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:denful/import-tree";
 
     nu-mcp = {
       url = "github:ck3mp3r/nu-mcp";
@@ -40,14 +44,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         den.flakeModule
-        ./modules/aspects/ai.nix
-        ./modules/aspects/helix.nix
-        ./modules/aspects/infra.nix
-        ./modules/aspects/notes.nix
-        ./modules/aspects/nushell.nix
-        ./modules/aspects/terminal.nix
-        ./modules/nixos/oric.nix
-        ./modules/thomas.nix
+        (inputs.import-tree ./modules)
       ];
     };
 }

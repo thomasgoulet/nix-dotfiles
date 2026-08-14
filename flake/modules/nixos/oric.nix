@@ -21,9 +21,9 @@
       {
         imports = [
           inputs.home-manager.nixosModules.home-manager
-          ./oric/wsl.nix
-          ./oric/docker.nix
-          ./oric/nix-settings.nix
+          ./_oric/wsl.nix
+          ./_oric/docker.nix
+          ./_oric/nix-settings.nix
         ];
 
         environment.variables = {

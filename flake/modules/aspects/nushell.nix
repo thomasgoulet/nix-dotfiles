@@ -13,7 +13,7 @@
         inherit (lib) concatStringsSep mapAttrsToList;
 
         env = {
-          skeleton = builtins.readFile ./nushell/env.nu;
+          skeleton = builtins.readFile ./_nushell/env.nu;
           extra = concatStringsSep "\n" (mapAttrsToList (name: value: "$env.${name} = \"${value}\"") config.home.sessionVariables);
         };
       in
@@ -27,7 +27,7 @@
         };
 
         programs.bat.syntaxes.nushell = {
-          src = ./nushell;
+          src = ./_nushell;
           file = "nushell.sublime-syntax";
         };
       };

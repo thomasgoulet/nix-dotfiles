@@ -37,8 +37,8 @@
         _module.args = { inherit editorWrapper; };
 
         imports = [
-          ./terminal/broot.nix
-          ./terminal/lazygit.nix
+          ./_terminal/broot.nix
+          ./_terminal/lazygit.nix
         ];
 
         home.sessionVariables = {
