@@ -5,7 +5,7 @@
       den.aspects.ai
       den.aspects.infra
       den.aspects.notes
-      den.aspects.shell
+      den.aspects.terminal
       den.batteries.primary-user
     ];
 

@@ -2,7 +2,7 @@
 {
   den.aspects.notes = { ... }: {
 
-    includes = [ den.aspects.shell ];
+    includes = [ den.aspects.terminal ];
 
     homeManager = { config, pkgs, ... }:
       let

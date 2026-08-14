@@ -1,24 +1,21 @@
 { den, ... }:
 {
-  den.aspects.shell = {
+  den.aspects.terminal = {
+
+    includes = [
+      den.aspects.helix
+      den.aspects.nushell
+    ];
 
     user =
       { pkgs, ... }:
       {
-        shell = pkgs.nushell;
         extraGroups = [ "docker" ];
       };
 
     homeManager =
       { config, lib, pkgs, ... }:
       let
-        inherit (lib) concatStringsSep mapAttrsToList;
-
-        env = {
-          skeleton = builtins.readFile ./shell/env.nu;
-          extra = concatStringsSep "\n" (mapAttrsToList (name: value: "$env.${name} = \"${value}\"") config.home.sessionVariables);
-        };
-
         editorWrapper = pkgs.writeShellScript "editor-wrapper" ''
           file="$1"
           tab_id=$(zellij action list-tabs -j | jq -r '.[] | select(.active) | .tab_id')
@@ -40,11 +37,8 @@
         _module.args = { inherit editorWrapper; };
 
         imports = [
-          ./editor/packages.nix
-          ./editor/helix-settings.nix
-          ./editor/helix-languages.nix
-          ./editor/lazygit.nix
-          ./editor/broot.nix
+          ./terminal/broot.nix
+          ./terminal/lazygit.nix
         ];
 
         home.sessionVariables = {
@@ -55,7 +49,6 @@
         home.packages = [
 
           # Core functionality
-          pkgs.nushell
           pkgs.carapace
           pkgs.zellij
 
@@ -66,16 +59,13 @@
           pkgs.fzf
           pkgs.just
           pkgs.jq
+          pkgs.nh
           pkgs.ripgrep
           pkgs.sd
           pkgs.television
           pkgs.zoxide
 
         ];
-
-        xdg.configFile."nushell/env.nu" = {
-          text = env.extra + "\n" + env.skeleton;
-        };
 
         xdg.configFile."zellij/zjstatus.wasm".source = zjstatus;
 
@@ -85,12 +75,6 @@
             theme = "Catppuccin Mocha";
             style = "changes,numbers,header,grid";
             pager = "less -RF --no-init";
-          };
-          syntaxes = {
-            nushell = {
-              src = ../homes/shared/bat/syntaxes;
-              file = "nushell.sublime-syntax";
-            };
           };
         };
 

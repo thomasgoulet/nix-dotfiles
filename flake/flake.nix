@@ -41,9 +41,11 @@
       imports = [
         den.flakeModule
         ./modules/aspects/ai.nix
+        ./modules/aspects/helix.nix
         ./modules/aspects/infra.nix
         ./modules/aspects/notes.nix
-        ./modules/aspects/shell.nix
+        ./modules/aspects/nushell.nix
+        ./modules/aspects/terminal.nix
         ./modules/nixos/oric.nix
         ./modules/thomas.nix
       ];
