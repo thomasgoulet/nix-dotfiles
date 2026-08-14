@@ -4,7 +4,6 @@
 
     includes = [
       den.aspects.terminal
-      den.aspects.helix
     ];
 
     homeManager =
