@@ -8,35 +8,10 @@
     ];
 
     homeManager =
-      { config, lib, pkgs, ... }:
-      let
-        zk = pkgs.buildGoModule {
-          pname = "zk";
-          version = "0.15.6";
-          src = pkgs.fetchFromGitHub {
-            owner = "zk-org";
-            repo = "zk";
-            rev = "v0.15.6";
-            hash = "sha256-owHbrQwoQS+SbfZ6EQO/ii10zX73MmUpohuIIltlnw8=";
-          };
-          vendorHash = "sha256-Y5KI3o4HYWyqQl/RnOetyIKOI+CbYWSgrbkGkpAKsX4=";
-          doCheck = false;
-          env.CGO_ENABLED = 1;
-          tags = [ "fts5" ];
-          ldflags = [
-            "-s" "-w"
-            "-X=main.Build=unstable"
-            "-X=main.Version=unstable"
-          ];
-        };
-      in
+      { config, pkgs, ... }:
       {
-        config.helix.notes.enable = true;
-
-        config = {
           home.packages = [
             pkgs.tuxedo
-            zk
           ];
 
           home.sessionVariables = {
@@ -45,8 +20,54 @@
             ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/notebook";
             ZK_SHELL = "/bin/bash";
           };
-        };
 
+          programs.zk = {
+            enable = true;
+            settings = {
+              note = {
+                language = "en";
+                default-title = "untitled";
+                filename = "{{format-date now '%Y-%m-%d'}}-{{slug title}}";
+                template = "default.md";
+                exclude = [ "drafts/*" ];
+                id-charset = "numbers";
+                id-length = 5;
+              };
+
+              extra = {
+                id = "{{id}}";
+              };
+
+              format.markdown = {
+                link-format = "wiki";
+                hashtags = true;
+                colon-tags = true;
+                multiword-tags = false;
+              };
+
+              tool = {
+                pager = "less -FIRX";
+                fzf-preview = "bat -p --color always {-1}";
+              };
+
+              lsp.diagnostics = {
+                wiki-title = "none";
+                dead-link = "error";
+                self-link = "error";
+                missing-backlink = {
+                  level = "hint";
+                  position = "bottom";
+                };
+              };
+
+              alias = {
+                config = "hx $ZK_NOTEBOOK_DIR/.zk/config.toml ~/.config/zk/config.toml";
+                e = "zk edit -i $@";
+                last = "zk edit --limit 1 --sort modified- $@";
+                list = "zk list -q -f oneline $@";
+              };
+            };
+          };
       };
 
     nixos = { config, ... }:

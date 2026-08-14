@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  zk = (config.helix.notes.enable or false);
+  zk = (config.programs.zk.enable or false);
 in
 {
   home.packages = [
