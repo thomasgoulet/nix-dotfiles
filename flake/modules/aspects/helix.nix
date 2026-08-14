@@ -1,19 +1,18 @@
-{ den, ... }:
+{ den, inputs, lib, ... }:
 {
   den.aspects.helix = {
-    homeManager =
-      { ... }: {
+    homeManager = {
+      imports = [
+        (inputs.import-tree ./_helix)
+      ];
 
-        imports = [
-          ./_helix/helix-languages.nix
-          ./_helix/packages.nix
-          ./_helix/settings.nix
-        ];
+      options.helix.notes.enable = lib.mkEnableOption "notes tooling in helix";
 
-        home.sessionVariables = {
-          EDITOR = "hx";
-        };
+      config.programs.helix.enable = true;
 
+      config.home.sessionVariables = {
+        EDITOR = "hx";
       };
+    };
   };
 }

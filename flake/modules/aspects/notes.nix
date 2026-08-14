@@ -2,9 +2,13 @@
 {
   den.aspects.notes = { ... }: {
 
-    includes = [ den.aspects.terminal ];
+    includes = [
+      den.aspects.terminal
+      den.aspects.helix
+    ];
 
-    homeManager = { config, pkgs, ... }:
+    homeManager =
+      { config, lib, pkgs, ... }:
       let
         zk = pkgs.buildGoModule {
           pname = "zk";
@@ -27,29 +31,22 @@
         };
       in
       {
-        home.packages = [
-          pkgs.tuxedo
-          zk
-        ];
+        config.helix.notes.enable = true;
 
-        home.sessionVariables = {
-          TODO_DIR = "${config.home.homeDirectory}/notebook";
-          TODO_FILE = "${config.home.homeDirectory}/notebook/tasks.txt";
-          ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/notebook";
-          ZK_SHELL = "/bin/bash";
-        };
-
-        programs.helix.languages = {
-          language-server.zk = { command = "zk"; args = [ "lsp" ]; };
-          language = [
-            {
-              name = "markdown";
-              formatter = { command = "prettier"; args = [ "--parser" "markdown" ]; };
-              roots = [ ".zk" ];
-              language-servers = [ "marksman" "harper-ls" "zk" ];
-            }
+        config = {
+          home.packages = [
+            pkgs.tuxedo
+            zk
           ];
+
+          home.sessionVariables = {
+            TODO_DIR = "${config.home.homeDirectory}/notebook";
+            TODO_FILE = "${config.home.homeDirectory}/notebook/tasks.txt";
+            ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/notebook";
+            ZK_SHELL = "/bin/bash";
+          };
         };
+
       };
 
     nixos = { config, ... }:
