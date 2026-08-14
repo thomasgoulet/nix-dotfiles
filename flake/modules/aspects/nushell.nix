@@ -11,11 +11,10 @@
       { config, lib, pkgs, ... }:
       let
         inherit (lib) concatStringsSep mapAttrsToList;
-
-        env = {
-          skeleton = builtins.readFile ./_nushell/env.nu;
-          extra = concatStringsSep "\n" (mapAttrsToList (name: value: "$env.${name} = \"${value}\"") config.home.sessionVariables);
-        };
+        env =
+          config.home.sessionVariables
+          |> mapAttrsToList (name: value: "$env.${name} = \"${value}\"")
+          |> concatStringsSep "\n";
       in
       {
         home.packages = [
@@ -23,7 +22,7 @@
         ];
 
         xdg.configFile."nushell/env.nu" = {
-          text = env.extra + "\n" + env.skeleton;
+          text = env + "\n" + (builtins.readFile ./_nushell/env.nu);
         };
 
         programs.bat.syntaxes.nushell = {
