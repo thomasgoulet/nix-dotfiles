@@ -1,4 +1,4 @@
-{ den, ... }:
+{ den, inputs, ... }:
 {
   den.aspects.terminal = {
 
@@ -19,7 +19,7 @@
         editorWrapper = pkgs.writeShellScript "editor-wrapper" ''
           file="$1"
           tab_id=$(zellij action list-tabs -j | jq -r '.[] | select(.active) | .tab_id')
-          editor_pane=$(zellij action list-panes -j -c -t  | jq -r --argjson tid "$tab_id" --arg editor "$EDITOR" '.[] | select(.tab_id == $tid and (.title // "" | endswith($editor)) or (.pane_commend // "" | endswith($editor))) | .id')
+          editor_pane=$(zellij action list-panes -j -c -t  | jq -r --argjson tid "$tab_id" --arg editor "$EDITOR" '.[] | select(.tab_id == $tid and (.title // "" | endswith($editor)) or (.pane_command // "" | endswith($editor))) | .id')
           if [ -z "$tab_id" ] || [ -z "$editor_pane" ]; then
             exec $EDITOR "$file"
           fi
@@ -37,8 +37,7 @@
         _module.args = { inherit editorWrapper; };
 
         imports = [
-          ./_terminal/broot.nix
-          ./_terminal/lazygit.nix
+          (inputs.import-tree ./_terminal)
         ];
 
         home.packages = [
