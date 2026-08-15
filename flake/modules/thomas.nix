@@ -4,6 +4,7 @@
 
     includes = [
       den.aspects.ai
+      den.aspects.docker
       den.aspects.infra
       den.aspects.notes
       den.aspects.terminal

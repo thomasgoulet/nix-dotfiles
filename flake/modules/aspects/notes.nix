@@ -3,6 +3,7 @@
   den.aspects.notes = { ... }: {
 
     includes = [
+      den.aspects.docker
       den.aspects.terminal
     ];
 

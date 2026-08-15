@@ -7,12 +7,6 @@
       den.aspects.nushell
     ];
 
-    user =
-      { pkgs, ... }:
-      {
-        extraGroups = [ "docker" ];
-      };
-
     homeManager =
       { config, lib, pkgs, ... }:
       let

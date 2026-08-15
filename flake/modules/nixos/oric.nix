@@ -22,7 +22,6 @@
         imports = [
           inputs.home-manager.nixosModules.home-manager
           ./_oric/wsl.nix
-          ./_oric/docker.nix
           ./_oric/nix-settings.nix
         ];
 
