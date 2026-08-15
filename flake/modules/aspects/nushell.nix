@@ -19,7 +19,6 @@
       {
         home.packages = [
           pkgs.nh
-          pkgs.nixfmt
           pkgs.nushell
         ];
 

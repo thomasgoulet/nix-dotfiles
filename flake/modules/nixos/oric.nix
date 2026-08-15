@@ -17,21 +17,44 @@
 
   den.aspects.oric = {
     nixos =
-      { host, ... }:
+      { host, pkgs, ... }:
       {
         imports = [
           inputs.home-manager.nixosModules.home-manager
-          ./_oric/wsl.nix
-          ./_oric/nix-settings.nix
+        ];
+
+        system.stateVersion = "25.11";
+        nixpkgs.config.allowUnfree = true;
+
+        nix.settings = {
+          auto-optimise-store = true;
+          experimental-features = [ "pipe-operators" "nix-command" "flakes" ];
+          trusted-users = [ "root" "thomas" ];
+        };
+
+        nix.gc = {
+          automatic = true;
+          persistent = true;
+          dates = "Fri *-*-* 06:00:00";
+          options = "--delete-older-than 7d";
+        };
+
+        environment.systemPackages = [
+          pkgs.nh
+          pkgs.wsl-open
         ];
 
         environment.variables = {
+          BROWSER = "wsl-open";
           NH_FLAKE = "/home/thomas/.config/flake";
           NH_HOST = host.name;
         };
 
         home-manager.useUserPackages = true;
         home-manager.useGlobalPkgs = true;
+
+        wsl.useWindowsDriver = true;
+        wsl.startMenuLaunchers = true;
       };
   };
 }

@@ -2,6 +2,8 @@
 {
   den.aspects.docker = {
 
+    user = { extraGroups = [ "docker" ]; };
+
     nixos = {
       virtualisation.oci-containers.backend = "docker";
       virtualisation.docker = {
@@ -9,8 +11,6 @@
         daemon.settings.userland-proxy = false;
       };
     };
-
-    user = { extraGroups = [ "docker" ]; };
 
   };
 }

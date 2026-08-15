@@ -1,6 +1,7 @@
 { den, ... }:
 {
   den.aspects.thomas = {
+
     includes = [
       den.aspects.ai
       den.aspects.infra
@@ -42,5 +43,6 @@
           };
         };
       };
+
   };
 }
