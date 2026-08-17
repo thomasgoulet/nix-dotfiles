@@ -35,53 +35,19 @@
       };
 
     homeManager = { inputs', config, pkgs, lib, ... }:
-      let
-        inherit (inputs) uv2nix pyproject-nix pyproject-build-systems;
-
-        swivalSrc = pkgs.fetchFromGitHub {
-          owner = "Swival";
-          repo = "swival";
-          rev = "1.0.39";
-          hash = "sha256-OpPcn7SU4FEXCL6f/bIuK6KBpGuw5NGS8FktEWhSwF0=";
-        };
-
-        swivalWorkspace = uv2nix.lib.workspace.loadWorkspace { workspaceRoot = swivalSrc; };
-        swivalOverlay = swivalWorkspace.mkPyprojectOverlay { sourcePreference = "wheel"; };
-        swivalPython = pkgs.python313;
-        swivalPythonBase = pkgs.callPackage pyproject-nix.build.packages {
-          python = swivalPython;
-        };
-
-        swivalPythonSet = swivalPythonBase.overrideScope (
-          lib.composeManyExtensions [
-            pyproject-build-systems.overlays.wheel
-            swivalOverlay
-          ]
-        );
-
-        inherit (pkgs.callPackage pyproject-nix.build.util { }) mkApplication;
-
-        swival = mkApplication {
-          venv = swivalPythonSet.mkVirtualEnv "swival-env" swivalWorkspace.deps.default;
-          package = swivalPythonSet.swival;
-        };
-      in
       {
         home.packages = [
-
-          # Harness
+          # harness
           pkgs.opencode
           pkgs.github-copilot-cli
-          swival
 
-          # MCP Servers
+          # mcp servers
           pkgs.ctx7
           pkgs.context7-mcp
           inputs'.nu-mcp.packages.default
 
-          # Tools
+          # tools
           pkgs.pdf-oxide
-
         ];
 
         home.sessionVariables = {
