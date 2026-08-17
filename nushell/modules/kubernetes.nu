@@ -54,7 +54,7 @@ module kubernetes {
         return {command: ($args.0), args: ($args | skip 1), flags: $flags, flag_id: ($flags | str join ".")}
     }
 
-    export def "watch" [
+    def "watch" [
         closure: closure
         delay: int
     ] {
@@ -148,9 +148,10 @@ module kubernetes {
     ] {
         let ctx = argparse $context
         cache hit $"kube.kind.($ctx.args.0).($ctx.flag_id)" 120 {
-            kubectl get $ctx.args.0 ...$ctx.flags
+            kubecolor --force-colors get $ctx.args.0 ...$ctx.flags
             | from ssv
-            | each { {value: $in.NAME, description: ($in | reject NAME | to nuon)} }
+            | rename --block { ansi strip | str lowercase }
+            | each { {value: $in.name, description: ($in | reject name | to nuon)} }
         };
     }
 
@@ -289,9 +290,10 @@ module kubernetes {
 
         # List the resources
         let output = {
-            kubectl get $kind ...$namespace_flags
+            kubecolor --force-colors get $kind ...$namespace_flags
             | from ssv
-            | find ($instance | default "") --columns [NAME]
+            | rename --block { ansi strip | str lowercase }
+            | if ($instance | is-not-empty) { find $instance } else { $in }
         };
 
         if ($watch) {

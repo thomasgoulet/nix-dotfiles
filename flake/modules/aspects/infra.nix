@@ -8,6 +8,7 @@
         pkgs.argonaut
         pkgs.dyff
         pkgs.hl-log-viewer
+        pkgs.kubecolor
         pkgs.kubectl
         pkgs.kubelogin
         pkgs.kustomize
