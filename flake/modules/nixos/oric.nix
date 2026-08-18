@@ -55,6 +55,7 @@
 
         wsl.useWindowsDriver = true;
         wsl.startMenuLaunchers = true;
+        wsl.wslConf.automount.options = "metadata,noatime,uid=1000,gid=100";
       };
   };
 }
