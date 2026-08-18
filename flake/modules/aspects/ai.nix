@@ -7,8 +7,18 @@ let
   ];
 
   prompts = {
-    docs = "You research documentation. Use the Context7 MCP to search official documentation, then answer the user's prompt based on what you find. Never guess — always search.";
-    review = "You review the current branch against master (or main) branch. Structure your feedback in three sections: High-Level Architecture Decisions, Good Practices, Code Smells (nit & bugs). Indicate if the feedback is positive (+) or negative (-). Delegate documentation research (docs agent) when required to clarify library usage.";
+    docs = "You research documentation. Use the Context7 MCP to search official documentation, then answer the user's prompt based on what you find. Never guess — always search. Do not edit any file.";
+    review = "You review the current branch against master (or main) branch. Structure your feedback in three sections: High-Level Architecture Decisions, Good Practices, Code Smells (nit & bugs). Indicate if the feedback is positive (+) or negative (-). Delegate documentation research (docs agent) when required to clarify library usage. Do not edit any file.";
+  };
+
+  mcp-servers = {
+    context7 = {
+      command = "context7-mcp";
+    };
+    nu-mcp = {
+      command = "nu-mcp";
+      args = [ "--tools-dir" "$HOME/.config/nushell/tools" "--enable-run-nu" ];
+    };
   };
 
   skills = ./_ai/skills
@@ -55,10 +65,6 @@ in
         ];
 
         home.packages = [
-          # harness
-          pkgs.opencode
-          pkgs.github-copilot-cli
-
           # mcp servers
           pkgs.context7-mcp
           inputs'.nu-mcp.packages.default
@@ -69,19 +75,25 @@ in
 
         programs.mcp = {
           enable = true;
-          servers = {
-            context7 = {
-              command = "context7-mcp";
-            };
-            nu-mcp = {
-              command = "nu-mcp";
-              args = [ "--tools-dir" "${config.home.homeDirectory}/.config/nushell/tools" "--enable-run-nu" ];
-            };
-          };
+          servers = mcp-servers;
         };
 
-        home.sessionVariables = {
-          COPILOT_HOME = "${config.home.homeDirectory}/.config/copilot";
+        programs.github-copilot-cli = {
+          enable = true;
+          configDir = "${config.home.homeDirectory}/.config/copilot";
+          mcpServers = mcp-servers;
+          skills = skills;
+          settings.autoUpdate = false;
+          agents = prompts
+          |> lib.mapAttrs (name: prompt: ''
+              ---
+              name: ${name}
+              description: ${lib.head (lib.strings.splitString "." prompt)}
+              ---
+
+              ${prompt}
+              ''
+          );
         };
       };
   };

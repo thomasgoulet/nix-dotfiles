@@ -4,7 +4,6 @@
 !AGENTS.md
 !.gitignore
 !argonaut/
-!copilot/
 !flake/
 !hl/
 !nix/
