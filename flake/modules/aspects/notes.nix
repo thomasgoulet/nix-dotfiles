@@ -70,7 +70,7 @@
           };
       };
 
-    nixos = { config, ... }:
+    nixos = { config, pkgs, lib, ... }:
       {
         virtualisation.oci-containers.backend = "docker";
 
@@ -90,6 +90,9 @@
         systemd.services.docker-excalidash-backend = {
           after = [ "init-excalidash-network.service" ];
           requires = [ "init-excalidash-network.service" ];
+          serviceConfig.ExecStartPre = lib.mkBefore [
+            "${pkgs.coreutils}/bin/rm -rf /var/lib/excalidash/.migration-lock"
+          ];
         };
         systemd.services.docker-excalidash-frontend = {
           after = [ "init-excalidash-network.service" ];
