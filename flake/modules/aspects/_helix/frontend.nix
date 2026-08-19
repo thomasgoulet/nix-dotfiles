@@ -29,7 +29,11 @@
         name = "typescript";
         formatter = {
           command = "npx";
-          args = [ "prettier" "--parser" "typescript" ];
+          args = [
+            "prettier"
+            "--parser"
+            "typescript"
+          ];
         };
         language-servers = [
           "typescript-language-server"

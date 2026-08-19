@@ -5,7 +5,6 @@
     pkgs.yamlfmt
   ];
 
-
   programs.helix.languages.language-server.yaml = {
     command = "yaml-language-server";
     args = [ "--stdio" ];
@@ -18,12 +17,18 @@
   programs.helix.languages.language = [
     {
       name = "yaml";
-      file-types = [ "yaml" "yml" ];
+      file-types = [
+        "yaml"
+        "yml"
+      ];
       language-servers = [ "yaml" ];
       auto-format = false;
       formatter = {
         command = "prettier";
-        args = [ "--parser" "yaml" ];
+        args = [
+          "--parser"
+          "yaml"
+        ];
       };
     }
   ];

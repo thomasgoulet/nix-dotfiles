@@ -10,67 +10,73 @@
     homeManager =
       { config, pkgs, ... }:
       {
-          home.packages = [
-            pkgs.tuxedo
-          ];
+        home.packages = [
+          pkgs.tuxedo
+        ];
 
-          home.sessionVariables = {
-            TODO_DIR = "${config.home.homeDirectory}/notebook";
-            TODO_FILE = "${config.home.homeDirectory}/notebook/tasks.txt";
-            ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/notebook";
-            ZK_SHELL = "/bin/bash";
-          };
+        home.sessionVariables = {
+          TODO_DIR = "${config.home.homeDirectory}/notebook";
+          TODO_FILE = "${config.home.homeDirectory}/notebook/tasks.txt";
+          ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/notebook";
+          ZK_SHELL = "/bin/bash";
+        };
 
-          programs.zk = {
-            enable = true;
-            settings = {
-              note = {
-                language = "en";
-                default-title = "untitled";
-                filename = "{{format-date now '%Y-%m-%d'}}-{{slug title}}";
-                template = "default.md";
-                exclude = [ "drafts/*" ];
-                id-charset = "numbers";
-                id-length = 5;
-              };
+        programs.zk = {
+          enable = true;
+          settings = {
+            note = {
+              language = "en";
+              default-title = "untitled";
+              filename = "{{format-date now '%Y-%m-%d'}}-{{slug title}}";
+              template = "default.md";
+              exclude = [ "drafts/*" ];
+              id-charset = "numbers";
+              id-length = 5;
+            };
 
-              extra = {
-                id = "{{id}}";
-              };
+            extra = {
+              id = "{{id}}";
+            };
 
-              format.markdown = {
-                link-format = "wiki";
-                hashtags = true;
-                colon-tags = true;
-                multiword-tags = false;
-              };
+            format.markdown = {
+              link-format = "wiki";
+              hashtags = true;
+              colon-tags = true;
+              multiword-tags = false;
+            };
 
-              tool = {
-                pager = "less -FIRX";
-                fzf-preview = "bat -p --color always {-1}";
-              };
+            tool = {
+              pager = "less -FIRX";
+              fzf-preview = "bat -p --color always {-1}";
+            };
 
-              lsp.diagnostics = {
-                wiki-title = "none";
-                dead-link = "error";
-                self-link = "error";
-                missing-backlink = {
-                  level = "hint";
-                  position = "bottom";
-                };
-              };
-
-              alias = {
-                config = "hx $ZK_NOTEBOOK_DIR/.zk/config.toml ~/.config/zk/config.toml";
-                e = "zk edit -i $@";
-                last = "zk edit --limit 1 --sort modified- $@";
-                list = "zk list -q -f oneline $@";
+            lsp.diagnostics = {
+              wiki-title = "none";
+              dead-link = "error";
+              self-link = "error";
+              missing-backlink = {
+                level = "hint";
+                position = "bottom";
               };
             };
+
+            alias = {
+              config = "hx $ZK_NOTEBOOK_DIR/.zk/config.toml ~/.config/zk/config.toml";
+              e = "zk edit -i $@";
+              last = "zk edit --limit 1 --sort modified- $@";
+              list = "zk list -q -f oneline $@";
+            };
           };
+        };
       };
 
-    nixos = { config, pkgs, lib, ... }:
+    nixos =
+      {
+        config,
+        pkgs,
+        lib,
+        ...
+      }:
       {
         virtualisation.oci-containers.backend = "docker";
 
@@ -111,7 +117,10 @@
               FRONTEND_URL = "http://localhost:6767,http://0.0.0.0:6767";
             };
             volumes = [ "/var/lib/excalidash:/app/prisma" ];
-            extraOptions = [ "--network=excalidash" "--network-alias=backend" ];
+            extraOptions = [
+              "--network=excalidash"
+              "--network-alias=backend"
+            ];
           };
           excalidash-frontend = {
             image = "zimengxiong/excalidash-frontend@sha256:de12bee592b2db0bcdee1b7066283297696a3e9e3a309798f78ca6c9d6caff9c";

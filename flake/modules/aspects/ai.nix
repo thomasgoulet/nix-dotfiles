@@ -1,4 +1,9 @@
-{ den, inputs, lib, ... }:
+{
+  den,
+  inputs,
+  lib,
+  ...
+}:
 let
   context-length = 16384;
   models = [
@@ -17,14 +22,21 @@ let
     };
     nu-mcp = {
       command = "nu-mcp";
-      args = [ "--tools-dir" "$HOME/.config/nushell/tools" "--enable-run-nu" ];
+      args = [
+        "--tools-dir"
+        "$HOME/.config/nushell/tools"
+        "--enable-run-nu"
+      ];
     };
   };
 
-  skills = ./_ai/skills
-  |> lib.filesystem.listFilesRecursive
-  |> map (file: {"${(lib.removeSuffix ".md" (baseNameOf file))}" = file;})
-  |> lib.attrsets.mergeAttrsList;
+  skills =
+    ./_ai/skills
+    |> lib.filesystem.listFilesRecursive
+    |> map (file: {
+      "${(lib.removeSuffix ".md" (baseNameOf file))}" = file;
+    })
+    |> lib.attrsets.mergeAttrsList;
 in
 {
   den.aspects.ai = {
@@ -58,10 +70,25 @@ in
         };
       };
 
-    homeManager = { inputs', config, lib, pkgs, ... }:
+    homeManager =
+      {
+        inputs',
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       {
         imports = [
-          (import ./_ai/opencode.nix { inherit lib context-length models prompts skills; })
+          (import ./_ai/opencode.nix {
+            inherit
+              lib
+              context-length
+              models
+              prompts
+              skills
+              ;
+          })
         ];
 
         home.packages = [
@@ -84,16 +111,18 @@ in
           mcpServers = mcp-servers;
           skills = skills;
           settings.autoUpdate = false;
-          agents = prompts
-          |> lib.mapAttrs (name: prompt: ''
-              ---
-              name: ${name}
-              description: ${lib.head (lib.strings.splitString "." prompt)}
-              ---
+          agents =
+            prompts
+            |> lib.mapAttrs (
+              name: prompt: ''
+                ---
+                name: ${name}
+                description: ${lib.head (lib.strings.splitString "." prompt)}
+                ---
 
-              ${prompt}
+                ${prompt}
               ''
-          );
+            );
         };
       };
   };

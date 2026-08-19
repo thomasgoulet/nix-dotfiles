@@ -8,7 +8,12 @@
     ];
 
     homeManager =
-      { config, lib, pkgs, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       let
         editorWrapper = pkgs.writeShellScript "editor-wrapper" ''
           file="$1"
@@ -67,21 +72,21 @@
         };
 
         programs.git.settings = {
-            core.pager = "delta";
-            diff.colorMoved = "default";
-            interactive.diffFilter = "delta --color-only";
-            merge.conflictstyle = "diff3";
+          core.pager = "delta";
+          diff.colorMoved = "default";
+          interactive.diffFilter = "delta --color-only";
+          merge.conflictstyle = "diff3";
 
-            delta = {
-              dark = true;
-              line-numbers = true;
-              navigate = true;
-              side-by-side = true;
-              syntax-theme = "Catppuccin Mocha";
-              blame-palette = "#1e1e2e #181825 #313244";
-              hunk-header-style = "omit";
-              file-style = "white";
-            };
+          delta = {
+            dark = true;
+            line-numbers = true;
+            navigate = true;
+            side-by-side = true;
+            syntax-theme = "Catppuccin Mocha";
+            blame-palette = "#1e1e2e #181825 #313244";
+            hunk-header-style = "omit";
+            file-style = "white";
+          };
         };
 
         programs.starship = {

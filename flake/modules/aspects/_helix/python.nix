@@ -15,9 +15,21 @@ in
     {
       name = "python";
       auto-format = false;
-      indent = { tab-width = 4; unit = "	"; };
-      formatter = { command = "black"; args = [ "-" "-l160" ]; };
-      language-servers = [ "ruff" "pylsp" ];
+      indent = {
+        tab-width = 4;
+        unit = "	";
+      };
+      formatter = {
+        command = "black";
+        args = [
+          "-"
+          "-l160"
+        ];
+      };
+      language-servers = [
+        "ruff"
+        "pylsp"
+      ];
     }
   ];
 }

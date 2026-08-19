@@ -10,13 +10,33 @@
       jump-label-alphabet = "hjklvbnmyuiopasdfg";
       line-number = "relative";
       mouse = false;
-      shell = [ "nu" "-c" ];
+      shell = [
+        "nu"
+        "-c"
+      ];
       true-color = true;
       undercurl = true;
       statusline = {
-        left = [ "mode" "spinner" ];
-        center = [ "file-name" "file-modification-indicator" "spacer" "version-control" ];
-        right = [ "register" "diagnostics" "selections" "position" "position-percentage" "file-encoding" "file-line-ending" "file-type" ];
+        left = [
+          "mode"
+          "spinner"
+        ];
+        center = [
+          "file-name"
+          "file-modification-indicator"
+          "spacer"
+          "version-control"
+        ];
+        right = [
+          "register"
+          "diagnostics"
+          "selections"
+          "position"
+          "position-percentage"
+          "file-encoding"
+          "file-line-ending"
+          "file-type"
+        ];
         separator = "-";
         mode.normal = "NORMAL";
         mode.insert = "INSERT";
@@ -45,7 +65,13 @@
           tabpad = "·";
         };
       };
-      gutters.layout = [ "diagnostics" "spacer" "diff" "line-numbers" "spacer" ];
+      gutters.layout = [
+        "diagnostics"
+        "spacer"
+        "diff"
+        "line-numbers"
+        "spacer"
+      ];
       indent-guides = {
         character = "|";
         render = true;
@@ -71,7 +97,11 @@
       "L" = ":bn";
       "S" = "@%s";
       "W" = "extend_next_word_start";
-      "y" = [ "yank" ":primary-clipboard-yank" ":clipboard-yank" ];
+      "y" = [
+        "yank"
+        ":primary-clipboard-yank"
+        ":clipboard-yank"
+      ];
       "X" = "extend_line_above";
       "tab" = "jump_backward";
       "S-tab" = "jump_forward";
@@ -85,8 +115,20 @@
         "Q" = ":qa!";
         "[" = "jump_view_left";
         "]" = "jump_view_right";
-        "," = [ "save_selection" "goto_line_end" ":append-output echo ','" "collapse_selection" "jump_backward" ];
-        ";" = [ "save_selection" "goto_line_end" ":append-output echo ';'" "collapse_selection" "jump_backward" ];
+        "," = [
+          "save_selection"
+          "goto_line_end"
+          ":append-output echo ','"
+          "collapse_selection"
+          "jump_backward"
+        ];
+        ";" = [
+          "save_selection"
+          "goto_line_end"
+          ":append-output echo ';'"
+          "collapse_selection"
+          "jump_backward"
+        ];
         "tab" = "save_selection";
         t = {
           n = "@o- [ ] ";
@@ -95,8 +137,20 @@
         };
       };
       m = {
-        w = [ "move_char_left" "move_next_word_end" "move_prev_word_start" "move_next_word_end" "search_selection" ];
-        W = [ "move_char_left" "move_next_long_word_end" "move_prev_long_word_start" "move_next_long_word_end" "search_selection" ];
+        w = [
+          "move_char_left"
+          "move_next_word_end"
+          "move_prev_word_start"
+          "move_next_word_end"
+          "search_selection"
+        ];
+        W = [
+          "move_char_left"
+          "move_next_long_word_end"
+          "move_prev_long_word_start"
+          "move_next_long_word_end"
+          "search_selection"
+        ];
       };
       "]" = {
         q = "@<space>'<tab><ret>";

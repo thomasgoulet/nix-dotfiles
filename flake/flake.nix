@@ -26,7 +26,8 @@
     };
   };
 
-  outputs = inputs@{ flake-parts, den, ... }:
+  outputs =
+    inputs@{ flake-parts, den, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         den.flakeModule

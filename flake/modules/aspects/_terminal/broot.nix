@@ -11,27 +11,74 @@ in
       modal = true;
       initial_mode = "command";
       show_selection_mark = true;
-      cols_order = [ "mark" "git" "size" "permission" "date" "count" "branch" "name" ];
+      cols_order = [
+        "mark"
+        "git"
+        "size"
+        "permission"
+        "date"
+        "count"
+        "branch"
+        "name"
+      ];
       special_paths = {
-        "~/.config" = { show = "always"; };
-        ".azure-devops" = { list = "never"; };
-        ".cache" = { list = "never"; };
-        ".dotnet" = { list = "never"; };
-        ".eclipse" = { list = "never"; };
-        ".git" = { show = "never"; };
-        ".gradle" = { show = "never"; };
-        ".local" = { list = "never"; };
-        ".nix" = { list = "never"; };
-        ".npm" = { list = "never"; };
-        ".nuget" = { list = "never"; };
-        ".project" = { show = "never"; };
-        ".settings" = { show = "never"; };
-        ".venv" = { show = "never"; };
-        "automated-tests" = { list = "never"; };
-        "bin" = { show = "never"; };
-        "build" = { show = "never"; };
-        "node_modules" = { show = "never"; };
-        "open-api-client" = { list = "never"; };
+        "~/.config" = {
+          show = "always";
+        };
+        ".azure-devops" = {
+          list = "never";
+        };
+        ".cache" = {
+          list = "never";
+        };
+        ".dotnet" = {
+          list = "never";
+        };
+        ".eclipse" = {
+          list = "never";
+        };
+        ".git" = {
+          show = "never";
+        };
+        ".gradle" = {
+          show = "never";
+        };
+        ".local" = {
+          list = "never";
+        };
+        ".nix" = {
+          list = "never";
+        };
+        ".npm" = {
+          list = "never";
+        };
+        ".nuget" = {
+          list = "never";
+        };
+        ".project" = {
+          show = "never";
+        };
+        ".settings" = {
+          show = "never";
+        };
+        ".venv" = {
+          show = "never";
+        };
+        "automated-tests" = {
+          list = "never";
+        };
+        "bin" = {
+          show = "never";
+        };
+        "build" = {
+          show = "never";
+        };
+        "node_modules" = {
+          show = "never";
+        };
+        "open-api-client" = {
+          list = "never";
+        };
       };
       quit_on_last_cancel = false;
       search_modes = {
@@ -42,8 +89,8 @@ in
       lines_before_match_in_preview = 1;
       lines_after_match_in_preview = 1;
       show_matching_characters_on_path_searches = false;
-      preview_transformers = [];
-      imports = [];
+      preview_transformers = [ ];
+      imports = [ ];
       skin = {
         directory = "ansi(4)";
         file = "ansi(15)";

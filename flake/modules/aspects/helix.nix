@@ -1,4 +1,9 @@
-{ den, inputs, lib, ... }:
+{
+  den,
+  inputs,
+  lib,
+  ...
+}:
 {
   den.aspects.helix = {
     homeManager = {

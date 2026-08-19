@@ -1,4 +1,10 @@
-{ lib, context-length, models, prompts, skills }:
+{
+  lib,
+  context-length,
+  models,
+  prompts,
+  skills,
+}:
 {
   home.sessionVariables = {
     OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
@@ -39,7 +45,7 @@
         npm = "@ai-sdk/openai-compatible";
         name = "local";
         options.baseURL = "http://127.0.0.1:11434/v1";
-        models = lib.attrsets.mergeAttrsList(
+        models = lib.attrsets.mergeAttrsList (
           models
           |> map (model: {
             "${model}" = {

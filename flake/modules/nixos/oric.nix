@@ -11,7 +11,10 @@
   den.hosts.x86_64-linux.oric = {
     wsl.enable = true;
     users.thomas = {
-      classes = [ "homeManager" "user" ];
+      classes = [
+        "homeManager"
+        "user"
+      ];
     };
   };
 
@@ -28,8 +31,15 @@
 
         nix.settings = {
           auto-optimise-store = true;
-          experimental-features = [ "pipe-operators" "nix-command" "flakes" ];
-          trusted-users = [ "root" "thomas" ];
+          experimental-features = [
+            "pipe-operators"
+            "nix-command"
+            "flakes"
+          ];
+          trusted-users = [
+            "root"
+            "thomas"
+          ];
         };
 
         nix.gc = {
