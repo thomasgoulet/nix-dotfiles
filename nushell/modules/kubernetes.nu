@@ -203,6 +203,7 @@ module kubernetes {
         --namespace (-n): string@"nu-complete kubectl namespaces"  # Namespace to list resources in
         --all (-a)  # Search in all namespaces
         --delete (-D)  # Delete a resource
+        --decode  # Decodes secret values using `base64 --decode`
         --edit (-e)  # Edit a resource
         --get (-g)  # Get a resource's full definition
         --logs (-l)  # Get the logs of a pod
@@ -271,6 +272,21 @@ module kubernetes {
                     };
                 }
             );
+        }
+
+        if ($decode) {
+            if ($kind not-in ["secret" "secrets"] or $instance == null) {
+                error make -u {msg: "`--decode` cannot be used for non-secret kinds or without specifying an instance"};
+            }
+            return (
+                cache hit $"kube.($kind).($instance)" 120 {
+                    kubectl get $kind $instance ...$namespace_flags -o yaml
+                    | from yaml
+                } | get data
+                | items {|key, value| {$key: ($value | base64 --decode)}}
+                | reduce { |row, acc| $acc | merge $row }
+            );
+
         }
 
         if ($path | is-not-empty) {
