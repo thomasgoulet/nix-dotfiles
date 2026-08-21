@@ -310,6 +310,7 @@ module kubernetes {
             | from ssv
             | rename --block { ansi strip | str lowercase }
             | if ($instance | is-not-empty) { find $instance } else { $in }
+            | if ($in | is-not-empty) { $in } else { null }
         };
 
         if ($watch) {
@@ -321,31 +322,15 @@ module kubernetes {
     }
 
     # List and change context
-    export def "k context" [
+    export def "k ctx" [
         context: string@"nu-complete kubectl contexts"  # Context (fuzzy)
         namespace?: string@"nu-complete kubectl namespaces"  # Namespace
     ] {
         cache invalidate
 
-        let contexts = (kubectl config get-contexts | from ssv -a)
-        mut match = ($contexts | where NAME == $context)
-        if ($match | is-empty) {
-            $match = ($contexts | where NAME =~ $context)
-        }
-
-        if ($match | length) == 0 {
-            error make -u { msg: "No matching context found." }
-        }
-        if ($match | length) > 1 {
-            let names = ($match | get NAME | str join ", ")
-            error make -u { msg: $"Multiple contexts found: ($names)." }
-        }
-
-        let final_context = ($match | first | get NAME | to text)
-        kubectl config use-context $final_context o+e> (null-device);
-
+        kubectl config use-context $context o+e> (null-device);
         if ($namespace != null) {
-            kubectl config set-context $final_context --namespace $namespace o+e> (null-device);
+            kubectl config set-context $context --namespace $namespace o+e> (null-device);
         }
 
         return null;
