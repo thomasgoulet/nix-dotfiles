@@ -27,8 +27,8 @@
         '';
 
         zjstatus = pkgs.fetchurl {
-          url = "https://github.com/dj95/zjstatus/releases/download/v0.23.0/zjstatus.wasm";
-          sha256 = "1zv173qh67x4bf4k4m5fpz22vy0pbp6f88c0c7dkjhjj4c9901p0";
+          url = "https://github.com/dj95/zjstatus/releases/download/v0.25.0/zjstatus.wasm";
+          sha256 = "1zmqhzpqqhsz7smzm1bxxzhw7rhz4h3kkhzsr441jvp536rflb18";
         };
       in
       {
