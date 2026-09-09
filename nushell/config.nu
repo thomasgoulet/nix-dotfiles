@@ -54,7 +54,7 @@ let theme = {
     shape_garbage: red_underline
     shape_globpattern: cyan
     shape_int: purple
-    shape_internalcall: cyan
+    shape_internalcall: cyan_italic
     shape_list: blue
     shape_literal: blue
     shape_matching_brackets: { attr: u }
