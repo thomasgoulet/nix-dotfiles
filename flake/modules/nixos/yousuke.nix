@@ -19,7 +19,14 @@
 
   den.aspects.yousuke = {
     nixos =
-      { config, host, lib, modulesPath, pkgs, ... }:
+      {
+        config,
+        host,
+        lib,
+        modulesPath,
+        pkgs,
+        ...
+      }:
       {
         imports = [
           inputs.home-manager.nixosModules.home-manager
@@ -73,8 +80,14 @@
         # Set your time zone.
         time.timeZone = "Canada/Eastern";
 
+        i18n.defaultLocale = "en_US.UTF-8";
+        console = {
+          useXkbConfig = true; # use xkb.options in tty.
+        };
+
         # Enable the X11 windowing system.
         services.xserver.enable = true;
+        services.xserver.xkb.options = "caps:escape";
 
         # Enable touchpad support (enabled default in most desktopManager).
         services.libinput.enable = true;
@@ -82,21 +95,30 @@
         # Enable the OpenSSH daemon.
         services.openssh.enable = true;
 
-        boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+        boot.initrd.availableKernelModules = [
+          "xhci_pci"
+          "thunderbolt"
+          "nvme"
+          "usb_storage"
+          "sd_mod"
+        ];
         boot.initrd.kernelModules = [ ];
         boot.kernelModules = [ "kvm-intel" ];
         boot.extraModulePackages = [ ];
 
-        fileSystems."/" =
-          { device = "/dev/disk/by-label/root";
-            fsType = "ext4";
-          };
+        fileSystems."/" = {
+          device = "/dev/disk/by-label/root";
+          fsType = "ext4";
+        };
 
-        fileSystems."/boot" =
-          { device = "/dev/disk/by-label/boot";
-            fsType = "vfat";
-            options = [ "fmask=0022" "dmask=0022" ];
-          };
+        fileSystems."/boot" = {
+          device = "/dev/disk/by-label/boot";
+          fsType = "vfat";
+          options = [
+            "fmask=0022"
+            "dmask=0022"
+          ];
+        };
 
         swapDevices = [ ];
 
@@ -106,4 +128,3 @@
       };
   };
 }
-
