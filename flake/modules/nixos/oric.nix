@@ -26,7 +26,7 @@
           inputs.home-manager.nixosModules.home-manager
         ];
 
-        system.stateVersion = "25.11";
+        system.stateVersion = "26.05";
         nixpkgs.config.allowUnfree = true;
 
         nix.settings = {

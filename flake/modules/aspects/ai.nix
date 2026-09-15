@@ -24,7 +24,7 @@ let
       command = "nu-mcp";
       args = [
         "--tools-dir"
-        "$HOME/.config/nushell/tools"
+        "/home/thomas/.config/nushell/tools"
         "--enable-run-nu"
       ];
     };
@@ -78,6 +78,9 @@ in
         pkgs,
         ...
       }:
+      let
+        pkgs-stable = inputs'.nixpkgs-stable.legacyPackages;
+      in
       {
         imports = [
           (import ./_ai/opencode.nix {
@@ -97,7 +100,7 @@ in
           inputs'.nu-mcp.packages.default
 
           # tools
-          pkgs.pdf-oxide
+          pkgs-stable.pdf-oxide
         ];
 
         programs.mcp = {
