@@ -18,6 +18,11 @@
   };
 
   den.aspects.yousuke = {
+
+    includes = [
+      den.aspects.wayland
+    ];
+
     nixos =
       {
         host,
@@ -75,6 +80,7 @@
         time.timeZone = "Canada/Eastern";
         i18n.defaultLocale = "en_US.UTF-8";
 
+        services.displayManager.gdm.enable = true;
         services.xserver.enable = true;
         services.xserver.xkb.options = "caps:escape";
         console.useXkbConfig = true; # use xkb.options in tty.
