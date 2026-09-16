@@ -9,7 +9,7 @@
   ];
 
   den.hosts.x86_64-linux.yousuke = {
-    users.thomas = {
+    users.thom = {
       classes = [
         "homeManager"
         "user"
@@ -20,7 +20,6 @@
   den.aspects.yousuke = {
     nixos =
       {
-        config,
         host,
         lib,
         modulesPath,
@@ -30,101 +29,57 @@
       {
         imports = [
           inputs.home-manager.nixosModules.home-manager
+          (inputs.import-tree ./_yousuke)
           (modulesPath + "/installer/scan/not-detected.nix")
         ];
 
         system.stateVersion = "26.05";
         nixpkgs.config.allowUnfree = true;
 
-        nix.settings = {
-          auto-optimise-store = true;
-          experimental-features = [
-            "pipe-operators"
-            "nix-command"
-            "flakes"
-          ];
-          trusted-users = [
-            "root"
-            "thomas"
-          ];
+        networking.hostName = "yousuke";
+
+        nix = {
+          gc = {
+            automatic = true;
+            persistent = true;
+            dates = "Fri *-*-* 06:00:00";
+            options = "--delete-older-than 7d";
+          };
+          settings = {
+            auto-optimise-store = true;
+            experimental-features = [
+              "pipe-operators"
+              "nix-command"
+              "flakes"
+            ];
+            trusted-users = [
+              "root"
+              "thom"
+            ];
+          };
         };
 
-        nix.gc = {
-          automatic = true;
-          persistent = true;
-          dates = "Fri *-*-* 06:00:00";
-          options = "--delete-older-than 7d";
-        };
-
+        nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
         environment.systemPackages = [
           pkgs.nh
         ];
 
         environment.variables = {
-          NH_FLAKE = "/home/thomas/.config/flake";
+          NH_FLAKE = "/home/thom/.config/flake";
           NH_HOST = host.name;
         };
 
         home-manager.useUserPackages = true;
         home-manager.useGlobalPkgs = true;
 
-        # Use the systemd-boot EFI boot loader.
-        boot.loader.systemd-boot.enable = true;
-        boot.loader.efi.canTouchEfiVariables = true;
-
-        networking.hostName = "yousuke";
-
-        # Configure network connections interactively with nmcli or nmtui.
-        networking.networkmanager.enable = true;
-
-        # Set your time zone.
         time.timeZone = "Canada/Eastern";
-
         i18n.defaultLocale = "en_US.UTF-8";
-        console = {
-          useXkbConfig = true; # use xkb.options in tty.
-        };
 
-        # Enable the X11 windowing system.
         services.xserver.enable = true;
         services.xserver.xkb.options = "caps:escape";
+        console.useXkbConfig = true; # use xkb.options in tty.
 
-        # Enable touchpad support (enabled default in most desktopManager).
-        services.libinput.enable = true;
-
-        # Enable the OpenSSH daemon.
         services.openssh.enable = true;
-
-        boot.initrd.availableKernelModules = [
-          "xhci_pci"
-          "thunderbolt"
-          "nvme"
-          "usb_storage"
-          "sd_mod"
-        ];
-        boot.initrd.kernelModules = [ ];
-        boot.kernelModules = [ "kvm-intel" ];
-        boot.extraModulePackages = [ ];
-
-        fileSystems."/" = {
-          device = "/dev/disk/by-label/root";
-          fsType = "ext4";
-        };
-
-        fileSystems."/boot" = {
-          device = "/dev/disk/by-label/boot";
-          fsType = "vfat";
-          options = [
-            "fmask=0022"
-            "dmask=0022"
-          ];
-        };
-
-        swapDevices = [ ];
-
-        nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-        hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
       };
   };
 }
