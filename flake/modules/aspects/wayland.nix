@@ -27,6 +27,7 @@
           pkgs.alacritty
           pkgs.firefox
 
+          pkgs.noctalia-shell
           pkgs.xwayland-satellite
         ];
 

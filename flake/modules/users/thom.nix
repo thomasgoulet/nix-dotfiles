@@ -18,6 +18,10 @@
         home.username = "thom";
         home.homeDirectory = "/home/thom";
 
+        home.sessionVariables = {
+          ZELLIJ = "no-auto-attach";
+        };
+
         programs.git = {
           enable = true;
           settings = {

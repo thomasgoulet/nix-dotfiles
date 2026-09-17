@@ -11,13 +11,14 @@
       {
         config,
         lib,
+        osConfig,
         pkgs,
         ...
       }:
       let
         inherit (lib) concatStringsSep mapAttrsToList;
         env =
-          config.home.sessionVariables
+          (config.home.sessionVariables // osConfig.environment.variables)
           |> mapAttrsToList (name: value: "$env.${name} = \"${value}\"")
           |> concatStringsSep "\n";
       in
