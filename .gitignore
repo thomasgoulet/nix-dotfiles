@@ -5,6 +5,7 @@
 !.gitignore
 !argonaut/
 !flake/
+!herdr/
 !hl/
 !nix/
 !nushell/

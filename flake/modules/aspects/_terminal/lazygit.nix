@@ -1,4 +1,4 @@
-{ editorWrapper, ... }:
+{ ... }:
 {
   programs.lazygit = {
     enable = true;
@@ -54,7 +54,7 @@
         editAtLine = "hx +{{line}} {{filename}}";
         editInTerminal = true;
         openDirInEditor = "hx {{dir}}";
-        open = "${editorWrapper} {{filename}}";
+        open = "herdr.nu edit {{filename}}";
         openLink = "wsl-open {{link}}";
       };
     };

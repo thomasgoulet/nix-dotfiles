@@ -9,31 +9,10 @@
 
     homeManager =
       {
-        config,
-        lib,
         pkgs,
         ...
       }:
-      let
-        editorWrapper = pkgs.writeShellScript "editor-wrapper" ''
-          file="$1"
-          tab_id=$(zellij action list-tabs -j | jq -r '.[] | select(.active) | .tab_id')
-          editor_pane=$(zellij action list-panes -j -c -t  | jq -r --argjson tid "$tab_id" --arg editor "$EDITOR" '.[] | select(.tab_id == $tid and (.title // "" | endswith($editor)) or (.pane_command // "" | endswith($editor))) | .id')
-          if [ -z "$tab_id" ] || [ -z "$editor_pane" ]; then
-            exec $EDITOR "$file"
-          fi
-          zellij action write-chars -p "$editor_pane" ":o $file"
-          zellij action send-keys -p "$editor_pane" "Enter"
-        '';
-
-        zjstatus = pkgs.fetchurl {
-          url = "https://github.com/dj95/zjstatus/releases/download/v0.25.0/zjstatus.wasm";
-          sha256 = "1zmqhzpqqhsz7smzm1bxxzhw7rhz4h3kkhzsr441jvp536rflb18";
-        };
-      in
       {
-
-        _module.args = { inherit editorWrapper; };
 
         imports = [
           (inputs.import-tree ./_terminal)
@@ -43,7 +22,7 @@
 
           # Core functionality
           pkgs.carapace
-          pkgs.zellij
+          pkgs.herdr
 
           # General utilities
           pkgs.delta
@@ -57,10 +36,7 @@
           pkgs.sd
           pkgs.television
           pkgs.zoxide
-
         ];
-
-        xdg.configFile."zellij/zjstatus.wasm".source = zjstatus;
 
         programs.bat = {
           enable = true;

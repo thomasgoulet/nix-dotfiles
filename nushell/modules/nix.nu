@@ -13,10 +13,10 @@ module nix {
 
     ### Alias
 
-    export alias "nix diff" = nh os test --dry --diff always --hostname $env.NH_HOST;
-    export alias "nix switch" = nh os switch --diff always --hostname $env.NH_HOST;
-    export alias "nix update" = nh os switch --update --diff always --hostname $env.NH_HOST;
-    export alias "nix gc" = nh clean all;
+    export alias "nix diff" = herdr record "nix diff" 5sec { nh os test --dry --diff always --hostname $env.NH_HOST };
+    export alias "nix switch" = herdr record "nix switch" 5sec { nh os switch --diff always --hostname $env.NH_HOST };
+    export alias "nix update" = herdr record "nix update" 5sec { nh os switch --update --diff always --hostname $env.NH_HOST };
+    export alias "nix gc" = herdr record "nix gc" 5sec { nh clean all };
 
     ### Commands
 

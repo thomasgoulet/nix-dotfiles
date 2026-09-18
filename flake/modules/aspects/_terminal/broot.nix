@@ -1,4 +1,4 @@
-{ pkgs, editorWrapper, ... }:
+{ pkgs, ... }:
 let
   brootShell = pkgs.writeShellScript "broot-shell" ''nu -c "with-env {ESCAPE_MODE: 'file'} {nu}"'';
 in
@@ -178,7 +178,7 @@ in
           shortcut = "e";
           key = "enter";
           apply_to = "text_file";
-          execution = "${editorWrapper} {file}:{line}";
+          execution = "herdr.nu edit {file}:{line}";
           leave_broot = false;
         }
         {
@@ -186,7 +186,7 @@ in
           shortcut = "e";
           key = "ctrl-e";
           apply_to = "text_file";
-          execution = "${editorWrapper} {file}:{line}";
+          execution = "herdr.nu edit {file}:{line}";
           leave_broot = false;
         }
         {

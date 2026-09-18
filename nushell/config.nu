@@ -256,12 +256,8 @@ const NU_LIB_DIRS = [
 
 source az.nu; use az *
 source git.nu; use git *
+source herdr.nu; use herdr *
 source kubernetes.nu; use kubernetes *
 source nix.nu; use nix *
 source notes.nu; use notes *
 source zellij.nu; use zellij *
-
-# Open ZelliJ session if not inside one
-if not ("ZELLIJ" in $env) {
-    zellij attach -c (whoami)
-}

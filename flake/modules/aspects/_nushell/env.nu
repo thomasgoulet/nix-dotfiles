@@ -16,6 +16,7 @@ path add 'cargo/bin'
 path add '~/go/bin'
 path add '~/.local/bin'
 path add 'local/bin'
+path add '~/.config/nushell/scripts'
 
 $env.PATH = ($env.PATH | uniq)
 
