@@ -13,7 +13,6 @@ module aliases {
     export alias vpy = .venv/bin/python;
     export alias tf = terraform;
     export alias tg = terragrunt;
-    export alias notes = zellij action new-tab -c ~/notes -n notes;
 
     def "nu-complete labs" [] {
         ls ~/labs -s | get name;

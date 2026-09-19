@@ -34,7 +34,6 @@
           pkgs.nh
           pkgs.ripgrep
           pkgs.sd
-          pkgs.television
           pkgs.zoxide
         ];
 
@@ -48,7 +47,8 @@
         };
 
         programs.git.settings = {
-          core.pager = "delta";
+          credential.helper = "store";
+          push.autoSetupRemote = true;
           diff.colorMoved = "default";
           interactive.diffFilter = "delta --color-only";
           merge.conflictstyle = "diff3";
@@ -63,6 +63,11 @@
             hunk-header-style = "omit";
             file-style = "white";
           };
+        };
+
+        programs.difftastic = {
+          enable = true;
+          git.enable = true;
         };
 
         programs.starship = {

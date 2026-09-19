@@ -19,14 +19,8 @@
 
         home.username = "thomas";
         home.homeDirectory = "/home/thomas";
+        programs.git.enable = true;
 
-        programs.git = {
-          enable = true;
-          settings = {
-            credential.helper = "store";
-            push.autoSetupRemote = true;
-          };
-        };
       };
   };
 }

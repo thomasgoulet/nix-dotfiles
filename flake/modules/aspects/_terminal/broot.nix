@@ -211,7 +211,7 @@ in
           key = "b";
           invocation = "blame";
           apply_to = "text_file";
-          external = "zellij run --floating --name BLAME -- git blame {file}";
+          external = "herdr.nu run tab 0 -- git blame {file}";
           set_working_dir = true;
           leave_broot = false;
         }
@@ -219,7 +219,7 @@ in
           key = "d";
           invocation = "diff";
           apply_to = "text_file";
-          external = "zellij run --floating --name DIFF -- git -c diff.external=difft diff {file}";
+          external = "herdr.nu run tab 0 -- git diff {file}";
           set_working_dir = true;
           leave_broot = false;
         }
@@ -227,7 +227,7 @@ in
           key = "d";
           invocation = "diff";
           apply_to = "directory";
-          external = "zellij run --floating --name DIFF -- git -c diff.external=difft diff";
+          external = "herdr.nu run tab 0 -- git diff";
           set_working_dir = true;
           leave_broot = false;
         }
