@@ -209,7 +209,7 @@ $env.config = {
                 until: [
                     {
                         send: ExecuteHostCommand
-                        cmd: "commandline edit -a ' --help'; herdr pane send-keys $env.HERDR_PANE_ID enter;"
+                        cmd: 'nu -c $"(commandline) --help | bat"'
                     }
                 ]
             }
