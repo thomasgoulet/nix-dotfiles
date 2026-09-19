@@ -201,14 +201,16 @@ $env.config = {
     keybindings: [
         # Default keybindings
         {
-            name: help_menu
+            name: help
             modifier: control
             keycode: char_h
             mode: [emacs vi_normal vi_insert]
             event: {
                 until: [
-                    { send: menu name: help_menu}
-                    { send: menunext }
+                    {
+                        send: ExecuteHostCommand
+                        cmd: "commandline edit -a ' --help'; herdr pane send-keys $env.HERDR_PANE_ID enter;"
+                    }
                 ]
             }
         }
