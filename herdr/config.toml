@@ -1,8 +1,8 @@
 onboarding = false
 
 [theme]
-name = "catppuccin"
 auto_switch = false
+name = "catppuccin"
 
 [theme.custom]
 active_row_bg = "#181825"
@@ -14,12 +14,27 @@ default_shell = "nu"
 kitty_graphics = true
 
 [ui]
-pane_borders = "auto"
-host_cursor = "native"
-sidebar_start_collapsed = true
-hide_tab_bar_when_single_tab = true
-tab_bar_position = "bottom"
 accent = "white"
+hide_tab_bar_when_single_tab = true
+host_cursor = "native"
+pane_borders = "auto"
+sidebar_start_collapsed = true
+status_indicators = "dots"
+tab_bar_position = "bottom"
+
+[ui.toast.clipboard]
+position = "bottom-right"
+
+[ui.sidebar.spaces]
+row_gap = 1
+
+[ui.sidebar.agents]
+row_gap = 1
+rows = [
+  ["state_icon", "state_text"],
+  [{token = "agent", fg = "#cdd6f4", dim = false}, "workspace"],
+  [{token = "terminal_title", fg = "#6c7086", dim = false}]
+]
 
 [ui.toast]
 delivery = "herdr"
@@ -46,3 +61,22 @@ rename_workspace = "alt+shift+r"
 zoom = "alt+shift+f"
 goto = "alt+s"
 copy_mode = "prefix+y"
+open_worktree = "prefix+g"
+remove_worktree = "prefix+d"
+
+[[keys.command]]
+key = "prefix+f"
+type = "popup"
+command = "nu -c 'with-env { ESCAPE_MODE: floating } { nu }'"
+description = "open floating terminal"
+
+[[keys.command]]
+key = "prefix+t"
+type = "popup"
+command = "tuxedo"
+description = "open tasks"
+width = "80%"
+height = "80%"
+
+[worktrees]
+directory = "~/repos/worktrees"

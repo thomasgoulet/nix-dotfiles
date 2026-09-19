@@ -144,7 +144,20 @@ $env.config = {
 
     show_banner: false
 
+    max_last_result_size: 256mib
+
     hooks: {
+        pre_execution: [{
+            if ("HERDR_PANE_ID" in $env) {
+                let command = (commandline | split words | get -o 0 | default "")
+                herdr pane rename $env.HERDR_PANE_ID $command o> /dev/null
+            }
+        }]
+        pre_prompt: [{
+            if ("HERDR_PANE_ID" in $env) {
+                herdr pane rename $env.HERDR_PANE_ID nu o> /dev/null
+            }
+        }]
         display_output: { ||
             if ((term size).columns >= 100) { table -e } else { table }
         }

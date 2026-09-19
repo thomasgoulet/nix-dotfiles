@@ -19,20 +19,35 @@ export def herdr-edit [
         return;
     }
 
-    let panes = (herdr pane list --workspace $env.HERDR_WORKSPACE_ID | from json | get result.panes);
-    let editor_filter = { $in | where scroll.max_offset_from_bottom == 0 and terminal_title =~ $env.EDITOR }
+    let editor_filter = { where {
+        $in.scroll.max_offset_from_bottom == 0 and (
+            (
+                ($in.terminal_title? | default "") =~ $env.EDITOR
+            ) or (
+                ($in.agent? | default "") =~ $env.EDITOR
+            ) or (
+                ($in.label? | default "") =~ $env.EDITOR
+            )
+        )
+    }};
 
-    let editor_in_tab = ($panes | where tab_id == $env.HERDR_TAB_ID | do $editor_filter);
+    let panes = (
+        herdr pane list --workspace $env.HERDR_WORKSPACE_ID
+        | from json
+        | get result.panes
+        | do $editor_filter
+    );
+
+    let editor_in_tab = ($panes | where tab_id == $env.HERDR_TAB_ID);
     if ($editor_in_tab | length) > 0 {
         let pane_id = ($editor_in_tab | first | get pane_id);
         herdr-edit-send-file $pane_id $file;
         return;
     }
 
-    let editor_in_workspace = ($panes | do $editor_filter);
-    if ($editor_in_workspace | length) > 0 {
-        let pane_id = ($editor_in_workspace | first | get pane_id);
-        let tab_id = ($editor_in_workspace | first | get tab_id);
+    if ($panes | length) > 0 {
+        let pane_id = ($panes | first | get pane_id);
+        let tab_id = ($panes | first | get tab_id);
         herdr-edit-send-file $pane_id $file;
         herdr tab focus $tab_id;
         return;
