@@ -20,7 +20,7 @@
   den.aspects.yousuke = {
 
     includes = [
-      den.aspects.wayland
+      den.aspects.niri
     ];
 
     nixos =
@@ -66,8 +66,24 @@
 
         nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
         environment.systemPackages = [
+          pkgs.cascadia-code
           pkgs.nh
         ];
+
+        fonts = {
+          enableDefaultPackages = true;
+          packages = [
+            pkgs.nerd-fonts.caskaydia-cove
+          ];
+          fontconfig = {
+            enable = true;
+            defaultFonts = {
+              monospace = [ "CaskaydiaCove Nerd Font" ];
+              sansSerif = [ "Noto Sans" ];
+              serif = [ "Noto Serif" ];
+            };
+          };
+        };
 
         environment.variables = {
           NH_FLAKE = "/home/thom/.config/flake";
@@ -86,6 +102,7 @@
         console.useXkbConfig = true; # use xkb.options in tty.
 
         services.openssh.enable = true;
+        services.upower.enable = true;
       };
   };
 }

@@ -4,6 +4,7 @@
 
     includes = [
       den.aspects.docker
+      den.aspects.niri
       den.aspects.notes
       den.aspects.terminal
       den.batteries.primary-user
@@ -18,17 +19,7 @@
         home.username = "thom";
         home.homeDirectory = "/home/thom";
 
-        home.sessionVariables = {
-          ZELLIJ = "no-auto-attach";
-        };
-
-        programs.git = {
-          enable = true;
-          settings = {
-            credential.helper = "store";
-            push.autoSetupRemote = true;
-          };
-        };
+        programs.git.enable = true;
       };
   };
 }

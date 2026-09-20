@@ -1,13 +1,20 @@
-{ den, ... }:
+{ den, inputs, ... }:
 {
-  den.aspects.wayland = {
+  den.aspects.niri = {
 
     nixos =
       { pkgs, ... }:
       {
+        imports = [
+          inputs.niri.nixosModules.niri
+        ];
+
         hardware.graphics.enable = true;
 
-        programs.niri.enable = true;
+        programs.niri = {
+          enable = true;
+          package = inputs.niri.packages.${pkgs.system}.niri-unstable;
+        };
 
         xdg.portal = {
           enable = true;
@@ -27,11 +34,17 @@
           pkgs.alacritty
           pkgs.firefox
 
+          pkgs.fuzzel
+
           pkgs.noctalia-shell
           pkgs.xwayland-satellite
         ];
 
       };
+
+    homeManager = {
+      programs.niri.config = builtins.readFile ./_niri/config.kdl;
+    };
 
   };
 }
