@@ -18,7 +18,7 @@
       let
         inherit (lib) concatStringsSep mapAttrsToList;
         env =
-          (config.home.sessionVariables // osConfig.environment.variables)
+          ((removeAttrs osConfig.environment.variables [ "PATH" ]) // config.home.sessionVariables)
           |> mapAttrsToList (name: value: "$env.${name} = \"${value}\"")
           |> concatStringsSep "\n";
       in
