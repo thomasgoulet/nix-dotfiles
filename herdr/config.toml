@@ -78,6 +78,14 @@ command = "drydock"
 description = "open list of repos"
 
 [[keys.command]]
+key = "prefix+n"
+type = "popup"
+command = "leaf $ZK_NOTEBOOK_DIR"
+description = "open notes"
+width = "80%"
+height = "80%"
+
+[[keys.command]]
 key = "prefix+t"
 type = "popup"
 command = "tuxedo"
