@@ -29,7 +29,7 @@ in
 {
   home.packages = [ leaf ];
 
-  home.file."${config.home.homeDirectory}/.config/leaf/config.toml" = {
+  xdg.configFile."leaf/config.toml" = {
     source = (pkgs.formats.toml { }).generate "leaf-settings.toml" {
       editor = "hx {$path}:{$line}";
       file-history-length = 10;
@@ -38,7 +38,7 @@ in
     };
   };
 
-  home.file."${config.home.homeDirectory}/.config/leaf/theme.toml" = {
+  xdg.configFile."leaf/theme.toml" = {
     source = (pkgs.formats.toml { }).generate "leaf-theme.toml" {
       base = "ocean";
       markdown = {

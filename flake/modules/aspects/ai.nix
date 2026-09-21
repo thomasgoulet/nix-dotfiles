@@ -182,7 +182,7 @@ in
             );
         };
 
-        home.file."${config.home.homeDirectory}/.config/copilot/settings.json" = {
+        xdg.configFile."copilot/settings.json" = {
           source = (pkgs.formats.json { }).generate "github-copilot-cli-settings.json" {
             autoUpdate = false;
             theme = "default";

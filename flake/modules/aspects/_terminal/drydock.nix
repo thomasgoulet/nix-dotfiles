@@ -30,7 +30,7 @@ in
 {
   home.packages = [ drydock ];
 
-  home.file."${config.home.homeDirectory}/.config/drydock/config.toml" = {
+  xdg.configFile."drydock/config.toml" = {
     source = (pkgs.formats.toml { }).generate "drydock-settings.toml" {
       exclude = [ ];
       follow_nested_repos = false;
