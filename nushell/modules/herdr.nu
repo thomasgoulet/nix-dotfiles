@@ -15,7 +15,7 @@ module herdr {
         remove_timeout: duration  # Time to wait before clearing the agent
         closure: closure  # Closure to execute
     ] {
-        if ("HERDR_ENV" not-in $env) {
+        if ("HERDR_PANE_ID" not-in $env) {
             do $closure;
             return;
         }

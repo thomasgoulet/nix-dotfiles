@@ -61,7 +61,8 @@ rename_workspace = "alt+shift+r"
 zoom = "alt+shift+f"
 goto = "alt+s"
 copy_mode = "prefix+y"
-open_worktree = "prefix+g"
+open_worktree = "prefix+c"
+new_worktree = "prefix+shift+c"
 remove_worktree = "prefix+d"
 
 [[keys.command]]
@@ -69,6 +70,12 @@ key = "prefix+f"
 type = "popup"
 command = "nu -c 'with-env { ESCAPE_MODE: floating } { nu }'"
 description = "open floating terminal"
+
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "drydock"
+description = "open list of repos"
 
 [[keys.command]]
 key = "prefix+t"
