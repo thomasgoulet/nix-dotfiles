@@ -82,9 +82,9 @@
 
         systemd.services.init-excalidash-network = {
           description = "Create the docker network shared by ExcaliDash containers";
-          after = [ "docker.service" ];
+          wants = [ "multi-user.target" ];
+          after = [ "multi-user.target" ];
           requires = [ "docker.service" ];
-          wantedBy = [ "multi-user.target" ];
           serviceConfig.Type = "oneshot";
           serviceConfig.RemainAfterExit = true;
           path = [ config.virtualisation.docker.package ];
