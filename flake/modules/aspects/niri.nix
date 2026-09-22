@@ -34,8 +34,7 @@
           pkgs.alacritty
           pkgs.firefox
 
-          pkgs.fuzzel
-          pkgs.noctalia-shell
+          pkgs.noctalia
           pkgs.xwayland-satellite
         ];
 
@@ -93,16 +92,15 @@
                 action.spawn = "alacritty";
               };
               "Mod+D" = {
-                hotkey-overlay.title = "Run an Application: fuzzel";
-                action.spawn = "fuzzel";
+                hotkey-overlay.title = "Run an Application";
+                action.spawn-sh = "noctalia msg panel-toggle launcher";
               };
               "Super+Escape" = {
                 hotkey-overlay.title = "Lock the Screen";
                 action.spawn = [
-                  "noctalia-shell"
-                  "ipc"
-                  "call"
-                  "lockScreen"
+                  "noctalia"
+                  "msg"
+                  "session"
                   "lock"
                 ];
               };
@@ -223,10 +221,9 @@
             };
 
             switch-events.lid-close.action.spawn = [
-              "noctalia-shell"
-              "ipc"
-              "call"
-              "lockScreen"
+              "noctalia"
+              "msg"
+              "session"
               "lock"
             ];
 
@@ -271,7 +268,7 @@
             };
 
             spawn-at-startup = [
-              { argv = [ "noctalia-shell" ]; }
+              { argv = [ "noctalia" ]; }
             ];
 
             hotkey-overlay.skip-at-startup = true;
