@@ -107,6 +107,7 @@
       "S-tab" = "jump_forward";
       space = {
         space = ":wa";
+        "B" = ":sh git blame %{buffer_name} -L %{cursor_line},-1 -p";
         "C" = ":bc!";
         "c" = ":bc";
         "F" = "file_picker_in_current_buffer_directory";
@@ -160,8 +161,12 @@
       };
       backspace = {
         a = ":sh herdr.nu run tab 0 opencode";
+        b = ":sh herdr.nu run tab 0 git blame %{buffer_name}";
         f = ":sh herdr.nu run pane 0.7 broot";
         g = ":sh herdr.nu run pane 0.5 lazygit o> /dev/null";
+        p = ":sh herdr.nu run pane 0.5 leaf %{buffer_name} o> /dev/null";
+        s = ":sh nix.nu toggle-symlink %{buffer_name}";
+        S = ":sh herdr.nu run pane 0.5 nix.nu diff-symlink %{buffer_name}";
       };
     };
   };

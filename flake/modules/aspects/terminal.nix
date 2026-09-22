@@ -50,6 +50,7 @@
           credential.helper = "store";
           push.autoSetupRemote = true;
           diff.colorMoved = "default";
+          core.pager = "delta";
           interactive.diffFilter = "delta --color-only";
           merge.conflictstyle = "diff3";
 
