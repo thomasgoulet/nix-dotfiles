@@ -1,7 +1,9 @@
 input {
     keyboard {
         xkb {
-            options "caps:escape"
+            options "caps:escape,grp:win_space_toggle"
+            layout "ca,ca"
+            variant "eng,fr"
         }
     }
 

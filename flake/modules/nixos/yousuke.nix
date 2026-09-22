@@ -73,14 +73,16 @@
         fonts = {
           enableDefaultPackages = true;
           packages = [
+            pkgs.inter
+            pkgs.lora
             pkgs.nerd-fonts.caskaydia-cove
           ];
           fontconfig = {
             enable = true;
             defaultFonts = {
               monospace = [ "CaskaydiaCove Nerd Font" ];
-              sansSerif = [ "Noto Sans" ];
-              serif = [ "Noto Serif" ];
+              sansSerif = [ "Inter" ];
+              serif = [ "Lora" ];
             };
           };
         };
@@ -97,8 +99,8 @@
         i18n.defaultLocale = "en_US.UTF-8";
 
         services.displayManager.gdm.enable = true;
-        services.xserver.enable = true;
         services.xserver.xkb.options = "caps:escape";
+        services.xserver.xkb.layout = "ca";
         console.useXkbConfig = true; # use xkb.options in tty.
 
         services.openssh.enable = true;

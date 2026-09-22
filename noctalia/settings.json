@@ -630,9 +630,9 @@
     },
     "ui": {
         "boxBorderEnabled": false,
-        "fontDefault": "CaskaydiaCove Nerd Font",
+        "fontDefault": "CaskaydiaCove NF",
         "fontDefaultScale": 1,
-        "fontFixed": "CaskaydiaCove Nerd Font",
+        "fontFixed": "CaskaydiaCove NF",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 1,
         "panelsAttachedToBar": true,
