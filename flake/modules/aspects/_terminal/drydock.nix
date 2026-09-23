@@ -38,7 +38,7 @@ in
       max_depth = 2;
       prune = [ ];
       refresh = {
-        debounce = "1s";
+        debounce = "30s";
         interval = "5m";
         watch = true;
       };
