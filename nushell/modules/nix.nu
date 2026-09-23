@@ -1,4 +1,6 @@
-module nix {
+use herdr.nu
+
+export module mod {
 
     ### Completions
 
@@ -13,14 +15,14 @@ module nix {
 
     ### Alias
 
-    export alias "nix diff" = herdr record "nix diff" 5sec { nh os test --dry --diff always --hostname $env.NH_HOST };
-    export alias "nix switch" = herdr record "nix switch" 5sec { nh os switch --diff always --hostname $env.NH_HOST };
-    export alias "nix update" = herdr record "nix update" 5sec { nh os switch --update --diff always --hostname $env.NH_HOST };
-    export alias "nix gc" = herdr record "nix gc" 5sec { nh clean all };
+    export alias diff = herdr record "nix diff" 5sec { nh os test --dry --diff always --hostname $env.NH_HOST };
+    export alias switch = herdr record "nix switch" 5sec { nh os switch --diff always --hostname $env.NH_HOST };
+    export alias update = herdr record "nix update" 5sec { nh os switch --update --diff always --hostname $env.NH_HOST };
+    export alias gc = herdr record "nix gc" 5sec { nh clean all };
 
     ### Commands
 
-    export def "to nix" []: any -> any {
+    export def to-nix []: any -> any {
         $in
         | to json
         | with-env {data: $"($in)"} {
@@ -29,13 +31,13 @@ module nix {
     }
 
     # List all available generations
-    export def "nix generations" [] {
+    export def generations [] {
         nu-complete nix generations
         | rename ID DATE VERSION CURRENT;
     }
 
     # Rollback to a specific generation or the previous one
-    export def "nix rollback" [
+    export def rollback [
         generation?: int@"nu-complete nix generations"  # Optional: generation ID to rollback to
     ] {
         if ($generation == null) {
@@ -47,12 +49,12 @@ module nix {
     }
 
     # Open Nix REPL with flake loaded
-    export def "nix flake-repl" [] {
+    export def flake-repl [] {
         nix repl --expr $"builtins.getFlake \"($env.NH_FLAKE)\"";
     }
 
     # Launch a nix shell with the specified packages installed
-    export def "nix install" [
+    export def install [
         ...packages  # Packages to temporarily install
     ] {
         nix-shell --command $"ESCAPE_MODE=\"($packages)\" nu" -p ...$packages;

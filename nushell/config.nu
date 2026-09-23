@@ -254,9 +254,13 @@ if ("ESCAPE_MODE" in $env) {
     })
 }
 
+const NU_LIB_DIRS = [
+    '~/.config/nushell/modules'
+]
+
 # Required modules
 use std *
-source ~/.config/nushell/modules/cache.nu; use cache
+use cache.nu
 
 # Third-party
 source ~/.cache/starship/init.nu
@@ -265,15 +269,10 @@ source ~/.cache/zoxide/init.nu
 # Source aliases
 source ~/.config/nushell/aliases.nu; use aliases *
 
-const NU_LIB_DIRS = [
-    '~/.config/nushell/modules'
-]
-
-source az.nu; use az *
-source git.nu; use git *
-source herdr.nu; use herdr *
-source kubernetes.nu; use kubernetes *
-source nix.nu; use nix *
-source notes.nu; use notes *
-
+use az.nu
 use devops *
+use git.nu
+use herdr.nu *
+use kubernetes.nu *
+use nix.nu
+use notes.nu *

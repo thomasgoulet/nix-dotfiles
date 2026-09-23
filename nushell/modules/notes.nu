@@ -1,6 +1,6 @@
 use ../tools/tasks/todo_format.nu *
 
-module notes {
+export module mod {
 
     export alias n = zk;
     export alias t = tuxedo;

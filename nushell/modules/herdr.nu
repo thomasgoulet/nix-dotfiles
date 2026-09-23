@@ -1,4 +1,4 @@
-module herdr {
+export module mod {
 
     export alias h = herdr;
 
@@ -10,7 +10,7 @@ module herdr {
     }
 
     # Record a closure's execution in herdr
-    export def "herdr record" [
+    export def record [
         id: string  # Id for the process
         remove_timeout: duration  # Time to wait before clearing the agent
         closure: closure  # Closure to execute

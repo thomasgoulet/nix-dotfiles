@@ -1,6 +1,4 @@
-use devops/pull_request.nu *
-
-module az {
+export module mod {
 
     def "nu-complete azurecli subscriptions" [] {
         cache hit az.subscriptions 60 {
@@ -12,16 +10,10 @@ module az {
         };
     }
 
-    # Changes your subscription for you
-    export def "az subscription" [
+    # Changes azure-cli subscription
+    export def sub [
         subscription: string@"nu-complete azurecli subscriptions"  # Subscription to switch to
     ] {
         az account set -s $subscription;
-    }
-
-    export def "az pr list" [
-        project: string  # DevOps project to list PR for
-    ] {
-        pull-request-list-active $project
     }
 }

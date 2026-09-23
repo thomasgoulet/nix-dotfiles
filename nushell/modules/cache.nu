@@ -1,4 +1,5 @@
-module cache {
+# This module is intended to be used by other modules
+export module mod {
 
     # Returns the cache result if available or executes the given closure
     export def hit [

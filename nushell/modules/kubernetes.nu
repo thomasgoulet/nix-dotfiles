@@ -1,4 +1,4 @@
-module kubernetes {
+export module mod {
 
     ### Aliases
 

@@ -1,18 +1,18 @@
-module git {
+export module mod {
 
     def "nu-complete git tags" [] {
         git tag -l | lines | reverse 
     }
 
     # List all commits since a specific tag or commit
-    export def "git changelog" [
+    export def changelog [
         tag_or_commit: string@"nu-complete git tags"  # Tag from which to start listing commits
     ] {
         git log --oneline $"($tag_or_commit)..HEAD";
     }
 
     # Pull all repos under the current folder recursively
-    export def "git pull-subdirectories" [
+    export def pull-subdirectories [
         branch = "master"  # Default branch name to use
     ] {
         if (".git" | path exists) {
@@ -30,7 +30,7 @@ module git {
         return;
     }
 
-    export def "git push-bundle" [
+    export def push-bundle [
         branch: string  # Branch name to create the bundle from
     ] {
         let bundle = (git remote get-url origin);
