@@ -63,7 +63,6 @@
 
               focus-follows-mouse = {
                 enable = true;
-                max-scroll-amount = "30%";
               };
             };
 
@@ -242,7 +241,7 @@
               focus-ring = {
                 enable = true;
                 width = 2;
-                active.color = "#a6adc8";
+                active.color = "#45475a";
               };
 
               border.enable = false;
@@ -283,15 +282,6 @@
                   }
                 ];
                 default-column-width = { };
-              }
-              {
-                matches = [
-                  {
-                    app-id = "firefox$";
-                    title = "^Picture-in-Picture$";
-                  }
-                ];
-                open-floating = true;
               }
               {
                 geometry-corner-radius = {

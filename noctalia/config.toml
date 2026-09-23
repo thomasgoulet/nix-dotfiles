@@ -203,13 +203,15 @@ enabled = false
 
 [theme]
 builtin = "Catppuccin"
-community_palette = "Catppuccin Mocha Sapphire"
+community_palette = "Catppuccin Mocha Blue"
 mode = "dark"
 source = "community"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    community_ids = [ "zen-browser" ]
+    builtin_ids = [ "alacritty" ]
+    community_ids = []
+    enable_community_templates = false
 
 [wallpaper]
 directory = "/home/thom/Pictures/Wallpaper"
