@@ -76,6 +76,7 @@ key = "prefix+g"
 type = "popup"
 command = "drydock"
 description = "open list of repos"
+width = "80%"
 
 [[keys.command]]
 key = "prefix+n"

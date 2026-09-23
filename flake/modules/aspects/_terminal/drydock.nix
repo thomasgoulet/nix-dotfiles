@@ -35,7 +35,7 @@ in
       exclude = [ ];
       follow_nested_repos = false;
       follow_symlinks = false;
-      max_depth = 4;
+      max_depth = 2;
       prune = [ ];
       refresh = {
         debounce = "1s";
