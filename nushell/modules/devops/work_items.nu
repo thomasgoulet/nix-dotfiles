@@ -1,5 +1,5 @@
 
-def format-work-items []: string -> any {
+export def format-work-items []: string -> any {
 
     # Mapping for WI fields
     const workitem_fields = {
@@ -66,7 +66,7 @@ export def work-item-details [
 }
 
 # Recursively obtain related work item details
-def resolve-work-item-relation [
+export def resolve-work-item-relation [
     depth: int  # Depth at which to resolve work item details of child or parent items
     direction: list<string>  # Direction in which related items are resolved (i.e. `[Child]` will only resolve child items and not parents)
 ]: record -> record {

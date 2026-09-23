@@ -1,4 +1,4 @@
-def format-pull-requests []: string -> any {
+export def format-pull-requests []: string -> any {
 
     const pr_fields = {
         id: $.pullRequestId
@@ -43,7 +43,7 @@ export def format-comments []: string -> any {
 export def pull-request-list-active [
     project: string  # DevOps project name
 ] {
-    az repos pr list --project $project --status active -o json
+    az repos pr list --detect false --project $project --status active -o json
     | format-pull-requests
 }
 
@@ -55,7 +55,7 @@ export def pull-request-list-recently-updated [
     let date_string = $date | format date "%Y-%m-%d";
     let query = $"[?creationDate > '($date_string)' || closedDate > '($date_string)']"
 
-    az repos pr list --project $project --status all --query $query -o json
+    az repos pr list --detect false --project $project --status all --query $query -o json
     | format-pull-requests
 }
 
@@ -64,7 +64,7 @@ export def pull-request-details [
     id: string  # ID of the pull request
     include_comments: bool = true  # Fetch and include comment threads
 ] {
-    let pr = (az repos pr show --id $id -o json);
+    let pr = (az repos pr show --detect false --id $id -o json);
 
     if not $include_comments {
         return ($pr | format-pull-requests)
@@ -74,7 +74,7 @@ export def pull-request-details [
     let repository_param = $"repositoryId=($pr | from json | get repository.id)"
     let pr_param = $"pullRequestId=($id)"
 
-    let comments = (az devops invoke --area git --resource pullRequestThreads --route-parameters $project_param $repository_param $pr_param --api-version 7.1)
+    let comments = (az devops invoke --detect false --area git --resource pullRequestThreads --route-parameters $project_param $repository_param $pr_param --api-version 7.1)
 
     $pr
     | format-pull-requests

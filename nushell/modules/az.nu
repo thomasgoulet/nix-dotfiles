@@ -1,4 +1,4 @@
-use ../tools/devops/pull_request.nu *
+use devops/pull_request.nu *
 
 module az {
 

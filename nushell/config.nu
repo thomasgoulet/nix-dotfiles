@@ -275,3 +275,5 @@ source herdr.nu; use herdr *
 source kubernetes.nu; use kubernetes *
 source nix.nu; use nix *
 source notes.nu; use notes *
+
+use devops *

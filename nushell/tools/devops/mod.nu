@@ -1,8 +1,6 @@
-
-use utils.nu *
-
-use pull_request.nu *
-use work_items.nu *
+use ../modules/devops/pull_request.nu *
+use ../modules/devops/utils.nu *
+use ../modules/devops/work_items.nu *
 
 def main [] {
     help main
