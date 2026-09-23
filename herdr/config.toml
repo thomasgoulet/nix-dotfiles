@@ -33,7 +33,6 @@ row_gap = 1
 rows = [
   ["state_icon", "state_text"],
   [{token = "agent", fg = "#cdd6f4", dim = false}, "workspace"],
-  [{token = "terminal_title", fg = "#6c7086", dim = false}]
 ]
 
 [ui.toast]
@@ -51,6 +50,8 @@ previous_tab = "alt+shift+h"
 next_tab = "alt+shift+l"
 previous_workspace = "alt+shift+k"
 next_workspace = "alt+shift+j"
+previous_agent = "alt+shift+u"
+next_agent = "alt+shift+n"
 split_vertical = ["prefix+v", "alt+n"]
 new_tab = "alt+t"
 new_workspace = "alt+w"
