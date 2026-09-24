@@ -49,7 +49,7 @@ export def work-item-list-recent [
     let date_string = $date | format date "%Y-%m-%d";
     let query = $"SELECT * FROM WorkItems WHERE [System.TeamProject] = '($project)' AND \([System.CreatedDate] >= '($date_string)' OR [System.ChangedDate] >= '($date_string)'\)";
 
-    az boards query --project $project --wiql $query -o json
+    az boards query --detect false --project $project --wiql $query -o json
     | format-work-items
     | reject relations
 }
@@ -60,7 +60,7 @@ export def work-item-details [
     depth: int = 0  # Depth at which to resolve work item details of child or parent items
     direction: list<string> = [Child Parent]  # Direction in which related items are resolved (i.e. `[Child]` will only resolve child items and not parents)
 ] {
-    az boards work-item show --id $id
+    az boards work-item show --detect false --id $id
     | format-work-items
     | resolve-work-item-relation $depth $direction
 }
