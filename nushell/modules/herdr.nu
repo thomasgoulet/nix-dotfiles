@@ -6,7 +6,7 @@ export module mod {
     export def edit [
         ...args: string  # Arguments to pass to $EDITOR
     ] {
-        herdr record $"($env.EDITOR) ($args | str join ' ')" 0sec { run-external $env.EDITOR }
+        record $"($env.EDITOR) ($args | str join ' ')" 0sec { run-external $env.EDITOR }
     }
 
     # Record a closure's execution in herdr
