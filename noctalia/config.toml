@@ -8,10 +8,27 @@ order = [ "default" ]
     capsule = true
     capsule_radius = 4
     center = [ "workspaces" ]
-    end = [ "tray", "notifications", "clipboard", "network", "volume", "battery", "session" ]
-    position = "left"
+    end = [
+        "tray",
+        "clipboard",
+        "screenshot",
+        "theme_mode",
+        "spacer_1",
+        "notifications",
+        "network",
+        "spacer_2",
+        "keyboard_layout",
+        "volume",
+        "brightness",
+        "battery",
+        "spacer_3",
+        "session"
+    ]
+    margin_ends = 0
+    padding = 8
+    position = "bottom"
     radius = 4
-    start = [ "launcher", "date", "clock" ]
+    start = [ "launcher", "custom_button_2", "clock", "date" ]
     thickness = 40
 
         [bar.default.dead_zone.actions]
@@ -154,6 +171,7 @@ corner_radius_scale = 0.5000000074505806
 font_family = "CaskaydiaCove Nerd Font"
 input_borders = false
 niri_overview_type_to_launch_enabled = true
+offline_mode = true
 polkit_agent = true
 popup_borders = false
 time_format = "{:%H:%M:%S}"
@@ -167,8 +185,9 @@ time_format = "{:%H:%M:%S}"
 
     [shell.launcher]
     categories = false
-    compact = true
-    pinned = [ "Firefox" ]
+    compact = false
+    fetch_exchange_rates = false
+    pinned = []
     show_app_actions = true
     show_icons = false
 
@@ -210,29 +229,41 @@ wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = [ "alacritty" ]
-    community_ids = []
-    enable_community_templates = false
+    community_ids = [ "spicetify", "zen-browser" ]
+    enable_community_templates = true
 
 [wallpaper]
-directory = "/home/thom/Pictures/Wallpaper"
+directory = "/home/thom/.config/wallpaper"
 fill_color = "on_primary"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/thom/Pictures/Wallpaper/wallpaper.png"
+    path = "/home/thom/.config/wallpaper/catppuccin.jpg"
 
     [wallpaper.last]
-    path = "/home/thom/Pictures/Wallpaper/wallpaper.png"
+    path = "/home/thom/.config/wallpaper/catppuccin.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/thom/Pictures/Wallpaper/wallpaper.png"
+    path = "/home/thom/.config/wallpaper/catppuccin.jpg"
 
 [widget.clock]
+capsule = true
+capsule_fill = "primary"
+capsule_foreground = "on_primary"
 format = "{:%H:%M:%S}"
+
+[widget.custom_button_2]
+glyph = "terminal"
+tooltip = "Terminal"
+type = "custom_button"
+
+    [widget.custom_button_2.actions]
+    left = "exec alacritty"
+    middle = "none"
 
 [widget.date]
 capsule_radius = 4
-format = "{:%y %m %d}"
+format = "{:%y-%m-%d}"
 
 [widget.media]
 hide_when_no_media = true
@@ -240,10 +271,25 @@ hide_when_no_media = true
 [widget.network]
 show_label = false
 
+[widget.spacer_1]
+type = "spacer"
+
+[widget.spacer_2]
+type = "spacer"
+
+[widget.spacer_3]
+type = "spacer"
+
+[widget.taskbar]
+only_active_workspace = true
+
 [widget.workspaces]
+active_pill_size = 2.0
 capsule = true
 capsule_fill = "surface"
-focused_color = "tertiary"
-occupied_color = "on_surface_variant"
+focused_color = "primary"
+occupied_color = "secondary"
+pill_scale = 0.5
 scale = 1.5
-style = "minimal"
+show_labels = false
+style = "regular"

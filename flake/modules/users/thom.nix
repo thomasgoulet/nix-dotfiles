@@ -3,7 +3,6 @@
   den.aspects.thom = {
 
     includes = [
-      den.aspects.browser
       den.aspects.docker
       den.aspects.niri
       den.aspects.notes

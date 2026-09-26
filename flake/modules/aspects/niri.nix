@@ -23,6 +23,18 @@
           ];
         };
 
+        services.displayManager.noctalia-greeter = {
+          enable = true;
+          settings = {
+            cursor.size = 24;
+            keyboard.layout = "us";
+          };
+          cursorTheme = {
+            package = pkgs.bibata-cursors;
+            name = "Bibata-Modern-Ice";
+          };
+        };
+
         security.polkit.enable = true;
 
         environment.sessionVariables = {
@@ -32,10 +44,11 @@
         environment.systemPackages = [
           # TODO Remove these once config is improved
           pkgs.alacritty
-          pkgs.firefox
 
           pkgs.noctalia
           pkgs.xwayland-satellite
+
+          inputs.zen-browser.packages.${pkgs.system}.default
         ];
 
       };
@@ -43,10 +56,17 @@
     homeManager =
       { pkgs, ... }:
       {
+        home.packages = [ pkgs.bibata-cursors ];
+
         programs.niri = {
           package = inputs.niri.packages.${pkgs.system}.niri-unstable;
 
           settings = {
+            cursor = {
+              theme = "Bibata-Modern-Classic";
+              size = 24;
+            };
+
             input = {
               keyboard.xkb = {
                 options = "caps:escape,grp:win_space_toggle";
@@ -62,7 +82,7 @@
               };
 
               focus-follows-mouse = {
-                enable = true;
+                enable = false;
               };
             };
 
@@ -225,6 +245,10 @@
               "session"
               "lock"
             ];
+
+            overview = {
+              backdrop-color = "#1e1e2e";
+            };
 
             layout = {
               gaps = 8;

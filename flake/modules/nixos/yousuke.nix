@@ -65,6 +65,7 @@
         };
 
         nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
         environment.systemPackages = [
           pkgs.cascadia-code
           pkgs.nh
