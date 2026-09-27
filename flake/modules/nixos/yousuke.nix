@@ -19,10 +19,6 @@
 
   den.aspects.yousuke = {
 
-    includes = [
-      den.aspects.niri
-    ];
-
     nixos =
       {
         host,

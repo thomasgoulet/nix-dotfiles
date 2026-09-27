@@ -4,7 +4,7 @@
 
     includes = [
       den.aspects.docker
-      den.aspects.niri
+      den.aspects.headful
       den.aspects.notes
       den.aspects.terminal
       den.batteries.primary-user
