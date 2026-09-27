@@ -16,6 +16,16 @@
               bind_address = "127.0.0.1";
               secret_key = "not-so-secret-is-it";
             };
+            engines = [
+              {
+                name = "brave";
+                disabled = true;
+              }
+              {
+                name = "nixos wiki";
+                disabled = false;
+              }
+            ];
           };
         };
 
