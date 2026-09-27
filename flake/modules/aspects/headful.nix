@@ -26,6 +26,7 @@
           pkgs.alacritty
 
           pkgs.bibata-cursors
+          pkgs.bitwarden-cli
           pkgs.noctalia
           pkgs.xwayland-satellite
 
@@ -52,6 +53,8 @@
           colorScheme = "mocha";
           wayland = true;
         };
+
+        programs.vesktop.enable = true;
       };
   };
 }
