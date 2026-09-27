@@ -7,6 +7,7 @@
       den.aspects.docker
       den.aspects.headful
       den.aspects.notes
+      den.aspects.privacy
       den.aspects.terminal
       den.batteries.primary-user
     ];
