@@ -82,8 +82,11 @@
 
         systemd.services.init-excalidash-network = {
           description = "Create the docker network shared by ExcaliDash containers";
-          wants = [ "multi-user.target" ];
-          after = [ "multi-user.target" ];
+          wants = lib.mkForce [ ];
+          after = lib.mkForce [
+            "docker.service"
+            "docker.socket"
+          ];
           requires = [ "docker.service" ];
           serviceConfig.Type = "oneshot";
           serviceConfig.RemainAfterExit = true;
@@ -94,14 +97,29 @@
         };
 
         systemd.services.docker-excalidash-backend = {
-          after = [ "init-excalidash-network.service" ];
+          wants = lib.mkForce [ ];
+          after = lib.mkForce [
+            "docker.service"
+            "docker.socket"
+            "init-excalidash-network.service"
+            "multi-user.target"
+          ];
+          before = lib.mkForce [ "shutdown.target" ];
           requires = [ "init-excalidash-network.service" ];
           serviceConfig.ExecStartPre = lib.mkBefore [
             "${pkgs.coreutils}/bin/rm -rf /var/lib/excalidash/.migration-lock"
           ];
         };
         systemd.services.docker-excalidash-frontend = {
-          after = [ "init-excalidash-network.service" ];
+          wants = lib.mkForce [ ];
+          after = lib.mkForce [
+            "docker.service"
+            "docker.socket"
+            "docker-excalidash-backend.service"
+            "init-excalidash-network.service"
+            "multi-user.target"
+          ];
+          before = lib.mkForce [ "shutdown.target" ];
           requires = [ "init-excalidash-network.service" ];
         };
 
