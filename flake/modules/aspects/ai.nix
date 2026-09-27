@@ -87,9 +87,9 @@ in
                   "--host"
                   "127.0.0.1"
                   "--port"
-                  (builtins.toString port)
+                  (toString port)
                   "--ctx-size"
-                  (builtins.toString context-length)
+                  (toString context-length)
                   "--n-gpu-layers"
                   "999"
                   "--flash-attn"
@@ -128,7 +128,6 @@ in
     homeManager =
       {
         inputs',
-        config,
         lib,
         pkgs,
         ...
@@ -161,32 +160,6 @@ in
         programs.mcp = {
           enable = true;
           servers = mcp-servers;
-        };
-
-        programs.github-copilot-cli = {
-          enable = true;
-          configDir = "${config.home.homeDirectory}/.config/copilot";
-          mcpServers = mcp-servers;
-          skills = skills;
-          agents =
-            prompts
-            |> lib.mapAttrs (
-              name: prompt: ''
-                ---
-                name: ${name}
-                description: ${lib.head (lib.strings.splitString "." prompt)}
-                ---
-
-                ${prompt}
-              ''
-            );
-        };
-
-        xdg.configFile."copilot/settings.json" = {
-          source = (pkgs.formats.json { }).generate "github-copilot-cli-settings.json" {
-            autoUpdate = false;
-            theme = "default";
-          };
         };
       };
   };
