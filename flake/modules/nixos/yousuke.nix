@@ -95,7 +95,27 @@
         time.timeZone = "Canada/Eastern";
         i18n.defaultLocale = "en_US.UTF-8";
 
-        services.displayManager.gdm.enable = true;
+        services.displayManager.noctalia-greeter = {
+          enable = true;
+          cursorTheme = {
+            package = pkgs.bibata-cursors;
+            name = "Bibata-Modern-Ice";
+          };
+          settings = {
+            appearance = {
+              scheme = "Catppuccin";
+              scheme_selector_position = "hidden";
+              hide_logo = true;
+            };
+            output = {
+              width = 1920;
+              height = 1080;
+            };
+            cursor.size = 24;
+            keyboard.layout = "us";
+          };
+        };
+
         services.xserver.xkb.options = "caps:escape";
         services.xserver.xkb.layout = "ca";
         console.useXkbConfig = true; # use xkb.options in tty.
