@@ -122,7 +122,7 @@ in
           ];
         };
 
-        systemd.services = lib.listToAttrs (map mkLlamaServerService llama-server-models);
+        # systemd.services = lib.listToAttrs (map mkLlamaServerService llama-server-models);
       };
 
     homeManager =
