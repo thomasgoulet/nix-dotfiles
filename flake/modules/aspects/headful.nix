@@ -48,10 +48,22 @@
 
     homeManager =
       { pkgs, ... }:
+      let
+        spicetify-pkg = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+        spicetify-module = inputs.spicetify-nix.homeManagerModules.spicetify;
+      in
       {
         imports = [
           (inputs.import-tree ./_headful)
+          spicetify-module
         ];
+
+        programs.spicetify = {
+          enable = true;
+          theme = spicetify-pkg.themes.catppuccin;
+          colorScheme = "mocha";
+          wayland = true;
+        };
       };
   };
 }

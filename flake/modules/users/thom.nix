@@ -3,6 +3,7 @@
   den.aspects.thom = {
 
     includes = [
+      den.aspects.ai
       den.aspects.docker
       den.aspects.headful
       den.aspects.notes
