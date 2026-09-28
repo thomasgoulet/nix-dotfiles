@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.bibata-cursors ];
+  home.packages = [
+    pkgs.bibata-cursors
+    pkgs.playerctl
+  ];
 
   programs.niri = {
 
@@ -82,6 +85,26 @@
         "XF86AudioMicMute" = {
           allow-when-locked = true;
           action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+        };
+        "XF86AudioPlay" = {
+          allow-when-locked = true;
+          action.spawn-sh = "playerctl play-pause";
+        };
+        "XF86AudioPause" = {
+          allow-when-locked = true;
+          action.spawn-sh = "playerctl play-pause";
+        };
+        "XF86AudioNext" = {
+          allow-when-locked = true;
+          action.spawn-sh = "playerctl next";
+        };
+        "XF86AudioPrev" = {
+          allow-when-locked = true;
+          action.spawn-sh = "playerctl previous";
+        };
+        "XF86AudioStop" = {
+          allow-when-locked = true;
+          action.spawn-sh = "playerctl stop";
         };
 
         "Mod+O" = {
