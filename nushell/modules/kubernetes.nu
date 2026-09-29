@@ -234,7 +234,7 @@ export module mod {
             # Outputs the logs for a resource
             if ($logs or $logs_previous) {
                 let log_flags = if $logs_previous { ['-p'] | append $namespace_flags } else { $namespace_flags }
-                kubectl logs $"($kind)/($instance)" ...$log_flags | hl;
+                kubectl logs $"($kind)/($instance)" ...$log_flags --follow | hl --follow;
                 return;
             }
 
