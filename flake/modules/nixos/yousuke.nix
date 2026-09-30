@@ -121,7 +121,6 @@
         console.useXkbConfig = true; # use xkb.options in tty.
 
         services.openssh.enable = true;
-        services.upower.enable = true;
       };
   };
 }
