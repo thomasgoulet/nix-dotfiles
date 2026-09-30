@@ -15,9 +15,9 @@ export module mod {
 
     ### Alias
 
-    export alias diff = herdr record "nix diff" 5sec { nh os test --dry --diff always --hostname $env.NH_HOST };
+    export alias build = herdr record "nix diff" 5sec { nh os test --dry --diff always --hostname $env.NH_HOST };
     export alias switch = herdr record "nix switch" 5sec { nh os switch --diff always --hostname $env.NH_HOST };
-    export alias update = herdr record "nix update" 5sec { nh os switch --update --diff always --hostname $env.NH_HOST };
+    export alias update = herdr record "nix update" 5sec { nh os test --update --diff always --hostname $env.NH_HOST };
     export alias gc = herdr record "nix gc" 5sec { nh clean all };
 
     ### Commands
@@ -54,7 +54,7 @@ export module mod {
     }
 
     # Launch a nix shell with the specified packages installed
-    export def install [
+    export def shell [
         ...packages  # Packages to temporarily install
     ] {
         nix-shell --command $"ESCAPE_MODE=\"($packages)\" nu" -p ...$packages;
