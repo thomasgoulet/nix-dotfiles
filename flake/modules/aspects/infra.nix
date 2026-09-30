@@ -5,7 +5,6 @@
     homeManager = { pkgs, ... }: {
       home.packages = [
         pkgs.argocd
-        pkgs.argonaut
         pkgs.dyff
         pkgs.hl-log-viewer
         pkgs.kubecolor

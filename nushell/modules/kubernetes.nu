@@ -2,7 +2,6 @@ export module mod {
 
     ### Aliases
 
-    export alias argo = argonaut;
     export alias kube = kubectl;
 
     ### Utility
@@ -189,11 +188,6 @@ export module mod {
             )
         };
     }
-
-    ### Exported Functions
-
-    # With https://github.com/keisku/kubectl-explore renamed to kubectl-explain
-    export alias kex = kubectl-explain;
 
     # Powered-up kubectl
     export def k [
