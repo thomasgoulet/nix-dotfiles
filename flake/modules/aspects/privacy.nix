@@ -25,6 +25,10 @@
                 name = "nixos wiki";
                 disabled = false;
               }
+              {
+                name = "wikidata";
+                disabled = true;
+              }
             ];
           };
         };
