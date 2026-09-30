@@ -5,7 +5,6 @@
 !.gitignore
 !flake/
 !herdr/
-!hl/
 !nix/
 !noctalia/
 !nushell/
