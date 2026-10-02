@@ -71,6 +71,8 @@ key = "prefix+f"
 type = "popup"
 command = "nu -c 'with-env { ESCAPE_MODE: floating } { nu }'"
 description = "open floating terminal"
+width = "80%"
+height = "80%"
 
 [[keys.command]]
 key = "prefix+g"
