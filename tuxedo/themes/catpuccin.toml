@@ -1,32 +1,32 @@
-name = Catppuccin Mocha
+name = "Catppuccin Mocha"
 
-bg = #1e1e2e
-panel = #181825
-border = #45475a
-fg = #cdd6f4
-dim = #7f849c
-accent = #89b4fa
+bg = "#1E1E2E"
+panel = "#181825"
+border = "#45475A"
+fg = "#CDD6F4"
+dim = "#7F849C"
+accent = "#89B4FA"
 
-cursor = #313244
-selection = #313244
-selected = #313244
+cursor = "#313244"
+selection = "#313244"
+selected = "#313244"
 
-statusbar = #181825
-status_fg = #bac2de
-mode_fg = #1e1e2e
-mode_bg = #89b4fa
+statusbar = "#181825"
+status_fg = "#BAC2DE"
+mode_fg = "#1E1E2E"
+mode_bg = "#89B4FA"
 
-pri_a = #f38ba8
-pri_b = #fab387
-pri_c = #a6e3a1
-pri_d = #89b4fa
-pri_other = #cba6f7
+pri_a = "#F38BA8"
+pri_b = "#FAB387"
+pri_c = "#A6E3A1"
+pri_d = "#89B4FA"
+pri_other = "#CBA6F7"
 
-project = #cba6f7
-context = #94e2d5
+project = "#CBA6F7"
+context = "#94E2D5"
 
-done = #a6adc8
-matched = #f9e2af
-due = #f9e2af
-overdue = #f38ba8
-today = #f38ba8
+done = "#A6ADC8"
+matched = "#F9E2AF"
+due = "#F9E2AF"
+overdue = "#F38BA8"
+today = "#F38BA8"
