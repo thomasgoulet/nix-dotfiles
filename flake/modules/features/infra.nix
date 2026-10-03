@@ -5,7 +5,6 @@
 }:
 {
   den.aspects.infra = {
-
     includes = [
       (den.batteries.unfree [ "azure-cli" ])
     ];

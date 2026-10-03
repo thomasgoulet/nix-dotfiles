@@ -43,11 +43,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         den.flakeModule
-
-        # Import all `.nix` files in `./modules` or it's sub-folders
-        inputs.import-tree.filter
-        (path: builtins.match ''^/(features/|hosts/|users/)?[^/]+\.nix$'' path != null)
-        ./modules
+        (inputs.import-tree.match "/((features|hosts|users)/)?[^/]+\.nix" ./modules)
       ];
     };
 }

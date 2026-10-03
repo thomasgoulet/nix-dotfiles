@@ -1,13 +1,9 @@
-{
-  den,
-  ...
-}:
+{ den, ... }:
 {
   den.aspects.thom = {
 
     includes = [
-      (den.batteries.primary-user)
-      den.aspects.docker
+      den.batteries.primary-user
       den.aspects.excalidash
       den.aspects.headful
       den.aspects.notes
@@ -16,10 +12,5 @@
       den.aspects.terminal
     ];
 
-    homeManager =
-      { ... }:
-      {
-        programs.git.enable = true;
-      };
   };
 }

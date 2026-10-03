@@ -31,7 +31,7 @@
         };
 
         environment.systemPackages = [
-          # TODO Remove these once config is improved
+          # TODO - Remove alacritty after installing a better terminal emulator
           pkgs.alacritty
 
           pkgs.bibata-cursors
