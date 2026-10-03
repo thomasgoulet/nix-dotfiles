@@ -1,6 +1,7 @@
+# opencode (https://opencode.ai), the AI coding agent, with its MCP servers and
+# per-agent prompts.
 {
   den,
-  inputs,
   lib,
   ...
 }:
@@ -25,7 +26,7 @@ let
   };
 
   skills =
-    ./_ai/skills
+    ./opencode/skills
     |> lib.filesystem.listFilesRecursive
     |> map (file: {
       "${(lib.removeSuffix ".md" (baseNameOf file))}" = file;
@@ -33,12 +34,11 @@ let
     |> lib.attrsets.mergeAttrsList;
 in
 {
-  den.aspects.ai = {
+  den.aspects.opencode = {
 
     homeManager =
       {
         inputs',
-        lib,
         pkgs,
         ...
       }:
@@ -47,7 +47,7 @@ in
       in
       {
         imports = [
-          (import ./_ai/opencode.nix {
+          (import ./opencode/opencode.nix {
             inherit
               lib
               mcp-servers
@@ -58,12 +58,9 @@ in
         ];
 
         home.packages = [
-          # mcp servers
           pkgs.context7-mcp
-          inputs'.nu-mcp.packages.default
-
-          # tools
           pkgs-stable.pdf-oxide
+          inputs'.nu-mcp.packages.default
         ];
 
         programs.mcp = {

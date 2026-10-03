@@ -1,26 +1,24 @@
-{ den, ... }:
+{
+  den,
+  ...
+}:
 {
   den.aspects.thomas = {
 
     includes = [
-      den.aspects.ai
+      (den.batteries.primary-user)
       den.aspects.docker
+      den.aspects.excalidash
       den.aspects.infra
       den.aspects.notes
+      den.aspects.opencode
       den.aspects.terminal
-      den.batteries.primary-user
     ];
 
     homeManager =
       { ... }:
       {
-        home.stateVersion = "26.05";
-        programs.home-manager.enable = true;
-
-        home.username = "thomas";
-        home.homeDirectory = "/home/thomas";
         programs.git.enable = true;
-
       };
   };
 }

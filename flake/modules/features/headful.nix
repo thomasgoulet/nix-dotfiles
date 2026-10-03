@@ -2,6 +2,14 @@
 {
   den.aspects.headful = {
 
+    includes = [
+      (den.batteries.unfree [
+        "spotify"
+        "spicetify-catppuccin"
+        "zen-browser"
+      ])
+    ];
+
     nixos =
       { pkgs, ... }:
       {
@@ -44,7 +52,7 @@
       in
       {
         imports = [
-          (inputs.import-tree ./_headful)
+          (inputs.import-tree ./headful)
           spicetify-module
         ];
 

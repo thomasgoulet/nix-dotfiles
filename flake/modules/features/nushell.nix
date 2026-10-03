@@ -29,11 +29,11 @@
         ];
 
         xdg.configFile."nushell/env.nu" = {
-          text = env + "\n" + (builtins.readFile ./_nushell/env.nu);
+          text = env + "\n" + (builtins.readFile ./nushell/env.nu);
         };
 
         programs.bat.syntaxes.nushell = {
-          src = ./_nushell;
+          src = ./nushell;
           file = "nushell.sublime-syntax";
         };
       };
