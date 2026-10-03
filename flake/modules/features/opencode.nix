@@ -29,6 +29,9 @@ in
         pkgs,
         ...
       }:
+      let
+        pkgs-stable = inputs'.nixpkgs-stable.legacyPackages;
+      in
       {
         imports = [
           (import ./opencode/opencode.nix {
@@ -41,7 +44,7 @@ in
 
         home.packages = [
           pkgs.context7-mcp
-          pkgs.pdf-oxide
+          pkgs-stable.pdf-oxide
           inputs'.nu-mcp.packages.default
         ];
 
