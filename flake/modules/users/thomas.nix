@@ -15,10 +15,5 @@
       den.aspects.terminal
     ];
 
-    homeManager =
-      { ... }:
-      {
-        programs.git.enable = true;
-      };
   };
 }

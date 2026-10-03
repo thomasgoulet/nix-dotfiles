@@ -1,8 +1,5 @@
 # ExcaliDash containers.
-{
-  pkgs,
-  ...
-}:
+{ ... }:
 {
   virtualisation.oci-containers.containers = {
     excalidash-backend = {

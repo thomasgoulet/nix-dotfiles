@@ -1,5 +1,3 @@
-# The two containers talk over the `excalidash` network, which docker does not
-# create on its own, so it is created once before both units start.
 {
   config,
   lib,

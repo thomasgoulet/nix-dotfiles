@@ -3,6 +3,7 @@
   fonts = {
     enableDefaultPackages = true;
     packages = [
+      pkgs.cascadia-code
       pkgs.inter
       pkgs.lora
       pkgs.nerd-fonts.caskaydia-cove

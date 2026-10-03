@@ -4,10 +4,10 @@
   ...
 }:
 {
-  den.aspects.helix = {
+  den.aspects.editor = {
     homeManager = {
       imports = [
-        (inputs.import-tree ./helix)
+        (inputs.import-tree ./editor)
       ];
 
       config.programs.helix.enable = true;

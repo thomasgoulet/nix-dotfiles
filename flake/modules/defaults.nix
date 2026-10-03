@@ -1,8 +1,3 @@
-# Settings shared by every host and user.
-#
-# `den.default` is applied to all entity kinds (hosts, users, homes), so
-# anything here lands on both machines. Host-specific or user-specific settings
-# belong in `aspects/hosts/` and `aspects/users/` instead.
 {
   den,
   ...

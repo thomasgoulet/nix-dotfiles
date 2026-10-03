@@ -2,6 +2,7 @@
 {
   den.aspects.docker = {
 
+    # TODO - This is most likely a security risk
     user = {
       extraGroups = [ "docker" ];
     };

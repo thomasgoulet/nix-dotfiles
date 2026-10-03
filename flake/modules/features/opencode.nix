@@ -1,5 +1,4 @@
-# opencode (https://opencode.ai), the AI coding agent, with its MCP servers and
-# per-agent prompts.
+# opencode (https://opencode.ai), the AI coding agent, with its MCP servers and per-agent prompts.
 {
   den,
   lib,
@@ -11,6 +10,7 @@ let
     review = "You review the current branch against master (or main) branch. Structure your feedback in three sections: High-Level Architecture Decisions, Good Practices, Code Smells (nit & bugs). Indicate if the feedback is positive (+) or negative (-). Delegate documentation research (docs agent) when required to clarify library usage. Do not edit any file.";
   };
 
+  # TODO - This could be changed to use import-tree
   skills =
     ./opencode/skills
     |> lib.filesystem.listFilesRecursive
@@ -33,15 +33,6 @@ in
         pkgs-stable = inputs'.nixpkgs-stable.legacyPackages;
       in
       {
-        imports = [
-          (import ./opencode/opencode.nix {
-            inherit
-              prompts
-              skills
-              ;
-          })
-        ];
-
         home.packages = [
           pkgs.context7-mcp
           pkgs-stable.pdf-oxide
@@ -60,6 +51,48 @@ in
                 "--enable-run-nu"
               ];
             };
+          };
+        };
+
+        home.sessionVariables = {
+          OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
+        };
+
+        programs.opencode = {
+          enable = true;
+          enableMcpIntegration = true;
+          skills = skills;
+          settings = {
+            model = "anthropic/claude-sonnet-5";
+            default_agent = "build";
+            autoupdate = false;
+            tools."context7*" = false;
+            agent = {
+              review = {
+                mode = "all";
+                color = "accent";
+                tools."*" = true;
+                prompt = prompts.review;
+              };
+              docs = {
+                mode = "all";
+                color = "info";
+                tools = {
+                  "*" = false;
+                  read = true;
+                  webfetch = true;
+                  websearch = true;
+                  "context7*" = true;
+                };
+                prompt = prompts.docs;
+              };
+              build.color = "secondary";
+              plan.color = "success";
+            };
+          };
+          tui = {
+            theme = "catppuccin";
+            scroll_acceleration.enabled = true;
           };
         };
       };
