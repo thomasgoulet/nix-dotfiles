@@ -1,15 +1,7 @@
 # Note taking with zk (https://zk-org.github.io/zk).
-{
-  den,
-  ...
-}:
+{ den, ... }:
 {
   den.aspects.notes = { ... }: {
-
-    includes = [
-      # zk's pager and fzf preview call bat and less.
-      den.aspects.terminal
-    ];
 
     homeManager =
       {
@@ -19,6 +11,7 @@
       }:
       {
         home.packages = [
+          pkgs.fzf
           pkgs.tuxedo
         ];
 
@@ -28,6 +21,9 @@
           ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/notebook";
           ZK_SHELL = "/bin/bash";
         };
+
+        # zk's paging and fzf preview uses bat
+        programs.bat.enable = true;
 
         programs.zk = {
           enable = true;

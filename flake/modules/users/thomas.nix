@@ -1,7 +1,4 @@
-{
-  den,
-  ...
-}:
+{ den, ... }:
 {
   den.aspects.thomas = {
 

@@ -1,13 +1,9 @@
-{
-  den,
-  ...
-}:
+{ den, ... }:
 {
   den.aspects.thom = {
 
     includes = [
       (den.batteries.primary-user)
-      den.aspects.docker
       den.aspects.excalidash
       den.aspects.headful
       den.aspects.notes
