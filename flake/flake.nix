@@ -40,10 +40,23 @@
 
   outputs =
     inputs@{ flake-parts, den, ... }:
+    let
+      # Only `modules/<aspect>.nix` and `modules/<dir>/<aspect>.nix` are
+      # imported automatically. Anything deeper, like
+      # `modules/features/terminal/` or `modules/hosts/yousuke/`, is imported
+      # explicitly by the aspect that owns it, which keeps its submodules out
+      # of the top level scan.
+      modules = inputs.import-tree.filter (
+        path: builtins.match ''^/([^/]+/)?[^/]+\.nix$'' path != null
+      ) ./modules;
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         den.flakeModule
-        (inputs.import-tree ./modules)
+
+        modules
+
+        ./hygiene.nix
       ];
     };
 }

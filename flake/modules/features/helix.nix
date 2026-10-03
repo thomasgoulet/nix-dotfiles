@@ -1,17 +1,14 @@
 {
   den,
   inputs,
-  lib,
   ...
 }:
 {
   den.aspects.helix = {
     homeManager = {
       imports = [
-        (inputs.import-tree ./_helix)
+        (inputs.import-tree ./helix)
       ];
-
-      options.helix.notes.enable = lib.mkEnableOption "notes tooling in helix";
 
       config.programs.helix.enable = true;
 

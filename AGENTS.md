@@ -13,7 +13,13 @@ Each aspect can provide attributes that will be with the other aspects;
 - `user` is for user specific configurations.
 - `homeManager` is a home manager module.
 
-[`import-tree`](https://import-tree.denful.dev/reference/api/) removes import clutter and automatically imports new files. Folders prefixed with a `_` are ignored by `import-tree` unless explicitly targeted.
+An aspect is looked up by name: a host `yousuke` picks up `den.aspects.yousuke`, a user
+`thom` picks up `den.aspects.thom`. Aspects only make sense with the class they configure,
+so an aspect whose content is all NixOS belongs under `modules/hosts/`, and one that is
+entirely Home Manager under `modules/users/`. Everything reusable goes under
+`modules/features/`.
+
+[`import-tree`](https://import-tree.denful.dev/reference/api/) removes import clutter and automatically imports new files. The scan is filtered to `modules/<aspect>.nix` and `modules/<dir>/<aspect>.nix`, so an aspect pulls in its own submodules explicitly (`modules/features/terminal.nix` imports `modules/features/terminal/`). Adding a directory below that level keeps its files out of the top level scan.
 
 [`flake-parts`](https://flake.parts/getting-started.html) helps create the flake for each system.
 
@@ -21,10 +27,57 @@ Each aspect can provide attributes that will be with the other aspects;
 
 ```
 flake/
-├── flake.nix
+├── flake.nix # entry point: den.flakeModule + import-tree ./modules + ./hygiene.nix
+├── hygiene.nix # flake-parts outputs: `nix fmt` and the formatting check
 ├── flake.lock
 └── modules/
-    ├── aspects/ # Shared den aspects to be re-used
-    ├── nixos/ # Hosts
-    └── users/ # Users
+    ├── defaults.nix # den.default: settings shared by every host and user
+    ├── features/ # reusable den aspects, one per feature
+    │   ├── docker.nix
+    │   ├── excalidash.nix + excalidash/ # self hosted Excalidraw containers
+    │   ├── headful.nix + headful/ # niri, desktop apps, media
+    │   ├── helix.nix + helix/ # helix, per language files
+    │   ├── infra.nix + infra/ # kubernetes tooling, hl
+    │   ├── notes.nix # zk note taking
+    │   ├── nushell.nix + nushell/ # nushell, env.nu and syntax highlighting
+    │   ├── opencode.nix + opencode/ # opencode, MCP servers, agents, skills
+    │   ├── privacy.nix # searxng, blocky
+    │   └── terminal.nix + terminal/ # shell tooling, one file per tool
+    ├── hosts/ # host identities + their NixOS only settings
+    │   ├── oric.nix + oric/
+    │   └── yousuke.nix + yousuke/
+    └── users/ # user aspects, one per account
+        ├── thom.nix
+        └── thomas.nix
+```
+
+## Aspects
+
+| Aspect | What it does | Included by |
+| --- | --- | --- |
+| `defaults` | batteries (`define-user`, `hostname`, `inputs'`, `self'`), `stateVersion`, `nix.gc`, `nix.settings` | every host and user, automatically |
+| `docker` | docker daemon and the `docker` group | `excalidash`, `thom`, `thomas` |
+| `excalidash` | two containers on a dedicated docker network | `thom`, `thomas` |
+| `headful` | niri, polkit, zen browser, spicetify, vesktop | `thom` |
+| `helix` | helix and its per language configuration | `terminal` |
+| `infra` | kubectl and friends, azure-cli, `hl` | `thomas` |
+| `notes` | zk and its notebook environment | `thom`, `thomas` |
+| `nushell` | nushell as the login shell, `env.nu`, syntax highlighting | `terminal` |
+| `opencode` | opencode, context7/nu-mcp, agent prompts, skills | `thom`, `thomas` |
+| `privacy` | searxng on localhost, blocky as the resolver | `thom` |
+| `terminal` | bat, git+delta, difftastic, starship, broot, lazygit, leaf, drydock | `thom`, `thomas` |
+
+Notes:
+- Unfree packages are allowlisted per aspect with `den.batteries.unfree`, never with a
+  blanket `nixpkgs.config.allowUnfree`. Adding an unfree package means adding its name
+  here, otherwise evaluation fails.
+- A host only sets what makes it a host (identity, WSL, hardware, disks). Anything another
+  host could reuse belongs in its own aspect.
+
+## Working on the flake
+
+```console
+nix flake check # evaluates both hosts and verifies formatting
+nix fmt # format with nixfmt, via treefmt
+nix eval .#nixosConfigurations.yousuke.config.system.build.toplevel.drvPath
 ```
