@@ -7,7 +7,7 @@
   den.aspects.terminal = {
 
     includes = [
-      den.aspects.helix
+      den.aspects.editor
       den.aspects.nushell
     ];
 

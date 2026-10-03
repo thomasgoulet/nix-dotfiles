@@ -10,7 +10,6 @@
   ];
 
   environment.systemPackages = [
-    pkgs.cascadia-code
     pkgs.nh
   ];
 

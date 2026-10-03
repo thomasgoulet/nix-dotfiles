@@ -1,5 +1,3 @@
-# WSL specific settings. Everything shared with other hosts lives in
-# ../defaults.nix.
 { config, pkgs, ... }:
 {
   wsl = {
