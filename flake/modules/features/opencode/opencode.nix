@@ -1,7 +1,4 @@
 {
-  lib,
-  context-length,
-  models,
   prompts,
   skills,
 }:
@@ -40,23 +37,6 @@
         };
         build.color = "secondary";
         plan.color = "success";
-      };
-      provider.ollama = {
-        npm = "@ai-sdk/openai-compatible";
-        name = "local";
-        options.baseURL = "http://127.0.0.1:11434/v1";
-        models = lib.attrsets.mergeAttrsList (
-          models
-          |> map (model: {
-            "${model}" = {
-              name = model;
-              limit = {
-                context = context-length;
-                output = (context-length / 2);
-              };
-            };
-          })
-        );
       };
     };
     tui = {
