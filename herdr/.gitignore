@@ -5,3 +5,4 @@ herdr-server.log
 herdr.sock
 release-notes.json
 session.json
+session-snapshots
