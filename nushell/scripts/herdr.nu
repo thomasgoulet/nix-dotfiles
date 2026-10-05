@@ -15,8 +15,7 @@ export def herdr-edit [
     file: string
 ] {
     if ("HERDR_ENV" not-in $env) {
-        run-external $env.EDITOR $file;
-        return;
+        return (run-external $env.EDITOR $file);
     }
 
     let editor_filter = { where {
@@ -53,8 +52,7 @@ export def herdr-edit [
         return;
     }
 
-    run-external $env.EDITOR $file;
-    return;
+    return (herdr-run pane 0.5 [$env.EDITOR $file]);
 }
 
 export def herdr-run [
