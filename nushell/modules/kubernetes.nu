@@ -200,8 +200,9 @@ export module mod {
         --decode  # Decodes secret values using `base64 --decode`
         --edit (-e)  # Edit a resource
         --get (-g)  # Get a resource's full definition
-        --logs (-l)  # Get the logs of a pod
+        --logs (-l)  # Get the logs of a resource
         --logs-previous (-L)  # Get the logs of the previous pod
+        --follow (-f)  # Get the logs of a resource and follow them
         --port_forward (-p): int  # Port-forward the resource's port to localhost
         --restart (-r)  # Restart the resources's pods
         --watch (-w)  # Watch the output
@@ -228,7 +229,13 @@ export module mod {
             # Outputs the logs for a resource
             if ($logs or $logs_previous) {
                 let log_flags = if $logs_previous { ['-p'] | append $namespace_flags } else { $namespace_flags }
-                kubectl logs $"($kind)/($instance)" ...$log_flags --follow | hl --follow;
+                kubectl logs $"($kind)/($instance)" ...$log_flags | hl;
+                return;
+            }
+
+            # Output all logs and follow them
+            if ($follow) {
+                kubectl logs $"($kind)/($instance)" ...$namespace_flags --follow | hl --follow;
                 return;
             }
 
