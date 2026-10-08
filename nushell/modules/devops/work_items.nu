@@ -44,7 +44,7 @@ export def format-work-items []: string -> any {
 
 export def work-item-list-recent [
     project: string  # DevOps project name
-    date: datetime  # Will list pull request created or closed after this date
+    date: datetime  # Will list work items created or closed after this date
 ] {
     let date_string = $date | format date "%Y-%m-%d";
     let query = $"SELECT * FROM WorkItems WHERE [System.TeamProject] = '($project)' AND \([System.CreatedDate] >= '($date_string)' OR [System.ChangedDate] >= '($date_string)'\)";
