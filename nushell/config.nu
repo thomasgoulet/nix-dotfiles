@@ -270,7 +270,7 @@ source ~/.cache/zoxide/init.nu
 source ~/.config/nushell/aliases.nu; use aliases *
 
 use az.nu
-use devops *
+use devops
 use git.nu
 use herdr.nu *
 use kubernetes.nu *
