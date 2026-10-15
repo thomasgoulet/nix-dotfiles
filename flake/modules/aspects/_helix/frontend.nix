@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
+
   home.packages = [
-    pkgs.nodejs-slim
+    pkgs.nodejs_26
     pkgs.prettier
     pkgs.typescript-language-server
     pkgs.vscode-langservers-extracted

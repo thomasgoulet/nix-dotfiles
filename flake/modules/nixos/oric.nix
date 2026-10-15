@@ -60,6 +60,8 @@
           NH_HOST = host.name;
         };
 
+        programs.nix-ld.enable = true;
+
         home-manager.useUserPackages = true;
         home-manager.useGlobalPkgs = true;
 
