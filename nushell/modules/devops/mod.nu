@@ -12,9 +12,7 @@ export module mod {
         | first
     }
 
-    def "nu-complete devops pr" [
-        context: string
-    ] {
+    def "nu-complete devops pr" [] {
         let project = (get-project);
         cache hit $"devops.pr.($project)" 120 {
             pull-request-list-active $project

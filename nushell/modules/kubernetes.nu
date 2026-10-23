@@ -7,50 +7,39 @@ export module mod {
     ### Utility
 
     def argparse [
-        context: string  # Context string passed to completer function
+        command: list<string>
     ] {
-        mut args = (
-            $context
-            | split row ' '
-        );
+        mut args = []
+        mut namespace = ""
+        mut all = false
+        mut expecting_namespace = false
 
-        mut flags = [];
-
-        let namespace_position = (
-            $args
-            | iter find-index {|s|
-                $s == "-n" or $s == "--namespace"
+        for word in ($command | where $it != "" | skip 1) {
+            if $expecting_namespace {
+                $namespace = $word
+                $expecting_namespace = false
+            } else if $word in ["-n" "--namespace"] {
+                $expecting_namespace = true
+            } else if $word in ["-A" "-a" "--all"] {
+                $all = true
+            } else {
+                $args = ($args | append $word)
             }
-        );
-
-        if ($namespace_position != null) {
-            $flags = [
-                "-n"
-                ($args | get ($namespace_position + 1))
-            ];
-            $args = (
-                $args
-                | drop nth $namespace_position
-                | drop nth $namespace_position
-            );
         }
 
-        let all_position = (
-            $args
-            | iter find-index {|s|
-                $s == "-A" or $s == "-a" or $s == "--all"
-            }
-        );
-
-        if ($all_position != null) {
-            $flags = ["-A"];
-            $args = (
-                $args
-                | drop nth $all_position
-            )
+        let flags = if $all {
+            ["-A"]
+        } else if ($namespace | is-not-empty) {
+            ["-n" $namespace]
+        } else {
+            []
         }
 
-        return {command: ($args.0), args: ($args | skip 1), flags: $flags, flag_id: ($flags | str join ".")}
+        {
+            args: $args
+            flags: $flags
+            flag_id: ($flags | str join ".")
+        }
     }
 
     def "watch" [
@@ -110,13 +99,23 @@ export module mod {
     ### Completions
 
     def "nu-complete kubectl contexts" [] {
-        cache hit kube.contexts 120 {
-            kubectl config get-contexts
-            | from ssv -a
-            | iter filter-map {|c|
-                {value: ($c.NAME), description: $"($c.CLUSTER | fill -w 15) namespace ($c.NAMESPACE | fill -w 15)"}
+        {
+            completions: (
+                with-env { KUBECONFIG: ($env.HOME | path join ".kube" "config") } {
+                    kubectl config get-contexts
+                }
+                | from ssv -a
+                | iter filter-map {|c|
+                    {
+                        value: ($c.NAME)
+                        description: $"($c.CLUSTER | fill -w 15) namespace ($c.NAMESPACE | fill -w 15)"
+                    }
+                }
+            )
+            options: {
+                match_description: true
             }
-        };
+        }
     }
 
     def "nu-complete kubectl namespaces" [] {
@@ -143,9 +142,10 @@ export module mod {
     }
 
     def "nu-complete kubectl kind instances" [
-        context: string
+        place: record
     ] {
-        let ctx = argparse $context
+        let ctx = argparse $place.command
+
         cache hit $"kube.kind.($ctx.args.0).($ctx.flag_id)" 120 {
             kubecolor --force-colors get $ctx.args.0 ...$ctx.flags
             | from ssv
@@ -156,9 +156,9 @@ export module mod {
 
     # Completes the possible paths for k
     def "nu-complete kubectl kind instance paths" [
-        context: string
+        place: record
     ] {
-        let ctx = argparse $context
+        let ctx = argparse $place.command
         let kind = $ctx.args.0;
         let instance = $ctx.args.1;
 
@@ -166,11 +166,16 @@ export module mod {
             kubectl get $kind $instance ...$ctx.flags -o yaml | from yaml
         };
 
-        return (
-            cache hit $"kube.($kind).($instance).paths" 120 {
-                recursive-paths $resource
-            };
-        );
+        {
+            completions: (
+                cache hit $"kube.($kind).($instance).paths" 120 {
+                    recursive-paths $resource
+                }
+            )
+            options: {
+                match_description: true
+            }
+        }
     }
 
 
