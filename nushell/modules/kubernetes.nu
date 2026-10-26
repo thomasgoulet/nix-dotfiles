@@ -111,6 +111,7 @@ export module mod {
                         description: $"($c.CLUSTER | fill -w 15) namespace ($c.NAMESPACE | fill -w 15)"
                     }
                 }
+                | prepend { value: "-", description: "Reset to the main kubeconfig" }
             )
             options: {
                 match_description: true
@@ -331,18 +332,63 @@ export module mod {
     }
 
     # List and change context
-    export def "k ctx" [
+    export def --env "k ctx" [
         context: string@"nu-complete kubectl contexts"  # Context (fuzzy)
         namespace?: string@"nu-complete kubectl namespaces"  # Namespace
+        --default (-d)  # Change the context in the main kubeconfig instead of a temporary one
     ] {
         cache invalidate
+        hide-env --ignore-errors KUBECONFIG
 
-        kubectl config use-context $context o+e> (null-device);
-        if ($namespace != null) {
-            kubectl config set-context $context --namespace $namespace o+e> (null-device);
+        if ($context == "-") {
+            return;
         }
 
-        return null;
+        if ($default) {
+            if ($namespace != null) {
+                kubectl config set-context $context --namespace $namespace o+e> (null-device);
+            }
+            kubectl config use-context $context o+e> (null-device);
+            return;
+        }
+
+        let kube_dir = ($env.HOME | path join ".kube");
+        let main_config = ($kube_dir | path join "config");
+
+        ls $kube_dir
+        | where modified < ((date now) - 2day) and name =~ ".*\\..*\\.config"
+        | each { rm $in.name }
+
+        let ctx = (
+            with-env { KUBECONFIG: $main_config } {
+                kubectl config view --minify --context $context -o json
+            }
+            | from json
+            | get contexts.0.context
+        );
+
+        let namespace = (
+            if ($namespace != null) { $namespace } else { $ctx | get -o namespace | default "default" }
+        );
+
+        let path = (
+            $kube_dir
+            | path join $"($namespace).($ctx.cluster).config"
+        );
+
+        {
+            kind: Config
+            apiVersion: v1
+            contexts: [{
+                name: $context
+                context: {cluster: $ctx.cluster, user: $ctx.user, namespace: $namespace}
+            }]
+            current-context: $context
+        }
+        | to yaml
+        | save -f $path
+
+        $env.KUBECONFIG = ([$path $main_config] | str join (char esep));
     }
 
     # Exec into a pod or a node
