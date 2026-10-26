@@ -141,6 +141,8 @@ export module mod {
         };
     }
 
+    # Completes instances for `k`
+    @interactive # Interactives prevents nushell caching results by accident
     def "nu-complete kubectl kind instances" [
         place: record
     ] {
@@ -154,7 +156,8 @@ export module mod {
         };
     }
 
-    # Completes the possible paths for k
+    # Completes the possible paths for `k`
+    @interactive # Interactives prevents nushell caching results by accident
     def "nu-complete kubectl kind instance paths" [
         place: record
     ] {
