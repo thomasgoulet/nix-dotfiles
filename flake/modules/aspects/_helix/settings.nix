@@ -138,20 +138,8 @@
         };
       };
       m = {
-        w = [
-          "move_char_left"
-          "move_next_word_end"
-          "move_prev_word_start"
-          "move_next_word_end"
-          "search_selection"
-        ];
-        W = [
-          "move_char_left"
-          "move_next_long_word_end"
-          "move_prev_long_word_start"
-          "move_next_long_word_end"
-          "search_selection"
-        ];
+        w = "@miw*";
+        W = "@miW*";
       };
       "]" = {
         q = "@<space>'<tab><ret>";
