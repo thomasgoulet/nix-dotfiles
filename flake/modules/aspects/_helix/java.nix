@@ -8,7 +8,7 @@ in
 {
   home.packages = [
     pkgs.jdk25_headless
-    (pkgs.jdt-language-server.override { jdk = pkgs.jdk25_headless; })
+    (pkgs.jdt-language-server.override { jdk25 = pkgs.jdk25_headless; })
   ];
 
   programs.helix.languages.language-server.jdtls = {

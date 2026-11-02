@@ -1,33 +1,10 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
-let
-  leaf = pkgs.rustPlatform.buildRustPackage rec {
-    pname = "leaf-markdown-viewer";
-    version = "1.28.2";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "RivoLink";
-      repo = "leaf";
-      tag = "${version}";
-      hash = "sha256-WX9C4gWNPCHWFsHN4xFmShv6dJyYAVgr9xMw5JtoFHI=";
-    };
-
-    cargoHash = "sha256-T6GH+Y9zBzSOp54shKtboydIZGPSsSKjuexQ3pQ1FqY=";
-
-    meta = {
-      description = "Terminal Markdown previewer — GUI-like experience.";
-      homepage = "https://github.com/RivoLink/leaf";
-      license = lib.licenses.mit;
-      mainProgram = "leaf";
-    };
-  };
-in
 {
-  home.packages = [ leaf ];
+  home.packages = [ pkgs.leaf-markdown-viewer ];
 
   xdg.configFile."leaf/config.toml" = {
     source = (pkgs.formats.toml { }).generate "leaf-settings.toml" {

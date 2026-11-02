@@ -7,17 +7,17 @@
 let
   drydock = pkgs.rustPlatform.buildRustPackage rec {
     pname = "drydock";
-    version = "1.1.4";
+    version = "1.3.1";
 
     src = pkgs.fetchFromGitHub {
       owner = "yetidevworks";
       repo = "drydock";
       tag = "v${version}";
-      hash = "sha256-23b8UEw8Lo9dj3JFKV36eXUhbzjfRRbXoe9xminIzVg=";
+      hash = "sha256-R3qCfp0pLQAWHgLgFi7tBhuPkS5acgrW9oc/Zw5Dr3I=";
     };
     nativeCheckInputs = [ pkgs.git ];
 
-    cargoHash = "sha256-IA+CKBw0P6uRPg9f41nZxERSVmY4FRV8vlyutuXhoHE=";
+    cargoHash = "sha256-XvdUVnxkgbEI+ZnM2zsx1ighGTwN0uFhDZbtQewueuI=";
 
     meta = {
       description = "Live dashboard for a fleet of git repos: what's uncommitted, unpushed, and unreleased, at a glance";

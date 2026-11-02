@@ -125,7 +125,7 @@
 
         virtualisation.oci-containers.containers = {
           excalidash-backend = {
-            image = "zimengxiong/excalidash-backend@sha256:f37cd418bcad543add138c16cdb5e6301c3065b77344125458ab462adde99f15";
+            image = "zimengxiong/excalidash-backend@sha256:b77d43d9f70e414279e0babbbd59803086868e23148f071b8d65fb1e49bce836";
             environment = {
               DATABASE_URL = "file:/app/prisma/dev.db";
               PORT = "6768";
@@ -141,7 +141,7 @@
             ];
           };
           excalidash-frontend = {
-            image = "zimengxiong/excalidash-frontend@sha256:de12bee592b2db0bcdee1b7066283297696a3e9e3a309798f78ca6c9d6caff9c";
+            image = "zimengxiong/excalidash-frontend@sha256:0d1f4e852f052872b9a9f2e0267a7a0ba5ba3e0d2d097ad2d82371f6c3f0de2d";
             environment = {
               BACKEND_URL = "backend:6768";
             };
