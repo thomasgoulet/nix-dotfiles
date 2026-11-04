@@ -39,7 +39,7 @@
       agents = {
         review = {
           mode = "all";
-          color = "#cba6f7";
+          color = "#f5c2e7";
           system = prompts.review;
         };
         docs = {
@@ -74,7 +74,7 @@
             }
           ];
         };
-        build.color = "#f5c2e7";
+        build.color = "#cba6f7";
         plan.color = "#a6e3a1";
       };
     };
