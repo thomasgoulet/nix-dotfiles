@@ -8,7 +8,7 @@
       end-of-line-diagnostics = "hint";
       idle-timeout = 0;
       jump-label-alphabet = "hjklvbnmyuiopasdfg";
-      line-number = "relative";
+      line-number = "absolute";
       mouse = false;
       shell = [
         "nu"
