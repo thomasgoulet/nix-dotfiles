@@ -26,22 +26,49 @@
           // lib.optionalAttrs (server.env or { } != { }) { environment = server.env; }
         );
 
-      model = "anthropic/claude-sonnet-5";
       default_agent = "build";
       update = "disable";
+      experimental = {
+        todo = true;
+        background_compaction = true;
+      };
       permissions = [
         {
           action = "context7*";
           resource = "*";
           effect = "deny";
         }
+        {
+          action = "external_directory";
+          resource = "*";
+          effect = "ask";
+        }
       ];
       agents = {
         review = {
-          mode = "all";
+          mode = "subagent";
           color = "#f5c2e7";
           system = prompts.review;
+          permissions = [
+            {
+              action = "edit";
+              resource = "*";
+              effect = "deny";
+            }
+            {
+              action = "context7*";
+              resource = "*";
+              effect = "allow";
+            }
+          ];
         };
+        explore.permissions = [
+          {
+            action = "external_directory";
+            resource = "*";
+            effect = "ask";
+          }
+        ];
         docs = {
           mode = "all";
           color = "#89b4fa";
@@ -72,6 +99,11 @@
               resource = "*";
               effect = "allow";
             }
+            {
+              action = "external_directory";
+              resource = "*";
+              effect = "ask";
+            }
           ];
         };
         build.color = "#cba6f7";
@@ -96,6 +128,7 @@
         thinking = "show";
       };
       animations = true;
+      tabs.mode = "off";
     };
   };
 }
