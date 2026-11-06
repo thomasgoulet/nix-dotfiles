@@ -1,13 +1,11 @@
 /*
 
 # Tracked directories
-!AGENTS.md
 !.gitignore
 !flake/
 !herdr/
 !nix/
 !noctalia/
 !nushell/
-!tuxedo/
 !wallpaper/
 !windowsterminal/
