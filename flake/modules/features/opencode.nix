@@ -10,21 +10,6 @@ let
     review = "You review the current branch against master (or main) branch. Structure your feedback in three sections: High-Level Architecture Decisions, Good Practices, Code Smells (nit & bugs). Indicate if the feedback is positive (+) or negative (-). Use the Context7 MCP to look up library documentation when required to clarify library usage. Do not edit any file.";
   };
 
-  mcp-servers = {
-    context7 = {
-      command = "context7-mcp";
-    };
-    nu-mcp = {
-      command = "nu-mcp";
-      args = [
-        "--tools-dir"
-        "/home/thomas/.config/nushell/tools"
-        "--enable-nu"
-      ];
-    };
-  };
-
-  # TODO - This could be changed to use import-tree
   skills =
     ./opencode/skills
     |> lib.filesystem.listFilesRecursive
@@ -38,6 +23,7 @@ in
 
     homeManager =
       {
+        config,
         inputs',
         pkgs,
         ...
@@ -52,11 +38,6 @@ in
           inputs'.nu-mcp.packages.default
         ];
 
-        programs.mcp = {
-          enable = true;
-          servers = mcp-servers;
-        };
-
         home.sessionVariables = {
           OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
         };
@@ -67,16 +48,21 @@ in
           skills = skills;
           settings = {
 
-            mcp.servers =
-              mcp-servers
-              |> lib.mapAttrs (
-                _: server:
-                {
-                  type = "local";
-                  command = [ server.command ] ++ (server.args or [ ]);
-                }
-                // lib.optionalAttrs (server.env or { } != { }) { environment = server.env; }
-              );
+            mcp.servers = {
+              context7 = {
+                type = "local";
+                command = [ "context7-mcp" ];
+              };
+              nu-mcp = {
+                type = "local";
+                command = [
+                  "nu-mcp"
+                  "--tools-dir"
+                  "${config.xdg.configHome}/nushell/tools"
+                  "--enable-nu"
+                ];
+              };
+            };
 
             default_agent = "build";
             update = "disable";
