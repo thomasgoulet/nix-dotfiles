@@ -40,10 +40,15 @@
 
   outputs =
     inputs@{ flake-parts, den, ... }:
+    let
+      # import-tree matches paths relative to ./modules (i.e. `/features/docker.nix`).
+      # the equivalent glob looks like `modules/{*,{features,hosts,users}/*}.nix`
+      moduleFiles = ''/((features|hosts|users)/)?[^/]+\.nix'';
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         den.flakeModule
-        (inputs.import-tree.match "/((features|hosts|users)/)?[^/]+\.nix" ./modules)
+        (inputs.import-tree.match moduleFiles ./modules)
       ];
     };
 }
